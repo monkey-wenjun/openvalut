@@ -7,6 +7,6 @@
     "e2e": "node e2e.js"
   },
   "devDependencies": {
-    "jsdom": "^26.0.0"
+    "jsdom": "^31.0.0"
   }
 }
