@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=openvalut
+GenericName=Password Manager
+Type=Application
+Exec=openvalut
+Terminal=false
+Icon=openvalut
+Categories=Utility;Security;

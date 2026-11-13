@@ -1,0 +1,100 @@
+"playstore_full_description","Lacak semua Kata Sandi Anda dengan mudah dan Aman!
+
+openvalut adalah pengelola kata sandi tunggal dengan dukungan untuk format <strong> KeePass </strong> (kdbx 3.x dan kdbx 4.x 🎉️) yang populer dan terbukti aman.
+Simpan sandi Anda, <strong> bagikan ke semua perangkat Anda </strong> dan temukan dengan mudah kapan pun Anda perlu masuk.
+
+🗄 Semua kata sandi Anda di satu tempat.
+🧬 Buat kata sandi acak yang aman untuk setiap akun Anda.
+ 🔐 Buka Kata Sandi dengan cepat diamankan dengan kunci biometrik anda.
+ 🔍 Lacak akun Anda di seluruh web.
+ 🖥 Aplikasi tersedia untuk Mac, iPhone, iPad, Ponsel/Tablet Android, Linux dan Windows.
+ 📂 Buka beberapa file kata sandi secara bersamaan (mis. Satu untuk kantor, satu untuk pribadi - atau bahkan bagikan file kata sandi Anda dengan rekan kerja)
+🤓 Open Source tersedia di
+https://github.com/openvalut/openvalut/
+✍ Isi otomatis kata sandi Anda (Android 9+, Dukungan di browser hanya sejak Android 10+)
+🔦 Tema Gelap 😎️
+
+
+<strong> === SEMUA DALAM KENDALI ANDA === </strong>
+openvalut menyimpan semua kata sandi Anda dalam format Keepass (Open Source), tepat di tempat yang Anda inginkan. Kami tidak menyimpan Kata Sandi anda pada server kami.
+Tetapi openvalut mendukung penyimpanan ke:
+
+✅️ Semua penyedia konten lokal dari Android
+✅️ Integrasi Google Drive
+✅️ Integrasi Dropbox
+✅️ Dukungan WebDAV untuk disimpan di NextCloud atau OwnCloud Anda (atau serupa)
+✅️ Integrasi Microsoft OneDrive
+
+<b> === FITUR LENGKAP, TANPA IKLAN, TANPA BERLANGGANAN === </b>
+Sebagai proyek open source maka tidak ada pembatasan secara artifisial, tidak ada iklan dan tidak ada persyaratan pembayaran.
+
+<strong> Semua bentu Kontribusi diterima dan diukung! </strong> 😅️ (Sedang mencari pengembang, penerjemah, penulis dokumentasi, perancang UI, dll. :)), cukup hanya dengan bergabung di <a href=""https://example.com/go/discord"">saluran discord kami</a>
+
+<b> === SEDANG DALAM PENGEMBANGAN AKTIF 🛠️ === </b>
+Ini adalah proyek open source yang masih dalam pengembangan berat dan penambahan fitur. Kami mengharapkan masukan Anda melalui email atau menggunakan <a href=""https://github.com/openvalut/openvalut/issues/""> pelacak masalah </a> di https://github.com/openvalut/openvalut/issues/
+
+Bergabunglah juga dengan komunitas  <a href=""https://example.com/go/discord""> saluran discord kami</a> di https://example.com/go/discord","Google Play Store description","4000",""
+"playstore_title","openvalut - KeePass compatible Password Manager","Google Play Title","50",""
+"playstore_short_description","Simpan Kata Sandi dan Akun anda secara aman antar platform dan perangkat anda.","Short description in play store.","80",""
+"apple-appstore-title","openvalut - Password Manager","","30",""
+"apple-appstore-subtitle","Satu Sandi, Semua Perangkat.","apple-appstore-subtitle -- Used as subtitle in Apple App Store, feel free to be creative ;-) Does not have to match english original, must just be a catchy phrase for the app store.","30",""
+"apple-appstore-description","Lacak semua Kata Sandi Anda dengan mudah dan aman!
+
+openvalut adalah pengelola kata sandi tunggal dengan dukungan untuk format KeePass yang populer dan terbukti keamanannya. Simpan kata sandi Anda, bagikan di semua perangkat Anda dan temukan dengan mudah kapan pun Anda perlu masuk.
+
+• Semua kata sandi Anda di satu tempat.
+• Buat kata sandi acak yang aman untuk setiap akun Anda.
+• Buka brankas secara cepat dengan diamankan oleh kunci biometrik anda.
+• Pantau akun Anda di seluruh web.
+• Aplikasi tersedia di semua platform. Diantaranya Mac, iPhone dan iPad.
+• Buka beberapa file kata sandi secara bersamaan (mis. Satu untuk kantor, satu untuk pribadi - atau bahkan berbagi file kata sandi Anda dengan rekan kerja)
+• Simpan Kata Sandi Sekali Pakai Berbasis Waktu untuk 2FA (Otentikasi Dua Faktor).
+• Lampirkan file biner ke entri kata sandi Anda. (Seperti TAN offline, dll)
+• Open Source tersedia di https://github.com/openvalut/openvalut/
+• Tema gelap ;-)
+
+
+=== SEMUA DALAM KENDALI ANDA ===
+
+openvalut menyimpan semua kata sandi Anda dalam format Keepass terbuka, tepat di tempat yang Anda inginkan. 
+Kami tidak mengirim data kata sandi anda ke server kami, Tetapi openvalut mendukung penyimpanan ke:
+
+• Semua penyedia dokumen lokal, seperti iCloud.
+• Integrasi Google Drive
+• Integrasi Dropbox
+• Dukungan WebDAV untuk disimpan di NextCloud atau OwnCloud Anda (atau yang serupa)
+• Integrasi Microsoft OneDrive
+
+
+=== FITUR LENGKAP, TANPA IKLAN, TANPA BERLANGGANAN ===
+
+Sebagai salah satu proyek open source maka tidak ada pembatasan fitur artifisial, iklan atau persyaratan pembayaran.
+
+Semua Jenis Kontribusi diterima dan didukung :-) (Sedang mencari pengembang, penerjemah, penulis dokumentasi, perancang antarmuka pengguna, dll. :) )
+Bergabunglah dengan saluran Discord kami: 
+https://example.com/go/discord.
+
+
+=== SEDANG DALAM PENGEMBANGAN AKTIF ===
+
+Aplikasi Ini adalah proyek open source yang sedang dalam pengembangan berat dan dalam proses penambahan fitur. Kami mengharapkan tanggapan Anda melalui email atau pelacak masalah di: https://github.com/openvalut/openvalut/issues/
+
+Bergabunglah juga dengan saluran komunitas discord kami di:
+https://example.com/go/discord
+","apple-appstore-description --- see my comment, this is essentially the same as the playstore_full_description just slight modifications for apple.","4000",""
+"apple-appstore-keywords","Pengelola Sandi,Kata Sandi,Kelola,keystroke,Keysafe,Keepass,Kdbx,Webdav,Icloud,Nextcloud,One Drive","apple-appstore-keywords - Keywords used for searching in the apple app store. Does not have to be a 1:1 translation, choose keywords that mak sense.","100",""
+"","","","",""
+"microsoft-store-windows","","Windows Store listing description https://docs.microsoft.com/en-us/windows/uwp/publish/write-a-great-app-description","",""
+"microsoft-store-windows-short-descriptoin","","short description for windows store 
+A shorter, catchy description that may be used in the top of your product’s Store listing
+Recommended length: 270 characters or fewer
+","1000",""
+"microsoft-store-windows-features","","Short summaries of your product's key features
+Displayed as bulleted list
+Up to 20 app features
+(max 200 characters each)","",""
+"microsoft-store-windows-search-terms","","search terms for the microsoft store
+
+Up to 7 search terms
+40 character limit for each search term
+No more than 21 separate words across all search terms","",""

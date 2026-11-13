@@ -1,0 +1,32 @@
+name: github pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Install
+        run: |
+          flutter config --enable-web
+          cd diac_client && flutter pub get
+      - name: Build
+        run: cd diac_client/example && flutter build web
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./diac_client/example/build/web
+          allow_empty_commit: true
+

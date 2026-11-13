@@ -1,0 +1,126 @@
+"playstore_full_description","Tallenna ja säilytä salasanasi turvallisesti ja helposti!
+
+openvalut on itsenäinen salasanojen hallintaohjelma, joka tukee suosittua ja hyväksi havaittua <strong>KeePass</strong> (kdbx 3.x AND kdbx 4.x 🎉️) tiedostomuotoa. Tallenna salasanasi, <strong>jaa ne kaikille laitteillesi</strong> ja löydät ne helposti aina, kun sinun on kirjauduttava sisään.
+
+🗄 Kaikki salasanasi yhdessä paikassa.
+🧬 Luo turvalliset, satunnaiset salasanat jokaiselle tilillesi.
+🔐 Pika avaus varmistettu biometrisellä lukolla
+🔍 Pidä kirjaa tileistäsi verkossa.
+🖥 Sovellus saatavilla Mac, iPhone, iPad, Android puhelimet ja tabletit, sekä Linux ja Windows käyttöjärjestelmät.
+📂 Avaa useita salasanatiedostoja samanaikaisesti (esim. yksi töihin, toinen henkilökohtaisiin - tai voit myös jakaa salasanatiedostosi työtovereiden kanssa)
+🤓 Avoin lähdekoodi saatavilla osoitteessa https://github.com/openvalut/openvalut/
+✍ Täytä salasanasi automaattisesti (Android 9+, selain tuki ainoastaan Android 10+ alkaen)
+🔦 Tumma teema 😎️
+
+
+<strong>=== SINUN HALLINNASSASI ===</strong>
+openvalut tallentaa kaikki salasanasi avoimessa Keepass-muodossa juuri haluamaasi paikkaan. Se ei lähetä salasanojasi palvelimillemme. Mutta openvalut tukee tallentamista:
+
+✅️ Mikä tahansa Androidin paikallinen sisällöntarjoaja
+✅️ Natiivi Google Drive integraatio
+✅️ Natiivi Dropbox Integraatio
+✅️ Natiiivi WebDAV tuki omaan NextCloud tai OwnCloud tallennukseen (tai samankaltainen)
+✅️ Natiiivi Microsoft OneDrive integraatio
+
+<b>=== TÄYSIN VARUSTELTU, EI MAINOKSIA, EI TILAUSTA ===</b>
+Avoimen lähdekoodin projektissa ei ole keinotekoisia ominaisuuksiin liittyviä rajoituksia, ei mainoksia eikä vaadita maksuja.
+
+<strong>Avustukset ovat tervetulleita ja tukea antavia</strong> 😅️ (Etsin aina kehittäjiä, kääntäjiä, dokumenttien kirjoittajia, käyttöliittymäsuunnittelijoita jne. :) ), liity joukkoomme <a href=""https://example.com/go/discord"">discord kanavalle</a>.
+
+<b>=== AKTIIVISESSA KEHITYKSESSÄ 🛠️ ===</b>
+Tämä on avoimen lähdekoodin projekti, jota kehitetään edelleen voimakkaasti ja joka lisää ominaisuuksia. Otamme mielellämme palautetta sähköpostitse tai osoitteessa <a href=""https://github.com/openvalut/openvalut/issues/"">ongelmien seurantaan</a> https://github.com/openvalut/openvalut/issues/
+
+Liity myös meidän yhteisöön <a href=""https://example.com/go/discord"">discord kanavalle</a> https://example.com/go/discord
+","Google Play Store description","4000",""
+"playstore_title","openvalut – Salasanojen hallintasovellus","Google Play Title","50",""
+"playstore_short_description","Pidä salasanasi ja tilisi turvassa kaikilla alustoilla ja laitteilla.","Short description in play store.","80",""
+"apple-appstore-title","openvalut –Salasanojen hallinta","","30",""
+"apple-appstore-subtitle","Yksi salasana kaikki laitteet.","apple-appstore-subtitle -- Used as subtitle in Apple App Store, feel free to be creative ;-) Does not have to match english original, must just be a catchy phrase for the app store.","30",""
+"apple-appstore-description","Tallenna ja säilytä salasanasi turvallisesti ja helposti!
+
+openvalut on itsenäinen salasanojen hallintaohjelma, joka tukee suosittua ja hyväksi havaittua KeePass tiedostomuotoa. Tallenna salasanasi, jaa ne kaikille laitteillesi ja löydät ne helposti aina, kun sinun on kirjauduttava sisään.
+
+• Kaikki salasanasi yhdessä paikassa.
+• Luo turvalliset, satunnaiset salasanat jokaiselle tilillesi.
+• Pika avaus varmistettu biometrisellä lukolla
+• Pidä kirjaa tileistäsi verkossa.
+• Sovellus saatavilla Mac, iPhone, iPad.
+• Avaa useita salasanatiedostoja samanaikaisesti (esim. yksi töihin, toinen henkilökohtaisiin - tai voit myös jakaa salasanatiedostosi työtovereiden kanssa)
+• Tallenna aikaperustaiset kertakäyttöiset salasanat 2fa (kaksivaiheinen todennus).
+• Liitä binääritiedostoja salasanatietoihisi. (offline-tilassa TANs, jne)
+• Avoin lähdekoodi saatavilla osoitteessa https://github.com/openvalut/openvalut/
+• Tumma teema ;-)
+
+
+=== SINUN HALLINNASSASI ===
+openvalut tallentaa kaikki salasanasi avoimessa Keepass-muodossa juuri haluamaasi paikkaan. Se ei lähetä salasanojasi palvelimillemme. Mutta openvalut tukee tallentamista:
+
+• Mikä tahansa paikallinen dokumenttien tarjoaja, kuten iCloud
+• Natiivi Google Drive integraatio
+• Natiivi Dropbox Integraatio
+• Natiiivi WebDAV tuki omaan NextCloud tai OwnCloud tallennukseen (tai samankaltainen)
+• Natiiivi Microsoft OneDrive integraatio
+
+=== TÄYSIN VARUSTELTU, EI MAINOKSIA, EI TILAUSTA ===
+Avoimen lähdekoodin projektissa ei ole keinotekoisia ominaisuuksiin liittyviä rajoituksia, ei mainoksia eikä vaadita maksuja.
+
+Avustukset ovat tervetulleita ja tukea antavia :-) (Etsin aina kehittäjiä, kääntäjiä, dokumenttien kirjoittajia, käyttöliittymäsuunnittelijoita jne. :) ), liity joukkoomme discord kanavalle https://example.com/go/discord.
+
+=== AKTIIVISESSA KEHITYKSESSÄ ===
+Tämä on avoimen lähdekoodin projekti, jota kehitetään edelleen voimakkaasti ja joka lisää ominaisuuksia. Otamme mielellämme palautetta sähköpostitse tai ongelmien seurantaan osoitteessa https://github.com/openvalut/openvalut/issues/
+
+Liity myös meidän yhteisöön discord kanavalle https://example.com/go/discord
+","apple-appstore-description --- see my comment, this is essentially the same as the playstore_full_description just slight modifications for apple.","4000",""
+"apple-appstore-keywords","Salasanahallinta, Salasanat, Manage, Keystore, Keysafe,Keepass,Kdbx,webdav,icloud,nextcloud,onedrive","apple-appstore-keywords - Keywords used for searching in the apple app store. Does not have to be a 1:1 translation, choose keywords that mak sense.","100",""
+"","","","",""
+"microsoft-store-windows","Tallenna ja säilytä salasanasi turvallisesti ja helposti!
+
+openvalut on itsenäinen salasanojen hallintaohjelma, joka tukee suosittua ja hyväksi havaittua KeePass (kdbx 3.x AND kdbx 4.x 🎉️) tiedostomuotoa. Tallenna salasanasi, jaa ne kaikille laitteillesi ja löydät ne helposti aina, kun sinun on kirjauduttava sisään.
+
+🗄 Kaikki salasanasi yhdessä paikassa.
+🧬 Luo turvalliset, satunnaiset salasanat jokaiselle tilillesi.
+🔍 Pidä kirjaa tileistäsi verkossa.
+🖥 Sovellus saatavilla Mac, iPhone, iPad, Android puhelimet ja tabletit, sekä Linux ja Windows käyttöjärjestelmät.
+📂 Avaa useita salasanatiedostoja samanaikaisesti (esim. yksi töihin, toinen henkilökohtaisiin - tai voit myös jakaa salasanatiedostosi työtovereiden kanssa)
+🤓 Avoin lähdekoodi saatavilla osoitteessa https://github.com/openvalut/openvalut/
+🔦 Tumma teema 😎️
+
+
+=== SINUN HALLINNASSASI ===
+openvalut tallentaa kaikki salasanasi avoimessa Keepass-muodossa juuri haluamaasi paikkaan. Se ei lähetä salasanojasi palvelimillemme. Mutta openvalut tukee tallentamista:
+
+✅️ Natiivi Google Drive integraatio
+✅️ Natiivi Dropbox Integraatio
+✅️ Natiiivi WebDAV tuki omaan NextCloud tai OwnCloud tallennukseen (tai samankaltainen)
+✅️ Natiiivi Microsoft OneDrive integraatio
+
+=== TÄYSIN VARUSTELTU, EI MAINOKSIA, EI TILAUSTA ===
+Avoimen lähdekoodin projektissa ei ole keinotekoisia ominaisuuksiin liittyviä rajoituksia, ei mainoksia eikä vaadita maksuja.
+
+Avustukset ovat tervetulleita ja tukea antavia</strong> 😅️ (Etsin aina kehittäjiä, kääntäjiä, dokumenttien kirjoittajia, käyttöliittymäsuunnittelijoita jne. :) ), liity joukkoomme discord kanavalle https://example.com/go/discord
+
+=== AKTIIVISESSA KEHITYKSESSÄ 🛠️ ===
+Tämä on avoimen lähdekoodin projekti, jota kehitetään edelleen voimakkaasti ja joka lisää ominaisuuksia. Otamme mielellämme palautetta sähköpostitse tai ongelmien seurantaan osoitteessa https://github.com/openvalut/openvalut/issues/
+
+Liity myös meidän yhteisöön discord kanavalle https://example.com/go/discord
+","Windows Store listing description https://docs.microsoft.com/en-us/windows/uwp/publish/write-a-great-app-description","",""
+"microsoft-store-windows-short-descriptoin","Pidä salasanasi ja tilisi turvassa kaikilla alustoilla ja laitteilla. Ilmainen ja avoimen lähdekoodin salasanojen hallintasovellus, joka tukee kdbx-salasanatiedostoja.","short description for windows store 
+A shorter, catchy description that may be used in the top of your product’s Store listing
+Recommended length: 270 characters or fewer
+","1000",""
+"microsoft-store-windows-features","* Tallenna ja säilytä salasanasi turvallisesti
+* Avoin lähdekoodi
+* Tuki KeePass-tiedostomuodolle (kdbx) 
+* Synkronoi laitteesi pilvitallennuspalvelujen kanssa.","Short summaries of your product's key features
+Displayed as bulleted list
+Up to 20 app features
+(max 200 characters each)","",""
+"microsoft-store-windows-search-terms","* salasanojen hallinta
+* openvalut
+* kdbx
+* keepass
+* salasanageneraattori","search terms for the microsoft store
+
+Up to 7 search terms
+40 character limit for each search term
+No more than 21 separate words across all search terms","",""

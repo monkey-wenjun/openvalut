@@ -1,0 +1,22 @@
+{
+  "@@locale": "pa",
+  "fieldUserName": "User",
+  "@fieldUserName": {},
+  "fieldPassword": "ਪਾਸਵਰਡ",
+  "@fieldPassword": {},
+  "aboutAppName": "openvalut",
+  "@aboutAppName": {},
+  "generatorPassword": "ਪਾਸਵਰਡ",
+  "@generatorPassword": {
+    "description": "Label for generated password"
+  },
+  "masterPasswordInputLabel": "ਪਾਸਵਰਡ",
+  "@masterPasswordInputLabel": {
+    "description": "",
+    "context": "credential screen"
+  },
+  "webDavopenvalutword": "ਪਾਸਵਰਡ",
+  "@webDavopenvalutword": {
+    "description": ""
+  }
+}

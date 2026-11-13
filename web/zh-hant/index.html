@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenVault — 為 AI 時代而生的開源密碼管理器</title>
+  <meta name="description" content="OpenVault 是開源、私有化部署、端到端加密的跨平台密碼管理器，安全適配 AI Agent 呼叫，支援 KDBX、自動填充、Passkey、SSH Agent。" />
+  <link rel="icon" type="image/png" href="../logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="logo">
+        <img src="../logo.png" alt="OpenVault Logo" />
+        <span>OpenVault</span>
+      </a>
+      <div class="nav-links">
+        <a href="#ai-agent">AI Agent</a>
+        <a href="#features">核心特性</a>
+        <a href="#security">安全架構</a>
+        <a href="#platforms">跨平台</a>
+      </div>
+      <div class="nav-actions">
+        <a href="../" class="btn btn-secondary">語言</a>
+        <a href="https://github.com/your-org/openvalut" target="_blank" rel="noopener" class="btn btn-secondary btn-github">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span class="btn-text">GitHub</span>
+        </a>
+        <button class="menu-toggle" aria-label="打開選單" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu">
+      <div class="container">
+        <a href="#ai-agent">AI Agent</a>
+        <a href="#features">核心特性</a>
+        <a href="#security">安全架構</a>
+        <a href="#platforms">跨平台</a>
+        <a href="https://github.com/your-org/openvalut" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge">
+          <span class="badge-dot"></span>
+          安全適配 AI 時代 Agent 呼叫
+        </div>
+        <div class="badge">
+          <span class="badge-dot rust"></span>
+          Rust 構建
+        </div>
+        <h1>
+          你的密碼庫，<br />
+          <span>AI 也能安全呼叫</span>
+        </h1>
+        <p>
+          OpenVault 是圍繞 Rust 記憶體安全核心構建的開源、私有化部署、端到端加密跨平台密碼管理器。主密碼只屬於你，服務端只存密文。讓 AI Agent 在受控通道內呼叫憑證，而無需觸碰明文。
+        </p>
+        <div class="hero-actions">
+          <a href="#features" class="btn btn-primary btn-lg">探索特性</a>
+          <a href="#get-started" class="btn btn-secondary btn-lg">快速開始</a>
+        </div>
+        <div class="hero-checks">
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            端到端加密
+          </span>
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            私有化部署
+          </span>
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            全平台開源
+          </span>
+        </div>
+      </div>
+      <div class="terminal">
+        <div class="terminal-header">
+          <span class="terminal-dot red"></span>
+          <span class="terminal-dot yellow"></span>
+          <span class="terminal-dot green"></span>
+          <span class="terminal-title">openvault-cli</span>
+        </div>
+        <div class="terminal-body">
+          <div class="prompt">$ openvault-cli unlock --biometric</div>
+          <div class="success">✓ Vault unlocked via secure enclave</div>
+          <div class="prompt">$ openvault-cli agent call github --agent-id my-ai</div>
+          <div style="margin-top: 12px; padding: 12px; background: #1e293b; border-radius: 8px; border: 1px solid #334155;">
+            <div>{</div>
+            <div style="padding-left: 12px;">"credential_id": "github.com",</div>
+            <div style="padding-left: 12px;">"username": "***",</div>
+            <div style="padding-left: 12px;">"password": "<span class="accent">••••••••••••••••</span>",</div>
+            <div style="padding-left: 12px;">"totp": "492 817",</div>
+            <div style="padding-left: 12px;">"scope": "agent:my-ai",</div>
+            <div style="padding-left: 12px;">"expires_at": "30s"</div>
+            <div>}</div>
+          </div>
+          <div class="muted" style="margin-top: 10px;">// Agent 只能存取被授權的條目，回應透過本地 Unix socket 返回</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ai-agent" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>AI 時代，憑證呼叫需要新典範</h2>
+        <p>當 Agent 需要登入網站、呼叫 API 或操作伺服器時，把密碼寫入提示詞或環境變數已不再安全。OpenVault 提供最小權限、可稽核、可撤銷的憑證通道。</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <h3>最小權限授權</h3>
+          <p>為每個 Agent 單獨授權可存取的條目，精確到單個網站或憑證，避免一次性暴露整個密碼庫。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          </div>
+          <h3>本地安全通道</h3>
+          <p>憑證僅在已解鎖的本地密碼庫中解密，透過 127.0.0.1 隨機埠 + Unix socket + token 檔案返回，網路不可達。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          </div>
+          <h3>可稽核 & 可撤銷</h3>
+          <p>每一次 Agent 呼叫都留下紀錄，隨時檢視、暫停或撤銷 Agent 的存取權限，憑證外洩即可一鍵隔離。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>不只是密碼管理</h2>
+        <p>從日常登入到開發者工作流，OpenVault 覆蓋完整的憑證生命週期。</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          </div>
+          <h3>端到端加密</h3>
+          <p>Argon2id + AES-256-GCM，主密碼不上傳、不儲存，服務端只儲存密文。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+          </div>
+          <h3>私有化部署</h3>
+          <p>Rust 服務端預設 SQLite，可選 MySQL，可部署在區域網路或公網。記憶體安全、可稽核、完全由你掌控。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 12 15 16 10"></polyline></svg>
+          </div>
+          <h3>自動填充</h3>
+          <p>Android 系統級、Chrome 擴充、iOS Face ID / Touch ID，智慧識別登入表單。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg>
+          </div>
+          <h3>通行密鑰 Passkey</h3>
+          <p>Chrome 擴充支援建立和使用 ES256 通行密鑰，私鑰儲存在本地 KDBX 中。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+          </div>
+          <h3>安全分享</h3>
+          <p>隨機分享金鑰 + X25519 公鑰包裝，只有指定接收方能夠解密條目。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+          </div>
+          <h3>SSH Agent</h3>
+          <p>1Password 風格的 SSH Agent，私鑰僅存於解鎖後的記憶體，支援 ed25519 / RSA。</p>
+        </div>
+        <div class="card card-rust">
+          <div class="card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 12 15 16 10"></polyline></svg>
+          </div>
+          <h3>Rust 記憶體安全核心</h3>
+          <p>加密引擎、KDBX 密碼庫、同步協定與瀏覽器原生訊息宿主均使用 Rust 編寫。所有權與編譯期檢查杜絕關鍵路徑上的記憶體損壞與釋放後使用漏洞。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="platforms" class="section">
+    <div class="container platform-grid">
+      <div>
+        <h2 style="font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px;">一處管理，全平台可用</h2>
+        <p style="font-size: 1.0625rem; color: var(--color-text-secondary); margin: 0 0 28px;">Flutter 構建的客戶端覆蓋桌面與行動裝置，Chrome 擴充與 CLI 打通瀏覽器和終端工作流。</p>
+        <div class="platform-list">
+          <div class="platform-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            Android
+          </div>
+          <div class="platform-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            iOS / macOS
+          </div>
+          <div class="platform-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 5c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2H0c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2h-4zM4 5h16v11H4V5z"/></svg>
+            Linux
+          </div>
+          <div class="platform-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5h18v12H3V5zm0-2c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H3zm3 14h12v2H6v-2z"/></svg>
+            Windows
+          </div>
+          <div class="platform-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            Chrome 擴充
+          </div>
+          <div class="platform-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+            CLI
+          </div>
+        </div>
+      </div>
+      <div class="platform-visual">
+        <div class="platform-box">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+          <h4>行動裝置</h4>
+          <p>生物辨識快速解鎖</p>
+        </div>
+        <div class="platform-box">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          <h4>桌面端</h4>
+          <p>SSH Agent + 本地服務</p>
+        </div>
+        <div class="platform-box">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          <h4>瀏覽器</h4>
+          <p>自動填充 & Passkey</p>
+        </div>
+        <div class="platform-box">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+          <h4>終端</h4>
+          <p>Rust CLI & Agent API</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="security" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>服務端不可信</h2>
+        <p>即使服務端被攻破，攻擊者也只能拿到無法解密的密文。加密參數公開透明，任何人可稽核。</p>
+      </div>
+      <div class="security-card">
+        <div class="security-grid">
+          <div class="security-col">
+            <h3><span></span>密碼庫加密</h3>
+            <ul>
+              <li><span>KDF</span><code>Argon2id</code></li>
+              <li><span>對稱加密</span><code>AES-256-GCM</code></li>
+              <li><span>格式</span><code>KDBX 3.x / 4.x</code></li>
+              <li><span>雲端額外加密</span><code>Argon2id + AES-256-GCM</code></li>
+            </ul>
+          </div>
+          <div class="security-col">
+            <h3><span style="background: var(--color-accent);"></span>傳輸安全</h3>
+            <ul>
+              <li><span>金鑰協商</span><code>X25519 / P-256 ECDH</code></li>
+              <li><span>請求簽章</span><code>HMAC + 時間戳</code></li>
+              <li><span>認證</span><code>郵箱 + UUID Secret Key</code></li>
+              <li><span>權杖</span><code>Bearer / 30 天</code></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="get-started" class="section">
+    <div class="container">
+      <div class="cta-box">
+        <h2>立即掌控你的憑證</h2>
+        <p>從 deb 安裝到服務端部署，從瀏覽器擴充到 CLI，OpenVault 提供完整的私有化密碼管理方案。</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+          <a href="https://github.com/your-org/openvalut" target="_blank" rel="noopener" class="btn btn-primary btn-lg">GitHub 倉庫</a>
+          <a href="../docs/" class="btn btn-secondary btn-lg">閱讀文件</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="#" class="logo">
+        <img src="../logo.png" alt="OpenVault Logo" />
+        <span>OpenVault</span>
+      </a>
+      <div class="footer-copy">© 2026 OpenVault. 開源、免費、由你掌控。</div>
+      <div class="footer-links">
+        <a href="#features">特性</a>
+        <a href="#security">安全</a>
+        <a href="#platforms">平台</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

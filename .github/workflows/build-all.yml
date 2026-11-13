@@ -1,0 +1,245 @@
+name: Build all platforms
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to build (e.g. 1.9.75). Defaults to debian/DEBIAN/control.'
+        required: false
+        type: string
+      create_release:
+        description: 'Create a GitHub Release after build'
+        required: false
+        type: boolean
+        default: true
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  android:
+    name: Android APK (sideload)
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: openvalut
+    env:
+      ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+      ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+      ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Free disk space
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: false
+          android: false
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
+          swap-storage: true
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: '3.47.1'
+          cache: true
+
+      - uses: android-actions/setup-android@v3
+
+      # Release signing is optional: with the keystore secrets set it builds a
+      # properly signed sideload APK, otherwise it falls back to a
+      # debug-signed APK so the workflow still works out of the box.
+      - name: Build sideload APK
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          if [ -n "${ANDROID_KEYSTORE_BASE64:-}" ]; then
+            echo "${ANDROID_KEYSTORE_BASE64}" | base64 -d > android/keystore.jks
+            {
+              echo "ANDROID_KEYSTORE_PATH=keystore.jks"
+              echo "ANDROID_KEYSTORE_PASSWORD=${ANDROID_KEYSTORE_PASSWORD}"
+              echo "ANDROID_KEY_PASSWORD=${ANDROID_KEY_PASSWORD}"
+              echo "ANDROID_KEY_ALIAS=${ANDROID_KEY_ALIAS}"
+            } >> android/.env
+            flutter build apk --release --flavor sideload -t lib/env/custom_sideload.dart
+            cp build/app/outputs/flutter-apk/app-sideload-release.apk dist/openvalut-android-sideload.apk
+          else
+            echo "::warning::ANDROID_KEYSTORE_BASE64 secret is not set; building a debug-signed APK instead."
+            flutter build apk --debug --flavor sideload -t lib/env/custom_sideload.dart
+            cp build/app/outputs/apk/sideload/debug/app-sideload-debug.apk dist/openvalut-android-sideload-debug.apk
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: openvalut-android
+          path: openvalut/dist/
+
+  linux:
+    name: Linux
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Free disk space
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
+          swap-storage: true
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: '3.47.1'
+          cache: true
+
+      - name: Install Linux toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libsecret-1-dev libkeybinder-3.0-dev
+
+      - name: Build Linux deb and bundle
+        env:
+          INPUT_VERSION: ${{ github.event.inputs.version }}
+        run: |
+          set -euo pipefail
+          if [ -n "${INPUT_VERSION}" ]; then
+            sed -i "s/^Version: .*/Version: ${INPUT_VERSION}/" debian/DEBIAN/control
+          fi
+          VERSION="$(grep '^Version:' debian/DEBIAN/control | awk '{print $2}')"
+          ./_tools/build-deb.sh "${VERSION}"
+          mkdir -p openvalut/dist
+          cp "openvalut_${VERSION}_amd64.deb" openvalut/dist/
+          tar -czf openvalut/dist/openvalut-linux.tar.gz -C openvalut/build/linux/x64/release bundle
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: openvalut-linux
+          path: openvalut/dist/
+
+  windows:
+    name: Windows
+    runs-on: windows-latest
+    timeout-minutes: 45
+    env:
+      # permission_handler_windows still uses <experimental/coroutine>, which
+      # the current MSVC turns into a hard error unless silenced.
+      CXXFLAGS: /D_SILENCE_EXPERIMENTAL_COROUTINE_DEPRECATION_WARNINGS
+    defaults:
+      run:
+        working-directory: openvalut
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: '3.47.1'
+          cache: true
+
+      - name: Build Windows bundle
+        run: |
+          mkdir dist
+          flutter build windows --release -t lib/env/custom_desktop.dart
+          Compress-Archive -Path build\windows\x64\runner\Release\* -DestinationPath dist\openvalut-windows.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: openvalut-windows
+          path: openvalut/dist/
+
+  macos:
+    name: macOS
+    runs-on: macos-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: openvalut
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: '3.47.1'
+          cache: true
+
+      - name: Disable code signing
+        run: |
+          # The checked-in project targets an AppStore team that CI has no
+          # profile for; clear signing settings so the bundle can be produced.
+          sed -i '' 's/CODE_SIGN_IDENTITY = "Apple Distribution";/CODE_SIGN_IDENTITY = "-";/g' macos/Runner.xcodeproj/project.pbxproj
+          sed -i '' 's/CODE_SIGN_STYLE = Manual;/CODE_SIGN_STYLE = Automatic;/g' macos/Runner.xcodeproj/project.pbxproj
+          sed -i '' 's/DEVELOPMENT_TEAM = 64ZPC769JY;/DEVELOPMENT_TEAM = "";/g' macos/Runner.xcodeproj/project.pbxproj
+          sed -i '' 's/"DEVELOPMENT_TEAM\[sdk=macosx\*\]" = 64ZPC769JY;/"DEVELOPMENT_TEAM[sdk=macosx*]" = "";/g' macos/Runner.xcodeproj/project.pbxproj
+          sed -i '' 's/PROVISIONING_PROFILE_SPECIFIER = "openvalut macOS AppStore";/PROVISIONING_PROFILE_SPECIFIER = "";/g' macos/Runner.xcodeproj/project.pbxproj
+
+      - name: Build macOS bundle
+        env:
+          CODE_SIGNING_ALLOWED: "NO"
+        run: |
+          mkdir -p dist
+          flutter build macos --release -t lib/env/custom_desktop.dart
+          ditto -c -k --sequesterRsrc --keepParent build/macos/Build/Products/Release/openvalut.app dist/openvalut-macos.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: openvalut-macos
+          path: openvalut/dist/
+
+  release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    needs: [android, linux, windows, macos]
+    if: github.event.inputs.create_release != 'false' || startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+
+      - name: List release assets
+        run: ls -lah artifacts/
+
+      - name: Determine release tag
+        id: tag
+        run: |
+          if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
+            echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=v${{ github.event.inputs.version }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          files: artifacts/openvalut-*
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

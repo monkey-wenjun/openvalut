@@ -1,0 +1,22 @@
+[package]
+name = "openvalut-mobile"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+description = "Flutter FFI bridge for OpenValut core on Android/iOS."
+
+[lib]
+name = "openvalut_mobile"
+crate-type = ["cdylib", "staticlib"]
+
+[dependencies]
+openvalut-core = { path = "../openvalut-core" }
+argon2 = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+[dev-dependencies]
+libc = "0.2"

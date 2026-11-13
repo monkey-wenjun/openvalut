@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=openvalut
+GenericName=Password Manager
+Type=Application
+Exec=openvalut
+Terminal=false
+Icon=${SNAP}/meta/gui/openvalut.png
+Categories=Utility;Security;

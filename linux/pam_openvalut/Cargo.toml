@@ -1,0 +1,14 @@
+[package]
+name = "pam_openvalut"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "pam_openvalut"
+crate-type = ["cdylib"]
+
+[dependencies]
+pamsm = { version = "0.5", features = ["libpam"] }
+ring = "0.17"
+dirs = "5"
+libc = "0.2"

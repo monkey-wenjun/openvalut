@@ -1,0 +1,159 @@
+/* In-page OpenValut UI (picker, toast, save banner).
+   Everything is scoped to extension-owned ids/classes so host pages cannot
+   accidentally inherit these rules. */
+
+#openvalut-inline-picker,
+#openvalut-toast,
+#openvalut-save-banner {
+  --p-bg: #ffffff;
+  --p-text: #10231b;
+  --p-muted: #56695f;
+  --p-border: #d8e2dc;
+  --p-hover: #edf3ef;
+  --p-primary: #047857;
+  --p-primary-hover: #066349;
+  --p-on-primary: #ffffff;
+  --p-danger: #c12922;
+  --p-error-bg: #fdecec;
+  --p-shadow: 0 6px 24px rgba(16, 35, 27, 0.14);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  #openvalut-inline-picker,
+  #openvalut-toast,
+  #openvalut-save-banner {
+    --p-bg: #16201b;
+    --p-text: #e6efe9;
+    --p-muted: #9fb2a7;
+    --p-border: #2d3d35;
+    --p-hover: #223029;
+    --p-primary: #22b583;
+    --p-primary-hover: #2ec795;
+    --p-on-primary: #06241a;
+    --p-danger: #f0736a;
+    --p-error-bg: #3a1512;
+    --p-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* --- Inline credential picker ---
+   The picker body renders inside a shadow root (see PICKER_CSS in
+   content.js) so host-page styles cannot break it; content.css only
+   contributes the theme variables and font-family below, which inherit
+   through the shadow boundary. */
+
+/* --- Toast --- */
+#openvalut-toast {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2147483647;
+  box-sizing: border-box;
+  max-width: 320px;
+  padding: 11px 15px;
+  background: #1d2a23;
+  border-radius: 10px;
+  box-shadow: var(--p-shadow);
+  color: #ffffff;
+  font-size: 13px;
+  line-height: 1.45;
+  opacity: 1;
+  transition: opacity 300ms ease;
+}
+
+#openvalut-toast.openvalut-toast-hide {
+  opacity: 0;
+}
+
+/* --- Save banner --- */
+#openvalut-save-banner {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2147483647;
+  box-sizing: border-box;
+  width: min(320px, calc(100vw - 32px));
+  padding: 13px 15px;
+  background: var(--p-bg);
+  border: 1px solid var(--p-border);
+  border-radius: 12px;
+  box-shadow: var(--p-shadow);
+  color: var(--p-text);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+#openvalut-save-banner .openvalut-save-title {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+#openvalut-save-banner .openvalut-save-meta {
+  margin: 0 0 4px;
+  color: var(--p-muted);
+  font-size: 12px;
+  word-break: break-all;
+}
+
+#openvalut-save-banner .openvalut-save-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+#openvalut-save-banner .openvalut-btn {
+  min-height: 32px;
+  padding: 6px 13px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 140ms ease, border-color 140ms ease;
+}
+
+#openvalut-save-banner .openvalut-btn:focus-visible {
+  outline: 2px solid var(--p-primary);
+  outline-offset: 2px;
+}
+
+#openvalut-save-banner .openvalut-btn-primary {
+  background: var(--p-primary);
+  color: var(--p-on-primary);
+}
+
+#openvalut-save-banner .openvalut-btn-primary:hover {
+  background: var(--p-primary-hover);
+}
+
+#openvalut-save-banner .openvalut-btn-secondary {
+  background: transparent;
+  border-color: var(--p-border);
+  color: var(--p-text);
+}
+
+#openvalut-save-banner .openvalut-btn-secondary:hover {
+  background: var(--p-hover);
+}
+
+#openvalut-save-banner .openvalut-save-error {
+  margin-top: 9px;
+  color: var(--p-danger);
+  font-size: 12px;
+  background: var(--p-error-bg);
+  padding: 6px 9px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #openvalut-toast,
+  #openvalut-save-banner .openvalut-btn {
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,49 @@
+/* Options page layout; tokens/base live in ui.css. */
+
+body {
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 40px 16px 64px;
+}
+
+.header .logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+}
+
+.header h1 {
+  font-size: 21px;
+}
+
+.hint {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--ov-text-2);
+}
+
+.section h2 {
+  margin: 0 0 10px;
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.section .hint {
+  padding-bottom: 4px;
+}
+
+.checkbox-label + .checkbox-label {
+  margin-top: 2px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}

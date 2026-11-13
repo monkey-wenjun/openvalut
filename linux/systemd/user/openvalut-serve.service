@@ -1,0 +1,17 @@
+[Unit]
+Description=OpenValut credential server (CLI, no desktop app required)
+Documentation=https://github.com/monkey-openvalut/openvalut
+After=default.target
+PartOf=default.target
+
+[Service]
+Type=simple
+# 用 CLI 自己解锁保险库并提供本地凭据服务：
+# 127.0.0.1:<随机端口> + ~/.config/openvalut/data/openvalut.{token,port}
+# 与桌面 App 内的 credential server 协议一致，所以 openvalut-cli run / ov-ssh 等脚本照常用。
+ExecStart=/usr/local/bin/openvalut-cli serve
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

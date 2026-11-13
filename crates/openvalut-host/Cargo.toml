@@ -1,0 +1,48 @@
+[package]
+name = "openvalut-host"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+description = "Chrome native messaging host for OpenValut."
+
+[[bin]]
+name = "openvalut-host"
+path = "src/main.rs"
+
+[dependencies]
+openvalut-core = { path = "../openvalut-core" }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# HTTP client for the desktop app bridge
+ureq = { version = "3", features = ["json"] }
+
+# Public Suffix List for registrable-domain matching
+psl = { workspace = true }
+url = { workspace = true }
+
+# Crypto / encoding
+sha2 = { workspace = true }
+sha1 = { workspace = true }
+hmac = { workspace = true }
+rand = { workspace = true }
+hex = { workspace = true }
+base64 = { workspace = true }
+data-encoding = { workspace = true }
+base32 = "0.5"
+
+# P-256 / ES256 for WebAuthn passkeys
+p256 = { version = "0.13", features = ["ecdsa", "pkcs8", "pem"] }
+
+# Filesystem
+dirs = "5"
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+[dev-dependencies]
+tempfile = "3"

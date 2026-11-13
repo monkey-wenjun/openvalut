@@ -1,0 +1,26 @@
+[package]
+name = "openvalut-ui"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+description = "Rust (egui) desktop UI for OpenValut"
+
+[[bin]]
+name = "openvalut-ui"
+path = "src/main.rs"
+
+[dependencies]
+openvalut-core = { path = "../openvalut-core" }
+serde_json = { workspace = true }
+
+# GUI
+eframe = "0.28"
+egui = "0.28"
+rfd = "0.14"
+arboard = "3"
+
+# Error handling
+anyhow = { workspace = true }

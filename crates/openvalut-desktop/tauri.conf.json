@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "openvalut",
+  "version": "0.1.0",
+  "identifier": "design.codeux.openvalut",
+  "build": {
+    "beforeDevCommand": { "script": "npm run dev", "cwd": "ui" },
+    "devUrl": "http://localhost:5173",
+    "beforeBuildCommand": { "script": "npm run build", "cwd": "ui" },
+    "frontendDist": "ui/dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "openvalut",
+        "visible": false,
+        "width": 1280,
+        "height": 800,
+        "minWidth": 980,
+        "minHeight": 640
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["deb", "appimage", "nsis"],
+    "icon": ["icons/128x128.png", "icons/icon.png"]
+  }
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenVault</title>
+  <meta name="description" content="OpenVault is an open-source, self-hostable, end-to-end encrypted cross-platform password manager built for secure AI Agent credential access." />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .lang-select {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+    .lang-select .logo {
+      margin-bottom: 32px;
+      font-size: 1.5rem;
+    }
+    .lang-select .logo img {
+      width: 64px;
+      height: 64px;
+    }
+    .lang-select h1 {
+      font-size: 1.75rem;
+      margin: 0 0 32px;
+    }
+    .lang-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .lang-buttons .btn {
+      min-width: 120px;
+      white-space: nowrap;
+    }
+    @media (max-width: 360px) {
+      .lang-buttons {
+        flex-direction: column;
+        width: 100%;
+      }
+      .lang-buttons .btn {
+        width: 100%;
+        min-width: auto;
+      }
+    }
+  </style>
+  <script>
+    (function () {
+      var langs = navigator.languages || [navigator.language || 'en'];
+      var target = '/en/';
+      for (var i = 0; i < langs.length; i++) {
+        var lang = langs[i].toLowerCase();
+        if (lang === 'zh-tw' || lang === 'zh-hk' || lang === 'zh-hant' || lang === 'zh-mo') {
+          target = '/zh-hant/';
+          break;
+        }
+        if (lang === 'zh' || lang.indexOf('zh-') === 0) {
+          target = '/zh/';
+          break;
+        }
+        if (lang.indexOf('en') === 0) {
+          target = '/en/';
+          break;
+        }
+      }
+      if (!window.location.pathname.startsWith(target)) {
+        window.location.replace(target + window.location.search + window.location.hash);
+      }
+    })();
+  </script>
+</head>
+<body>
+  <div class="lang-select">
+    <a href="#" class="logo">
+      <img src="logo.png" alt="OpenVault Logo" />
+      <span>OpenVault</span>
+    </a>
+    <h1>Choose your language / 选择语言 / 選擇語言</h1>
+    <div class="lang-buttons">
+      <a href="/zh/" class="btn btn-primary btn-lg">简体中文</a>
+      <a href="/zh-hant/" class="btn btn-primary btn-lg">繁體中文</a>
+      <a href="/en/" class="btn btn-secondary btn-lg">English</a>
+    </div>
+  </div>
+</body>
+</html>

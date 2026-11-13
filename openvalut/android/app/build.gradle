@@ -1,0 +1,258 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+kotlin {
+    jvmToolchain(17)
+}
+
+android {
+    namespace 'app.openvalut'
+    compileSdk 36
+//    buildToolsVersion "29.0.2"
+    ndkVersion System.getProperty("design.codeux.ndkVersion", "28.2.13676358")
+
+
+    defaultConfig {
+        applicationId "app.openvalut"
+        minSdk 24
+        targetSdk 36
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            // Filter for architectures supported by Flutter.
+            // https://github.com/flutter/flutter/issues/83596#issuecomment-1082781598
+            // https://docs.flutter.dev/development/add-to-app/android/project-setup
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
+        }
+    }
+
+    // One config, because there is one keystore in the environment at a time.
+    //
+    // Local builds read credentials from android/.env (gitignored) first, so a
+    // plain `flutter build apk --release --flavor sideload` works without
+    // exporting variables by hand. CI keeps using the fixed environment
+    // variables below, exported by `cux_ship secrets exec --keystore <name>`.
+    //
+    // "invalid" keeps a checkout without any of it configurable: the release
+    // buildType is only reachable with a keystore, debug never needs one.
+    def envProps = new Properties()
+    def envFile = rootProject.file('.env')
+    if (envFile.exists()) {
+        envFile.withReader('UTF-8') { reader -> envProps.load(reader) }
+    }
+    def envOr = { String key, String fallback ->
+        // Real environment variables first: `openvalut-cli run` injects the
+        // signing secrets from the OpenValut vault this way. android/.env is
+        // only the fallback (and still what CI writes).
+        def value = System.getenv(key) ?: envProps.getProperty(key)
+        return value ?: fallback
+    }
+    signingConfigs {
+        release {
+            keyAlias envOr('ANDROID_KEY_ALIAS', 'openvalut')
+            keyPassword envOr('ANDROID_KEY_PASSWORD', '')
+            storeFile rootProject.file(envOr('ANDROID_KEYSTORE_PATH', 'invalid'))
+            storePassword envOr('ANDROID_KEYSTORE_PASSWORD', '')
+        }
+    }
+
+    flavorDimensions = ["hpdist"]
+
+    productFlavors {
+        samsungapps {
+            // Assigns this product flavor to the "version" flavor dimension.
+            // If you are using only one dimension, this property is optional,
+            // and the plugin automatically assigns all the module's flavors to
+            // that dimension.
+            dimension "hpdist"
+            applicationIdSuffix ".samsungapps"
+//            minSdkVersion 23
+//            targetSdkVersion 29
+            signingConfig signingConfigs.release
+        }
+        huawei {
+            dimension "hpdist"
+            applicationIdSuffix ".huawei"
+            signingConfig signingConfigs.release
+        }
+        amazon {
+            dimension "hpdist"
+            applicationIdSuffix ".amazon"
+            // Signed with whatever `secrets exec --keystore amazon` supplied.
+            signingConfig signingConfigs.release
+        }
+        playstore {
+            dimension "hpdist"
+            signingConfig signingConfigs.release
+        }
+        playstoredev {
+            dimension "hpdist"
+            applicationIdSuffix ".dev"
+            signingConfig signingConfigs.release
+        }
+        fdroid {
+            dimension "hpdist"
+            project.flutter.target = 'lib/env/fdroid.dart'
+            applicationIdSuffix = '.fdroid'
+            // https://issuetracker.google.com/issues/197430188
+            signingConfig?.setConfig(null)
+        }
+        // Binary distribution for direct release through github.
+        sideload {
+            dimension "hpdist"
+            applicationIdSuffix = '.sideload'
+            signingConfig signingConfigs.release
+            
+        }
+
+    }
+
+
+    buildTypes {
+        release {
+//            minification is enabled by flutter build command, so nothing we need to do here.
+//            NOTE: only `flutter build apk/appbundle` will enable it,
+//            BUT NOT `flutter run --release`!!
+            minifyEnabled true
+            shrinkResources false
+            proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'),'proguard-rules.pro'
+        }
+        debug {
+            project.flutter.target = 'lib/env/development.dart'
+            applicationIdSuffix = '.debug'
+        }
+    }
+    lint {
+        checkReleaseBuilds false
+        disable 'InvalidPackage'
+    }
+}
+
+android.applicationVariants.all { variant ->
+    if (variant.flavorName == "fdroid" && variant.buildType.name == "release") {
+        variant.outputs.all { output ->
+            output.outputFileName = "app-fdroid-release.apk"
+        }
+    }
+}
+
+
+def rustProjectDir = rootProject.file('../../crates/openvalut-mobile')
+def rustJniLibsDir = rootProject.file('app/src/main/jniLibs')
+// Resolve cargo from PATH if possible; fall back to the standard rustup location.
+def cargoBinary = {
+    def fromPath = System.getenv('PATH')?.split(File.pathSeparator)?.findResult { dir ->
+        def candidate = new File(dir, 'cargo')
+        candidate.exists() && candidate.canExecute() ? candidate.absolutePath : null
+    }
+    return fromPath ?: "${System.getProperty('user.home')}/.cargo/bin/cargo"
+}()
+
+def rustAbis = [
+    ['armeabi-v7a', 'armv7-linux-androideabi', 'armv7a-linux-androideabi24-clang'],
+    ['arm64-v8a',   'aarch64-linux-android',   'aarch64-linux-android24-clang'],
+    ['x86_64',      'x86_64-linux-android',    'x86_64-linux-android24-clang'],
+]
+
+// `flutter` sets sdk.dir in local.properties, but this machine's shell may
+// not export ANDROID_HOME; read the same value instead of failing outright.
+def androidHomeDir = {
+    def fromEnv = System.getenv("ANDROID_HOME") ?: System.getenv("ANDROID_SDK")
+    if (fromEnv != null) {
+        return fromEnv
+    }
+    def fromLocalProps = localProperties.getProperty('sdk.dir')
+    if (fromLocalProps != null) {
+        return fromLocalProps
+    }
+    throw new GradleException(
+        "ANDROID_HOME/ANDROID_SDK is not set and local.properties has no sdk.dir"
+    )
+}()
+
+def ndkClangDir = {
+    def ndkVersionProp = System.getProperty("design.codeux.ndkVersion", "28.2.13676358")
+    return new File("$androidHomeDir/ndk/$ndkVersionProp/toolchains/llvm/prebuilt/linux-x86_64/bin")
+}()
+
+tasks.register("cargoBuild") {
+    group = "rust"
+    description = "Build openvalut-mobile Rust crate for Android ABIs"
+
+    doLast {
+        def profile = gradle.startParameter.taskNames.any { it.toLowerCase().contains('release') }
+            || project.findProperty('openvalut.rust.profile') == 'release'
+            ? 'release' : 'debug'
+        rustJniLibsDir.mkdirs()
+
+        rustAbis.each { abi, rustTarget, clangName ->
+            def abiDir = new File(rustJniLibsDir, abi)
+            abiDir.mkdirs()
+
+            def linker = new File(ndkClangDir, clangName).absolutePath
+            def linkerEnvKey = "CARGO_TARGET_${rustTarget.toUpperCase().replace('-', '_')}_LINKER".toString()
+            def env = [(linkerEnvKey): linker]
+
+            exec {
+                workingDir rustProjectDir
+                environment env
+                commandLine cargoBinary, 'build', '--target', rustTarget, '--profile', profile == 'release' ? 'release' : 'dev'
+            }
+
+            def srcSo = new File(rustProjectDir, "../../target/$rustTarget/$profile/libopenvalut_mobile.so")
+            copy {
+                from srcSo
+                into abiDir
+            }
+        }
+    }
+}
+
+afterEvaluate {
+    tasks.matching { it.name.startsWith('merge') && it.name.endsWith('JniLibFolders') }.all {
+        dependsOn cargoBuild
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+
+    implementation "androidx.appcompat:appcompat:1.6.1"
+    implementation "androidx.fragment:fragment-ktx:1.6.2"
+
+    // logging
+    implementation "org.slf4j:slf4j-api:2.0.7"
+    implementation "io.github.microutils:kotlin-logging:1.7.6"
+    implementation "uk.uuid.slf4j:slf4j-android:2.0.7-0"
+
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}

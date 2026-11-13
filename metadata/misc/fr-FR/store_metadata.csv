@@ -1,0 +1,136 @@
+"playstore_full_description","Conservez facilement et en toute sécurité la trace de tous vos mots de passe !
+
+openvalut est un gestionnaire de mots de passe autonome prenant en charge le format <strong>Keepass</strong> (kdbx 3.x ET kdbx 4.x 🎉️), populaire et éprouvé. Stockez vos mots de passe, partagez-les <strong>sur tous vos appareils</strong> et trouvez-les facilement chaque fois que vous avez besoin de vous connecter.
+
+🗄 Tous vos mots de passe au même endroit.
+🧬 Générez des mots de passe sécurisés aléatoires pour chacun de vos comptes.
+🔐 Déverrouillage rapide sécurisé avec verrou biométrique.
+🔍 Gardez une trace de vos comptes sur le Web.
+🖥 Appli disponible sur Mac, iPhone, iPAd, téléphones et tablettes Android, Linux et Windows.
+📂 Ouvrez plusieurs fichiers de mots de passe en même temps (par exemple, un pour le travail, un privé - Vous pouvez même partager vos fichiers de mots de passe avec vos collègues).
+🤓 Code Open Source disponible sur https://github.com/openvalut/openvalut/
+✍ Remplissage automatique de vos mots de passe (sous Android 9+, supporté dans le navigateur depuis Android 10+)
+🔦 Mode sombre 😎️
+
+
+<strong>=== SOUS VOTRE CONTRÔLE ===</strong>
+
+openvalut enregistre tous vos mots de passe sous le format libre Keepass, exactement là où vous le voulez. Vos mots de passe ne sont pas envoyés sur nos serveurs. openvalut supporte malgré tout la sauvegarde :
+
+✅️ Tous documents locaux sous Android.
+✅️ Intégration native de Google Drive.
+✅️ Intégration native de Dropbox.
+✅️ Support intégré de WebDAV pour enregistrer dans votre NextCloud ou OwnCloud (ou équivalent).
+✅️ Intégration native de Microsoft OneDrive.
+
+
+<b>=== SOLUTION COMPLÈTE, SANS PUB, SANS ABONNEMENT ===</b>
+
+En tant que projet Open Source, vous ne trouverez aucune restriction artificielle des fonctionnalités, aucune publicité et aucune demande de paiement.
+
+<strong>Les contributions sont bienvenues et encouragées</strong> 😅️ (en constante recherche de développeurs, traducteurs, rédacteurs de documentation, designer d'interface, etc. :) ), rejoignez simplement notre <a href=""https://example.com/go/discord"">canal discord</a>.
+
+
+<b>=== EN COURS DE DÉVELOPPEMENT 🛠️ ===</b>
+
+Ceci est un projet Open Source qui est encore en cours de développement intensif, pour y ajouter des fonctionnalités. Votre retour d'expérience nous est précieux, par e-mail ou sur notre <a href=""https://github.com/openvalut/openvalut/issues/"">suivi d'incidents</a> sur : https://github.com/openvalut/openvalut/issues/
+
+Vous pouvez aussi rejoindre notre communauté sur notre <a href=""https://example.com/go/discord"">canal discord</a> à l'adresse https://example.com/go/discord
+","Google Play Store description","4000",""
+"playstore_title","openvalut – Gestion de mots de passe (Keepass comp)","Google Play Title","50",""
+"playstore_short_description","Sécurisez vos mots de passe sur toutes les plates-formes et appareils.","Short description in play store.","80",""
+"apple-appstore-title","openvalut – Password Manager","","30",""
+"apple-appstore-subtitle","Un mot de passe pour tous.","apple-appstore-subtitle -- Used as subtitle in Apple App Store, feel free to be creative ;-) Does not have to match english original, must just be a catchy phrase for the app store.","30",""
+"apple-appstore-description","Conservez facilement et en toute sécurité la trace de tous vos mots de passe !
+
+openvalut est un gestionnaire de mots de passe autonome prenant en charge le format Keepass (kdbx), populaire et éprouvé. Stockez vos mots de passe, partagez-les sur tous vos appareils et trouvez-les facilement chaque fois que vous avez besoin de vous connecter.
+
+• Tous vos mots de passe au même endroit.
+• Générez des mots de passe sécurisés aléatoires pour chacun de vos comptes.
+• Déverrouillage rapide sécurisé avec verrou biométrique.
+• Gardez une trace de vos comptes sur le Web.
+• Appli disponible pour toutes les plateformes. Parmi lesquelles Mac, iPhone et iPad.
+• Ouvrez plusieurs fichiers de mots de passe en même temps (par exemple, un pour le travail, un privé - Vous pouvez même partager vos fichiers de mots de passe avec vos collègues).
+• Enregistrez vos mots de passe à usage unique limité dans le temps pour votre identification à deux facteurs.
+• Joignez des fichiers binaires à vos mots de passe (comme des clés personnelles hors-ligne, etc).
+• Code Open Source disponible sur https://github.com/openvalut/openvalut/
+• Mode sombre ;-)
+
+
+=== SOUS VOTRE CONTRÔLE ===
+
+openvalut enregistre tous vos mots de passe sous le format libre Keepass, exactement là où vous le voulez. Vos mots de passe ne sont pas envoyés sur nos serveurs. openvalut supporte malgré tout la sauvegarde :
+
+• Documents locaux, tel que iCloud.
+• Intégration native de Google Drive.
+• Intégration native de Dropbox.
+• Support intégré de WebDAV pour enregistrer dans votre NextCloud ou OwnCloud (ou équivalent).
+• Intégration native de Microsoft OneDrive.
+
+
+=== SOLUTION COMPLÈTE, SANS PUB, SANS ABONNEMENT ===
+
+En tant que projet Open Source, vous ne trouverez aucune restriction artificielle des fonctionnalités, aucune publicité et aucune demande de paiement.
+
+Les contributions sont bienvenues et encouragées :-) (en constante recherche de développeurs, traducteurs, rédacteurs de documentation, designer d'interface, etc. :) ), rejoignez simplement notre canal discord : https://example.com/go/discord.
+
+
+=== EN COURS DE DÉVELOPPEMENT ===
+
+Ceci est un projet Open Source qui est encore en cours de développement intensif, pour y ajouter des fonctionnalités. Votre retour d'expérience nous est précieux, par e-mail ou sur notre suivi d'incidents sur : https://github.com/openvalut/openvalut/issues/
+
+Vous pouvez aussi rejoindre notre communauté sur notre canal discord à l'adresse https://example.com/go/discord
+","apple-appstore-description --- see my comment, this is essentially the same as the playstore_full_description just slight modifications for apple.","4000",""
+"apple-appstore-keywords","Gestionnaire, Mots de passe, Clés, Sécurité, Keepass, Kdbx, webdav, iCloud, nextCloud, OneDrive","apple-appstore-keywords - Keywords used for searching in the apple app store. Does not have to be a 1:1 translation, choose keywords that mak sense.","100",""
+"","","","",""
+"microsoft-store-windows","Gardez facilement et en toute sécurité la trace de tous vos mots de passe !
+
+openvalut est un gestionnaire de mots de passe autonome compatible avec le format populaire et éprouvé KeePass(kdbx 3. ET format kdbx 4.x 🎉). Stockez vos mots de passe, partagez vos mots de passe sur tous vos appareils et de les facilement lorsque vous avez besoin de vous connecter.
+
+🗄 Tous vos mots de passe au même endroit.
+🧬 Générer des mots de passe sécurisés aléatoires pour chacun de vos comptes.
+:magnifying_glass_tilted_left : Gardez une trace de vos comptes sur le Web.
+🖥 Application disponible pour Mac, iPhone, iPad, téléphones et tablettes Android, Linux et Windows.
+📂 Capable d'ouvrir plusieurs fichiers de mot de passe en même temps (ex: un pour le travail, un personnel - ou même pour partager vos fichiers de mot de passe avec les collègues de travail)
+🤓 Open Source, disponible sur https://github. om/openvalut/openvalut/
+🔦 Dark Theme 😎
+
+
+=== SOUS VOTRE CONTROLE ===
+openvalut stocke tous vos mots de passe dans le format open source Keepass, exactement où vous le souhaitez. Il n'envoie pas vos mots de passe à nos serveurs. Mais openvalut prend en charge la sauvegarde vers:
+
+✅ Intégration native de Google Drive
+✅ Intégration native de Dropbox
+✅ Prise en charge Native WebDAV pour stocker dans votre propre NextCloud ou OwnCloud (ou similaire)
+✅ Intégration native de Microsoft OneDrive
+
+=== TOUTES LES FONCTIONNALITÉS, AUCUNE PUBLICITÉ, PAS D'ABONNEMENT ===
+En tant que projet open source, il n'y a pas de restrictions artificielles de fonctionnalités, pas de publicités et pas d'obligation de paiement.
+
+Les contributions sont bienvenues et encouragées 😅 (Toujours à la recherche de développeurs, de traducteurs, de rédacteur de documentation, de concepteurs d'interface utilisateur, etc... :) ), rejoignez notre canal discord : https://openvalut. pp/go/discord
+
+=== SOUS DÉVELOPPEMENT ACTIF 🛠️ ===
+Ceci est un projet open source qui est toujours en cours de développement, ajoutant des fonctionnalités. Nous aimerions recevoir vos commentaires par e-mail ou sur le traqueur de tickets sur https://github.com/openvalut/openvalut/issues/
+
+Rejoignez également la communauté sur notre forum : https://forum.example.com/
+","Windows Store listing description https://docs.microsoft.com/en-us/windows/uwp/publish/write-a-great-app-description","",""
+"microsoft-store-windows-short-descriptoin","Gardez vos mots de passe et vos comptes sécurisés sur toutes les plates-formes et tous les appareils. Gestionnaire de mots de passe gratuit et Open Source avec la prise en charge des fichiers de mots de passe au format kdbx.","short description for windows store 
+A shorter, catchy description that may be used in the top of your product’s Store listing
+Recommended length: 270 characters or fewer
+","1000",""
+"microsoft-store-windows-features","* Stockez vos mots de passe en toute sécurité
+* Open Source
+* Prise en charge des fichiers KeePass standards (kdbx)
+* Synchronisez sur vos appareils avec les services de stockage dans le cloud.","Short summaries of your product's key features
+Displayed as bulleted list
+Up to 20 app features
+(max 200 characters each)","",""
+"microsoft-store-windows-search-terms","* gestionnaire de mots de passe
+* openvalut
+* kdbx
+* keepass
+* générateur de mots de passe","search terms for the microsoft store
+
+Up to 7 search terms
+40 character limit for each search term
+No more than 21 separate words across all search terms","",""

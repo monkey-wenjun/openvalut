@@ -1,0 +1,3 @@
+#!/bin/bash
+ln -sfn /opt/openvalut/openvalut /usr/bin/openvalut
+ln -sfn /opt/openvalut/openvalut-cli /usr/bin/openvalut-cli

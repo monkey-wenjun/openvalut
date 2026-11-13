@@ -1,0 +1,90 @@
+"playstore_full_description","","Google Play Store description","4000",""
+"playstore_title","openvalut - Menager Haseł kompatybilny z KeePass","Google Play Title","50",""
+"playstore_short_description","Przechowuj hasła i konta bezpiecznie na wszystkich platformach i urządzeniach.","Short description in play store.","80",""
+"apple-appstore-title","AutPass - Menedżer haseł","","30",""
+"apple-appstore-subtitle","","apple-appstore-subtitle -- Used as subtitle in Apple App Store, feel free to be creative ;-) Does not have to match english original, must just be a catchy phrase for the app store.","30",""
+"apple-appstore-description","Łatwo i bezpiecznie przechowuj wszystkie swoje hasła!
+
+AutthPass to samodzielny menedżer haseł ze wsparciem dla popularnego i sprawdzonego bezpiecznego formatu KeePass. Przechowuj swoje hasła, udostępniaj je na wszystkich urządzeniach i łatwo je znajduj, gdy będziesz musiał się zalogować.
+
+• Wszystkie hasła w jednym miejscu.
+• Generowanie bezpiecznych losowych haseł dla każdego z kont.
+• Szybkie odblokowanie zabezpieczone zamkiem biometrycznym.
+• Śledź swoje konta w Internecie.
+• Aplikacja dostępna na wszystkie platformy. Między innymi Mac, iPhone i iPad.
+• Otwieranie wielu plików z hasłami jednocześnie (np. w pracy, prywatnie - lub nawet udostępnianie plików z hasłami współpracownikom)
+• Zapisz hasła jednorazowe oparte na czasie dla 2fa (Two Factor Authentication).
+• Dołączaj pliki binarne do swoich haseł. (tak jak offline TANs itd.)
+• Otwarte źródło dostępne na https://github. om/openvalut/openvalut/
+• Ciemny motyw; )
+
+
+=== POD TWOJĄ KONTROLĄ ===
+
+openvalut przechowuje wszystkie Twoje hasła w otwartym formacie Keepass, dokładnie tam, gdzie chcesz. Nie wysyła Twoich haseł do naszych serwerów. openvalut obsługuje zapisywanie do:
+
+• Dowolny lokalny dostawca dokumentów, na przykład iCloud.
+• Integracja z Google Drive
+• Integracja z Dropbox
+• Obsługa WebDAV do przechowywania we własnej chmurze NextCloud lub OwnCloud (lub podobnej)
+• Integracja z Microsoft OneDrive
+
+
+== W PEŁNI FUNKCJONALNY, BEZ REKLAM, BEZ ABONAMENTU ===
+
+Jako projekt open source nie ma żadnych ograniczeń funkcji, nie ma reklam i nie wymaga płatności.
+
+Wkład mile widziany i zachęcany :-) (Zawsze szukamy programistów, tłumaczy, autorów dokumentacji, projektantów UI, itd. :) ), po prostu dołącz do naszego kanału: https://openvalut. pp/go/discord.
+
+
+==== W TRAKCIE AKTYWNEGO ROZWOJU ===
+
+Jest to projekt open source, który jest nadal w fazie intensywnego rozwoju, dodawania funkcji. Chętnie poznamy Twoje opinie poprzez e-mail lub na issue trackerze pod adresem: https://github. om/openvalut/openvalut/issues/
+
+Dołącz do społeczności na naszym kanale discord pod adresem: https://example.com/go/discord
+","apple-appstore-description --- see my comment, this is essentially the same as the playstore_full_description just slight modifications for apple.","4000",""
+"apple-appstore-keywords","Password Manager,Passwords,Manage,Keystore,Keysafe,Keepass,Kdbx,WebDav,iCloud,Nextloud,OneDrive","apple-appstore-keywords - Keywords used for searching in the apple app store. Does not have to be a 1:1 translation, choose keywords that mak sense.","100",""
+"","","","",""
+"microsoft-store-windows","Łatwo i bezpiecznie przechowuj wszystkie swoje hasła!
+
+AutthPass to samodzielny menedżer haseł ze wsparciem dla popularnego i sprawdzonego bezpiecznego formatu KeePass (kdbx 3 i formatu kdbx 4.x 🎉). Przechowuj swoje hasła, udostępniaj je na wszystkich urządzeniach i łatwo je odnajduj, gdy musisz się zalogować.
+
+🗄 Wszystkie Twoje hasła w jednym miejscu.
+🧬 Wygeneruj bezpieczne, losowe hasła dla każdego z Twoich kont.
+🔍 Śledź swoje konta w sieci.
+🖥 Aplikacja dostępna na Mac, iPhone, iPad, telefony i tablety z systemem Android, Linux i Windows.
+📂 Otwieranie wielu plików z hasłami jednocześnie (np. w pracy, prywatnie - lub nawet udostępnianie plików z hasłami współpracownikom)
+🤓 Otwarte źródło dostępne na https://github. om/openvalut/openvalut/
+🔦 Ciemny motyw 😎
+
+
+=== POD TWOJĄ KONTROLĄ ===
+openvalut przechowuje wszystkie Twoje hasła w bezpiecznym formacie Keepass, dokładnie tam, gdzie chcesz. Nie wysyła on Twoich haseł na nasze serwery. Ale openvalut obsługuje zapisywanie do:
+✅ Integracja z Google Drive
+✅ Integracja z Dropbox
+✅ Obsługa WebDAV do przechowywania we własnej chmurze NextCloud lub OwnCloud (lub podobne)
+✅ Integracja z Microsoft OneDrive
+
+== W PEŁNI FUNKCJONALNY, BEZ REKLAM, BEZ ABONAMENTU ===
+Jako projekt open source nie ma żadnych ograniczeń funkcji, nie ma reklam i nie wymaga płatności.
+
+Wkład mile widziany i zachęcany :-) (Zawsze szukamy programistów, tłumaczy, autorów dokumentacji, projektantów UI, itd. :) , po prostu dołącz do naszego kanału discord: https://openvalut. pp/go/discord
+
+=== W TRAKCIE AKTYWNEGO ROZWOJU 🛠️ ===
+Jest to projekt open source, który jest nadal w fazie intensywnego rozwoju, dodawania funkcji. Chętnie poznamy Twoje opinie poprzez e-mail lub na issue trackerze pod adresem: https://github.com/openvalut/openvalut/issues/
+
+Dołącz do społeczności na naszym forum: https://forum.example.com/
+","Windows Store listing description https://docs.microsoft.com/en-us/windows/uwp/publish/write-a-great-app-description","",""
+"microsoft-store-windows-short-descriptoin","","short description for windows store 
+A shorter, catchy description that may be used in the top of your product’s Store listing
+Recommended length: 270 characters or fewer
+","1000",""
+"microsoft-store-windows-features","","Short summaries of your product's key features
+Displayed as bulleted list
+Up to 20 app features
+(max 200 characters each)","",""
+"microsoft-store-windows-search-terms","","search terms for the microsoft store
+
+Up to 7 search terms
+40 character limit for each search term
+No more than 21 separate words across all search terms","",""

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenValut</title>
+  <link rel="stylesheet" href="ui.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <img src="icons/icon-192.png" alt="OpenValut" class="logo">
+      <h1>OpenValut</h1>
+    </header>
+
+    <div id="status" class="status"></div>
+
+    <section id="unlock-section" class="section">
+      <p class="hint" id="unlock-hint">正在连接桌面 OpenValut…</p>
+      <button id="unlock-btn" class="primary hidden">打开 OpenValut 解锁</button>
+    </section>
+
+    <section id="generator-section" class="section hidden">
+      <div class="section-header">
+        <h2>生成密码</h2>
+      </div>
+
+      <div class="gen-field">
+        <label for="gen-length">长度: <span id="gen-length-value">20</span></label>
+        <input type="range" id="gen-length" min="8" max="64" value="20">
+      </div>
+
+      <div class="gen-checks">
+        <label><input type="checkbox" id="gen-upper" checked> 大写字母</label>
+        <label><input type="checkbox" id="gen-digits" checked> 数字</label>
+        <label><input type="checkbox" id="gen-special" checked> 特殊字符</label>
+      </div>
+
+      <div class="gen-output-row">
+        <input type="text" id="gen-password" readonly placeholder="点击重新生成">
+        <button id="gen-copy-btn" class="secondary">复制</button>
+      </div>
+
+      <div class="gen-strength hidden" id="gen-strength">
+        <div class="strength-bar" id="strength-bar"></div>
+        <span class="strength-label" id="strength-label"></span>
+      </div>
+
+      <div class="gen-actions">
+        <button id="gen-regen-btn" class="secondary">重新生成</button>
+        <button id="gen-fill-btn" class="secondary">填充</button>
+        <button id="gen-create-btn" class="primary">新增条目</button>
+      </div>
+    </section>
+
+    <section id="matches-section" class="section hidden">
+      <div class="section-header">
+        <h2>匹配条目</h2>
+        <button id="lock-btn" class="secondary">锁定</button>
+      </div>
+      <ul id="matches-list" class="matches"></ul>
+    </section>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

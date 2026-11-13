@@ -1,0 +1,8 @@
+Package: openvalut
+Version: 1.9.33
+Architecture: amd64
+Depends: libsecret-1-0 (>= 0.15.0), libgtk-3-0
+Maintainer: openvalut Developers <openvalut@localhost>
+Description: openvalut - 开源密码管理器
+ 基于 Flutter 的开源密码管理器，兼容 KeePass 2.x（kdbx 3.x / 4.x）。
+ 数据本地加密存储，支持自定义 WebDAV 服务器同步。
