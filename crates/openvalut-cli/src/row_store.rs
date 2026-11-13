@@ -39,14 +39,17 @@ pub fn database_from_rows(
     for row in rows {
         let group_path = cloud::decrypt_group(key, &row.group).unwrap_or_default();
         let payload = cloud::decrypt_row(key, &row.nonce, &row.ciphertext)?;
-        let payload_value: Value = serde_json::from_slice(&payload)
-            .map_err(|e| format!("invalid row payload: {e}"))?;
+        let payload_value: Value =
+            serde_json::from_slice(&payload).map_err(|e| format!("invalid row payload: {e}"))?;
         let (fields_map, protected, icon) = decode_payload(&payload_value);
         let group_id = ensure_group(&mut db, &mut groups, &group_path)?;
         let entry_id = EntryId::from_uuid(
-            Uuid::parse_str(&row.uuid).map_err(|e| format!("invalid row uuid {}: {e}", row.uuid))?,
+            Uuid::parse_str(&row.uuid)
+                .map_err(|e| format!("invalid row uuid {}: {e}", row.uuid))?,
         );
-        let mut group = db.group_mut(group_id).ok_or_else(|| "group vanished".to_string())?;
+        let mut group = db
+            .group_mut(group_id)
+            .ok_or_else(|| "group vanished".to_string())?;
         let entry = group
             .add_entry_with_id(entry_id)
             .map_err(|e| format!("duplicate row uuid {}: {e}", row.uuid))?;
@@ -77,14 +80,11 @@ pub fn diff_entries(
     for entry in db.iter_all_entries() {
         let uuid = entry.id().uuid().simple().to_string();
         seen.insert(uuid.clone());
-        let group_path = paths
-            .get(&entry.parent().id())
-            .cloned()
-            .unwrap_or_default();
+        let group_path = paths.get(&entry.parent().id()).cloned().unwrap_or_default();
         let (fields_map, protected, icon) = collect_fields(&entry);
         let payload = encode_payload(&fields_map, &protected, icon);
         let prev = synced.get(&uuid);
-        let unchanged = prev.map_or(false, |p| {
+        let unchanged = prev.is_some_and(|p| {
             p.group_path == group_path
                 && p.fields == fields_map
                 && p.protected == protected
@@ -212,7 +212,9 @@ fn ensure_group(
             cur = *id;
             continue;
         }
-        let mut parent = db.group_mut(cur).ok_or_else(|| "group vanished".to_string())?;
+        let mut parent = db
+            .group_mut(cur)
+            .ok_or_else(|| "group vanished".to_string())?;
         let mut child = parent.add_group();
         child.name = part.to_string();
         let id = child.id();
@@ -299,12 +301,15 @@ mod tests {
 
         // Adding a new entry yields exactly one upsert.
         let mut db2 = db.clone();
-        let _ = kdbx::add_entry(&mut db2, &kdbx::EntryChanges {
-            title: Some("New".into()),
-            username: Some("bob".into()),
-            group: Some("网站".into()),
-            ..Default::default()
-        });
+        let _ = kdbx::add_entry(
+            &mut db2,
+            &kdbx::EntryChanges {
+                title: Some("New".into()),
+                username: Some("bob".into()),
+                group: Some("网站".into()),
+                ..Default::default()
+            },
+        );
         let (upserts, deletes) = diff_entries(&db2, &k, &synced).unwrap();
         assert_eq!(upserts.len(), 1, "one new entry upserted: {upserts:#?}");
         assert_eq!(upserts[0].base_updated_at, 0);

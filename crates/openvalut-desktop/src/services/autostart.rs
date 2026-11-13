@@ -69,6 +69,28 @@ fn run_command_line(exe: &std::path::Path) -> String {
     format!("\"{}\" {HIDDEN_ARG}", exe.display())
 }
 
+/// Re-points an existing entry at the running executable, so a moved install
+/// keeps starting. Debug builds never touch the login items.
+pub fn heal(app: &AppHandle) {
+    #[cfg(debug_assertions)]
+    let _ = app;
+    #[cfg(not(debug_assertions))]
+    {
+        use tauri::Manager;
+        let enabled = app
+            .state::<crate::state::AppState>()
+            .settings
+            .lock()
+            .unwrap()
+            .autostart;
+        if enabled {
+            if let Err(e) = set_enabled(app, true) {
+                eprintln!("修复开机自启动失败: {e}");
+            }
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::run_command_line;
@@ -101,27 +123,5 @@ mod tests {
             r"C:\Users\hs wei\AppData\Local\openvalut\openvalut-desktop.exe"
         );
         assert!(inner.contains(' '), "the path really carries the space");
-    }
-}
-
-/// Re-points an existing entry at the running executable, so a moved install
-/// keeps starting. Debug builds never touch the login items.
-pub fn heal(app: &AppHandle) {
-    #[cfg(debug_assertions)]
-    let _ = app;
-    #[cfg(not(debug_assertions))]
-    {
-        use tauri::Manager;
-        let enabled = app
-            .state::<crate::state::AppState>()
-            .settings
-            .lock()
-            .unwrap()
-            .autostart;
-        if enabled {
-            if let Err(e) = set_enabled(app, true) {
-                eprintln!("修复开机自启动失败: {e}");
-            }
-        }
     }
 }

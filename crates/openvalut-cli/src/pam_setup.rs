@@ -67,8 +67,6 @@ pub fn read_encrypted_totp() -> Option<String> {
     let key = derive_key(&mid);
     let cipher = Aes256Gcm::new_from_slice(&key).ok()?;
     let (nonce, ciphertext) = data.split_at(12);
-    let secret = cipher
-        .decrypt(Nonce::from_slice(nonce), ciphertext)
-        .ok()?;
+    let secret = cipher.decrypt(Nonce::from_slice(nonce), ciphertext).ok()?;
     String::from_utf8(secret).ok()
 }

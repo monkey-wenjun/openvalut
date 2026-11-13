@@ -22,6 +22,9 @@ pub fn bridge_status(state: State<'_, AppState>) -> Result<BridgeStatus, String>
         serde_json::from_str(&text).map_err(|e| format!("host-bridge.json 无效: {e}"))?;
     Ok(BridgeStatus {
         running: true,
-        port: data.get("port").and_then(serde_json::Value::as_u64).map(|p| p as u16),
+        port: data
+            .get("port")
+            .and_then(serde_json::Value::as_u64)
+            .map(|p| p as u16),
     })
 }

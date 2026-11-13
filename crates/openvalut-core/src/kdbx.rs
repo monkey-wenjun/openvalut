@@ -304,7 +304,10 @@ impl Vault {
     /// The recycle bin: the group recorded in the header, or one adopted by name
     /// (see [`Vault::name_adopted_bin`]).
     fn recycle_bin_id(&self) -> Option<GroupId> {
-        self.db.recycle_bin().map(|g| g.id()).or_else(|| self.name_adopted_bin())
+        self.db
+            .recycle_bin()
+            .map(|g| g.id())
+            .or_else(|| self.name_adopted_bin())
     }
 
     /// A top-level group carrying the recycle bin's name while the file's
@@ -452,10 +455,11 @@ impl Vault {
     /// subgroups. Returns how many entries were touched.
     pub fn set_group_read_allowed(&mut self, uuid: &str, allowed: bool) -> Result<usize> {
         let id = self.resolve_group(uuid)?;
-        let group = self.db.group(id).ok_or(Error::GroupNotFound)?;
         let mut uuids = Vec::new();
-        collect_entry_uuids(&group, &mut uuids);
-        drop(group);
+        {
+            let group = self.db.group(id).ok_or(Error::GroupNotFound)?;
+            collect_entry_uuids(&group, &mut uuids);
+        }
         for entry_uuid in &uuids {
             self.set_entry_read_allowed(entry_uuid, allowed)?;
         }
@@ -989,13 +993,23 @@ mod tests {
             })
             .unwrap();
 
-        assert_eq!(vault.trash_duplicate_entries("华泰证券", "88001234").unwrap(), 2);
+        assert_eq!(
+            vault
+                .trash_duplicate_entries("华泰证券", "88001234")
+                .unwrap(),
+            2
+        );
         // One of the three survives, the other account is untouched, and what
         // was removed is recoverable rather than gone.
         assert_eq!(vault.entries().len(), 2);
         assert_eq!(vault.trashed_entries().len(), 2);
         // Nothing left to clean the second time.
-        assert_eq!(vault.trash_duplicate_entries("华泰证券", "88001234").unwrap(), 0);
+        assert_eq!(
+            vault
+                .trash_duplicate_entries("华泰证券", "88001234")
+                .unwrap(),
+            0
+        );
     }
 
     #[test]
@@ -1077,7 +1091,11 @@ mod tests {
         vault.rename_group(&work, "公司").unwrap();
         assert_eq!(vault.find_entry("GitHub").unwrap().group, "公司/邮箱");
         assert_eq!(
-            vault.groups().into_iter().map(|g| g.path).collect::<Vec<_>>(),
+            vault
+                .groups()
+                .into_iter()
+                .map(|g| g.path)
+                .collect::<Vec<_>>(),
             vec!["公司".to_string(), "公司/邮箱".to_string()]
         );
         assert_eq!(
@@ -1104,7 +1122,11 @@ mod tests {
         vault.trash_group(&nested).unwrap();
         assert!(vault.entries().is_empty());
         assert_eq!(
-            vault.groups().into_iter().map(|g| g.path).collect::<Vec<_>>(),
+            vault
+                .groups()
+                .into_iter()
+                .map(|g| g.path)
+                .collect::<Vec<_>>(),
             vec!["工作".to_string()],
             "a group under the recycle bin must leave the tree"
         );

@@ -88,7 +88,8 @@ fn build_report(entries: &[openvalut_core::Entry]) -> AuditReport {
             .or_default()
             .push(index);
     }
-    let mut duplicate_groups: Vec<&Vec<usize>> = by_identity.values().filter(|g| g.len() > 1).collect();
+    let mut duplicate_groups: Vec<&Vec<usize>> =
+        by_identity.values().filter(|g| g.len() > 1).collect();
     duplicate_groups.sort_by_key(|g| entries[g[0]].title.clone());
     for group in duplicate_groups {
         for index in group {
@@ -123,7 +124,9 @@ fn build_report(entries: &[openvalut_core::Entry]) -> AuditReport {
         // Staleness only applies to entries that actually own a password.
         if is_literal_password(&entry.password) {
             if let Some(updated_at) = &entry.updated_at {
-                if let Ok(modified) = chrono::NaiveDateTime::parse_from_str(updated_at, "%Y-%m-%d %H:%M:%S") {
+                if let Ok(modified) =
+                    chrono::NaiveDateTime::parse_from_str(updated_at, "%Y-%m-%d %H:%M:%S")
+                {
                     let days = (chrono::Utc::now().naive_utc() - modified).num_days();
                     if days > STALE_DAYS {
                         report.old.push(AuditIssue {
@@ -220,7 +223,10 @@ mod tests {
         assert_eq!(report.old[0].uuid, "uuid-Old Site");
         assert!(report.old[0].days_since_update.unwrap() > 365);
         assert_eq!(report.duplicates.len(), 2);
-        assert!(report.duplicates.iter().all(|i| i.duplicate_count == Some(2)));
+        assert!(report
+            .duplicates
+            .iter()
+            .all(|i| i.duplicate_count == Some(2)));
         assert_eq!(report.duplicates[0].username, "trader");
     }
 }

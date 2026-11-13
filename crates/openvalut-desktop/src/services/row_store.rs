@@ -40,14 +40,17 @@ pub fn database_from_rows(
     for row in rows {
         let group_path = cloud::decrypt_group(key, &row.group).unwrap_or_default();
         let payload = cloud::decrypt_row(key, &row.nonce, &row.ciphertext)?;
-        let payload_value: Value = serde_json::from_slice(&payload)
-            .map_err(|e| format!("invalid row payload: {e}"))?;
+        let payload_value: Value =
+            serde_json::from_slice(&payload).map_err(|e| format!("invalid row payload: {e}"))?;
         let (fields_map, protected, icon) = decode_payload(&payload_value);
         let group_id = ensure_group(&mut db, &mut groups, &group_path)?;
         let entry_id = EntryId::from_uuid(
-            Uuid::parse_str(&row.uuid).map_err(|e| format!("invalid row uuid {}: {e}", row.uuid))?,
+            Uuid::parse_str(&row.uuid)
+                .map_err(|e| format!("invalid row uuid {}: {e}", row.uuid))?,
         );
-        let mut group = db.group_mut(group_id).ok_or_else(|| "group vanished".to_string())?;
+        let mut group = db
+            .group_mut(group_id)
+            .ok_or_else(|| "group vanished".to_string())?;
         let entry = group
             .add_entry_with_id(entry_id)
             .map_err(|e| format!("duplicate row uuid {}: {e}", row.uuid))?;
@@ -76,7 +79,7 @@ pub fn diff_entries(
     let mut upserts = Vec::new();
     for (uuid, row) in &current {
         let prev = synced.get(uuid);
-        let unchanged = prev.map_or(false, |p| {
+        let unchanged = prev.is_some_and(|p| {
             p.group_path == row.group_path
                 && p.fields == row.fields
                 && p.protected == row.protected
@@ -115,10 +118,7 @@ pub fn current_rows(db: &Database) -> HashMap<String, DecodedRow> {
         out.insert(
             entry.id().uuid().simple().to_string(),
             DecodedRow {
-                group_path: paths
-                    .get(&entry.parent().id())
-                    .cloned()
-                    .unwrap_or_default(),
+                group_path: paths.get(&entry.parent().id()).cloned().unwrap_or_default(),
                 fields,
                 protected,
                 icon,
@@ -230,7 +230,9 @@ fn ensure_group(
             cur = *id;
             continue;
         }
-        let mut parent = db.group_mut(cur).ok_or_else(|| "group vanished".to_string())?;
+        let mut parent = db
+            .group_mut(cur)
+            .ok_or_else(|| "group vanished".to_string())?;
         let mut child = parent.add_group();
         child.name = part.to_string();
         let id = child.id();
@@ -302,7 +304,11 @@ mod tests {
         let mut titles = Vec::new();
         for entry in db.iter_all_entries() {
             titles.push((
-                entry.fields.get("Title").map(|v| v.to_string()).unwrap_or_default(),
+                entry
+                    .fields
+                    .get("Title")
+                    .map(|v| v.to_string())
+                    .unwrap_or_default(),
                 group_paths(&db)
                     .get(&entry.parent().id())
                     .cloned()

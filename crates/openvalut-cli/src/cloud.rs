@@ -17,6 +17,10 @@ const ARGON_MEMORY_KIB: u32 = 64 * 1024;
 const ARGON_ITERATIONS: u32 = 3;
 const ARGON_PARALLELISM: u32 = 4;
 
+/// Upserted `(uuid, updated_at)` pairs plus the uuids the server rejected as
+/// stale by its optimistic lock.
+pub type SyncEntriesResult = (Vec<(String, i64)>, Vec<String>);
+
 #[derive(Debug, Clone)]
 pub struct CloudVault {
     pub id: String,
@@ -206,14 +210,23 @@ impl CloudClient {
             .iter()
             .map(|e| {
                 Ok(CloudRow {
-                    uuid: e.get("uuid").and_then(Value::as_str).unwrap_or("").to_string(),
+                    uuid: e
+                        .get("uuid")
+                        .and_then(Value::as_str)
+                        .unwrap_or("")
+                        .to_string(),
                     group: e
                         .get("group")
                         .and_then(Value::as_str)
                         .unwrap_or("")
                         .to_string(),
                     nonce: BASE64
-                        .decode(e.get("nonce").and_then(Value::as_str).unwrap_or("").as_bytes())
+                        .decode(
+                            e.get("nonce")
+                                .and_then(Value::as_str)
+                                .unwrap_or("")
+                                .as_bytes(),
+                        )
                         .unwrap_or_default(),
                     ciphertext: BASE64
                         .decode(
@@ -245,7 +258,7 @@ impl CloudClient {
         vault_id: &str,
         upserts: &[RowUpsert],
         deletes: &[String],
-    ) -> Result<(Vec<(String, i64)>, Vec<String>), String> {
+    ) -> Result<SyncEntriesResult, String> {
         let upserts_json: Vec<Value> = upserts
             .iter()
             .map(|u| {
@@ -289,7 +302,11 @@ impl CloudClient {
         let conflicts = resp
             .get("conflicts")
             .and_then(Value::as_array)
-            .map(|a| a.iter().filter_map(|v| v.as_str().map(String::from)).collect())
+            .map(|a| {
+                a.iter()
+                    .filter_map(|v| v.as_str().map(String::from))
+                    .collect()
+            })
             .unwrap_or_default();
         Ok((upserted, conflicts))
     }
@@ -520,11 +537,7 @@ pub fn decrypt_row(key: &[u8; 32], nonce: &[u8], ciphertext: &[u8]) -> Result<Ve
 /// Encrypts a group path into the row `group` field: "base64(nonce).base64(ct)".
 pub fn encrypt_group(key: &[u8; 32], group: &str) -> Result<String, String> {
     let (nonce, ct) = encrypt_row(key, group.as_bytes())?;
-    Ok(format!(
-        "{}.{}",
-        BASE64.encode(&nonce),
-        BASE64.encode(&ct)
-    ))
+    Ok(format!("{}.{}", BASE64.encode(&nonce), BASE64.encode(&ct)))
 }
 
 /// Decrypts a row `group` field back to the group path. An empty field (root)

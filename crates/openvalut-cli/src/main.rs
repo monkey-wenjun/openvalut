@@ -76,7 +76,10 @@ fn run(args: &[String]) -> i32 {
     // When the credential server is not running, fall back to the local KDBX
     // remembered by the last successful `--db` run so the CLI still works
     // without the desktop app.
-    if matches!(opts.command.as_deref(), Some("list" | "pam-setup" | "serve")) {
+    if matches!(
+        opts.command.as_deref(),
+        Some("list" | "pam-setup" | "serve")
+    ) {
         if let Some(home) = home_dir() {
             let base = credential_server_data_dir(&home);
             let token_path = opts
@@ -229,9 +232,7 @@ fn parse_args(args: &[String]) -> Option<Options> {
             }
             // AK/SK entry fields. `--secret-key` is already taken by the cloud
             // account Secret Key, so the entry fields spell it out.
-            "--access-key-id" | "--ak" => {
-                item_fields.access_key = Some(take_value(args, &mut i)?)
-            }
+            "--access-key-id" | "--ak" => item_fields.access_key = Some(take_value(args, &mut i)?),
             "--secret-access-key" | "--sk" => {
                 item_fields.secret_key = Some(take_value(args, &mut i)?)
             }
@@ -257,9 +258,7 @@ fn parse_args(args: &[String]) -> Option<Options> {
             }
             // `item edit|delete|allow|deny <target>`: the third positional is the
             // entry to operate on.
-            (Some("item"), "edit" | "delete" | "allow" | "deny") => {
-                item_target = third
-            }
+            (Some("item"), "edit" | "delete" | "allow" | "deny") => item_target = third,
             (Some("item"), "import-env") => item_target = third,
             (Some("agent"), "add" | "remove") => item_target = third,
             // `rows delete <uuids>`: the third positional is the uuid list.
@@ -840,16 +839,12 @@ fn run_standalone(opts: Options) -> i32 {
                         item_delete(&mut db, opts.item_target.as_deref().unwrap_or(""))
                     }
                 }
-                "allow" => item_set_read_allowed(
-                    &mut db,
-                    opts.item_target.as_deref().unwrap_or(""),
-                    true,
-                ),
-                "deny" => item_set_read_allowed(
-                    &mut db,
-                    opts.item_target.as_deref().unwrap_or(""),
-                    false,
-                ),
+                "allow" => {
+                    item_set_read_allowed(&mut db, opts.item_target.as_deref().unwrap_or(""), true)
+                }
+                "deny" => {
+                    item_set_read_allowed(&mut db, opts.item_target.as_deref().unwrap_or(""), false)
+                }
                 "import-env" => item_import_env(&mut db, &opts),
                 _ => {
                     usage();
@@ -1420,10 +1415,7 @@ fn serve_command(opts: &Options) -> i32 {
         }
     };
     let data_dir = credential_server_data_dir(&home);
-    credential_server::serve(
-        db,
-        &credential_server::ServeOptions { port, data_dir },
-    )
+    credential_server::serve(db, &credential_server::ServeOptions { port, data_dir })
 }
 
 /// Clears the stored master and sudo passwords from the keychain.
@@ -1542,11 +1534,7 @@ fn spawn_sudo(
     // argv[0] is the command to run under sudo. Accept both `exec --sudo --
     // dpkg -i f` (whole argv is the command) and `exec -- sudo dpkg -i f`
     // (argv[0] is literally `sudo`).
-    let command_args: &[String] = if argv[0] == "sudo" {
-        &argv[1..]
-    } else {
-        argv
-    };
+    let command_args: &[String] = if argv[0] == "sudo" { &argv[1..] } else { argv };
     cmd.args(command_args);
     for (key, value) in envs {
         cmd.env(key, value);
@@ -1827,9 +1815,7 @@ fn open_cloud(
             // the rows under the current vault key on the next save.
             let full = client.get_vault(&vault.id)?;
             let plain = cloud::decrypt_blob(&key, &full.nonce, &full.ciphertext).map_err(|e| {
-                format!(
-                    "行数据无法用当前主密码解密，且旧 blob 也打不开（{row_err}；{e}）"
-                )
+                format!("行数据无法用当前主密码解密，且旧 blob 也打不开（{row_err}；{e}）")
             })?;
             let db = kdbx::load(&plain, password, None)?;
             let synced: HashMap<String, row_store::DecodedRow> = rows
@@ -1892,16 +1878,14 @@ fn resolve_cloud_vault_id(opts: &Options) -> Result<String, String> {
 /// Row-level store operations (`rows list` / `rows delete <uuids>`), used to
 /// reconcile the per-entry rows against the blob-backed truth.
 fn run_cloud_vaults(opts: &Options, password: &str) -> i32 {
-    let (server, email, secret_key) = match resolve_cloud_credentials(
-        opts,
-        keychain::default_key_store(),
-    ) {
-        Ok(c) => c,
-        Err(e) => {
-            eprintln!("error: {e}");
-            return 1;
-        }
-    };
+    let (server, email, secret_key) =
+        match resolve_cloud_credentials(opts, keychain::default_key_store()) {
+            Ok(c) => c,
+            Err(e) => {
+                eprintln!("error: {e}");
+                return 1;
+            }
+        };
     let client = match cloud::CloudClient::login(&server, &email, &secret_key) {
         Ok(c) => c,
         Err(e) => {
@@ -1927,10 +1911,7 @@ fn run_cloud_vaults(opts: &Options, password: &str) -> i32 {
         let mut blob_opens = false;
         let mut key_fp = String::from("derive_err");
         if let Ok(key) = key {
-            key_fp = format!(
-                "{:02x}{:02x}{:02x}{:02x}",
-                key[0], key[1], key[2], key[3]
-            );
+            key_fp = format!("{:02x}{:02x}{:02x}{:02x}", key[0], key[1], key[2], key[3]);
             if let Ok(rows) = client.list_rows(&vault.id) {
                 row_count = rows.len();
                 if let Some(row) = rows.first() {
@@ -1964,16 +1945,14 @@ fn run_rows(opts: &Options) -> i32 {
             return 1;
         }
     };
-    let (server, email, secret_key) = match resolve_cloud_credentials(
-        opts,
-        keychain::default_key_store(),
-    ) {
-        Ok(c) => c,
-        Err(e) => {
-            eprintln!("error: {e}");
-            return 1;
-        }
-    };
+    let (server, email, secret_key) =
+        match resolve_cloud_credentials(opts, keychain::default_key_store()) {
+            Ok(c) => c,
+            Err(e) => {
+                eprintln!("error: {e}");
+                return 1;
+            }
+        };
     let client = match cloud::CloudClient::login(&server, &email, &secret_key) {
         Ok(c) => c,
         Err(e) => {
@@ -1997,7 +1976,7 @@ fn run_rows(opts: &Options) -> i32 {
         "delete" => {
             let target = opts.item_target.as_deref().unwrap_or("");
             let uuids: Vec<String> = target
-                .split(|c| c == ',' || c == ' ' || c == '\n')
+                .split([',', ' ', '\n'])
                 .filter(|s| !s.is_empty())
                 .map(String::from)
                 .collect();
@@ -2157,7 +2136,10 @@ fn standalone_list(opts: &Options, db: &kdbx::Database) -> i32 {
             continue;
         }
         if opts.list_uuids {
-            println!("{}\t{}\t{}\t{}\t{}", e.id, e.title, e.username, e.group, e.file);
+            println!(
+                "{}\t{}\t{}\t{}\t{}",
+                e.id, e.title, e.username, e.group, e.file
+            );
         } else {
             println!("{}\t{}\t{}\t{}", e.title, e.username, e.group, e.file);
         }
@@ -2249,9 +2231,7 @@ fn item_add(db: &mut kdbx::Database, opts: &Options) -> i32 {
     match kdbx::add_entry(db, &changes) {
         Ok(_) => {
             println!("added {title}");
-            eprintln!(
-                "note: 新条目默认禁止 CLI/脚本读取；需要时请执行 item allow {title}"
-            );
+            eprintln!("note: 新条目默认禁止 CLI/脚本读取；需要时请执行 item allow {title}");
             0
         }
         Err(e) => {
@@ -2451,7 +2431,11 @@ fn item_set_read_allowed(db: &mut kdbx::Database, target: &str, allowed: bool) -
     }
     println!(
         "{} {}",
-        if allowed { "已允许读取" } else { "已禁止读取" },
+        if allowed {
+            "已允许读取"
+        } else {
+            "已禁止读取"
+        },
         info.title
     );
     0

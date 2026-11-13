@@ -60,10 +60,7 @@ async fn run(app: AppHandle) -> Result<(), String> {
     let listener = tokio::net::TcpListener::bind(("127.0.0.1", 0))
         .await
         .map_err(|e| format!("bind loopback: {e}"))?;
-    let port = listener
-        .local_addr()
-        .map_err(|e| e.to_string())?
-        .port();
+    let port = listener.local_addr().map_err(|e| e.to_string())?.port();
 
     let state = app.state::<AppState>();
     let config_dir = state.config_dir.clone();
@@ -130,7 +127,11 @@ fn err_json(message: impl Into<String>) -> Response {
 }
 
 fn conflict(message: &str) -> Response {
-    (StatusCode::CONFLICT, Json(json!({"ok": false, "error": message}))).into_response()
+    (
+        StatusCode::CONFLICT,
+        Json(json!({"ok": false, "error": message})),
+    )
+        .into_response()
 }
 
 fn authorized(headers: &HeaderMap, token: &str) -> bool {
@@ -202,9 +203,7 @@ fn kdf_fingerprint(kdbx_bytes: &[u8]) -> Option<String> {
 fn build_snapshot<R: tauri::Runtime>(app: &AppHandle<R>) -> Result<Value, String> {
     let state = app.state::<AppState>();
     let guard = state.vault.read().unwrap();
-    let handle = guard
-        .as_ref()
-        .ok_or_else(|| "密码库未解锁".to_string())?;
+    let handle = guard.as_ref().ok_or_else(|| "密码库未解锁".to_string())?;
     let vault = handle.vault.lock().unwrap();
 
     let (bytes, transformed_key) = vault
@@ -212,19 +211,16 @@ fn build_snapshot<R: tauri::Runtime>(app: &AppHandle<R>) -> Result<Value, String
         .map_err(|e| format!("cannot serialize vault: {e}"))?;
     let transformed_key =
         transformed_key.ok_or_else(|| "vault did not produce a transformed key".to_string())?;
-    let fingerprint = kdf_fingerprint(&bytes)
-        .ok_or_else(|| "cannot compute KDF fingerprint".to_string())?;
+    let fingerprint =
+        kdf_fingerprint(&bytes).ok_or_else(|| "cannot compute KDF fingerprint".to_string())?;
     let id = handle.id_string();
-    let name = vault
-        .name()
-        .map(str::to_string)
-        .unwrap_or_else(|| {
-            handle
-                .source
-                .local_path()
-                .and_then(|p| p.file_stem().map(|s| s.to_string_lossy().to_string()))
-                .unwrap_or_else(|| id.clone())
-        });
+    let name = vault.name().map(str::to_string).unwrap_or_else(|| {
+        handle
+            .source
+            .local_path()
+            .and_then(|p| p.file_stem().map(|s| s.to_string_lossy().to_string()))
+            .unwrap_or_else(|| id.clone())
+    });
 
     Ok(json!([{
         "id": id,
@@ -538,9 +534,7 @@ async fn save_vault<R: tauri::Runtime>(
         .map_err(|e| format!("invalid vault bytes: {e}"))?;
         let state = app.state::<AppState>();
         let guard = state.vault.read().unwrap();
-        let handle = guard
-            .as_ref()
-            .ok_or_else(|| "密码库未解锁".to_string())?;
+        let handle = guard.as_ref().ok_or_else(|| "密码库未解锁".to_string())?;
         *handle.vault.lock().unwrap() = vault;
         drop(guard);
         state.touch();
@@ -643,7 +637,9 @@ mod tests {
             *guard = Some(VaultHandle {
                 vault: std::sync::Mutex::new(vault),
                 key,
-                source: crate::state::VaultSource::Local { path: vault_path.clone() },
+                source: crate::state::VaultSource::Local {
+                    path: vault_path.clone(),
+                },
                 dirty: std::sync::atomic::AtomicBool::new(false),
             });
         }
@@ -707,10 +703,11 @@ mod tests {
     #[tokio::test]
     async fn locked_vault_conflicts() {
         let app = setup();
-        let state = app.handle.state::<AppState>();
-        *state.vault.write().unwrap() = None;
-        state.touch();
-        drop(state);
+        {
+            let state = app.handle.state::<AppState>();
+            *state.vault.write().unwrap() = None;
+            state.touch();
+        }
         let (status, body) = request(&app.router, "GET", "/vaults", None, Some(TOKEN)).await;
         assert_eq!(status, StatusCode::CONFLICT);
         assert_eq!(body["ok"], json!(false));
@@ -799,7 +796,11 @@ mod tests {
             &openvalut_core::VaultKey::with_transformed_key(tk),
         )
         .unwrap();
-        let entry = vault.entries().into_iter().find(|e| e.uuid == uuid).unwrap();
+        let entry = vault
+            .entries()
+            .into_iter()
+            .find(|e| e.uuid == uuid)
+            .unwrap();
         assert_eq!(entry.title, "Renamed");
 
         let (_, body) = request(
@@ -841,7 +842,10 @@ mod tests {
         .await;
         assert_eq!(status, StatusCode::OK);
         assert_eq!(body["ok"], json!(false));
-        assert!(body["error"].as_str().unwrap().contains("invalid vault bytes"));
+        assert!(body["error"]
+            .as_str()
+            .unwrap()
+            .contains("invalid vault bytes"));
     }
 
     #[tokio::test]

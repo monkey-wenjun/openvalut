@@ -7,7 +7,9 @@ use openvalut_core::{CreateEntryRequest, Vault, VaultKey};
 
 fn main() {
     let mut args = std::env::args().skip(1);
-    let path = args.next().unwrap_or_else(|| "/tmp/openvalut-e2e.kdbx".into());
+    let path = args
+        .next()
+        .unwrap_or_else(|| "/tmp/openvalut-e2e.kdbx".into());
     let password = args.next().unwrap_or_else(|| "test-master-pw".into());
 
     let mut vault = Vault::create_new("E2E 测试库").expect("create");

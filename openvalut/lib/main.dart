@@ -4,7 +4,6 @@ import 'dart:ui' as ui;
 
 import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:another_flushbar/flushbar_route.dart' as flushbar_route;
-import 'package:biometric_storage/biometric_storage.dart';
 import 'package:diac_client/diac_client.dart';
 import 'package:file/local.dart';
 import 'package:file_picker_writable/file_picker_writable.dart';
@@ -333,14 +332,6 @@ Future<void> startApp(Env env) async {
   };
 
   WidgetsFlutterBinding.ensureInitialized();
-  if (OpenValutPlatform.isWindows) {
-    // biometric_storage ships its Windows implementation as an inline Dart
-    // plugin but pins `flutter: ">=2.8.0"`, and the tool only auto-registers
-    // inline desktop implementations from Flutter 2.11 on. Register it
-    // manually, otherwise saving the cloud account / master password throws
-    // MissingPluginException on Windows.
-    Win32BiometricStoragePlugin.registerWith();
-  }
   final deps = Deps(env: env);
   deps.kdbxBloc.delegate = KdbxBlocDelegateHandler(navigatorKey);
   // 桌面端启动回环桥，让 Chrome 扩展直接读取已解锁的密码库。

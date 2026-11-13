@@ -101,7 +101,9 @@ pub fn list_entries(db: &Database) -> Vec<EntryInfo> {
 /// `openvalut.read-allowed` field must be exactly "1"; anything else
 /// (including a missing field) is denied.
 pub fn entry_read_allowed(entry: &EntryRef<'_>) -> bool {
-    entry.get(READ_ALLOWED_FIELD).is_some_and(|v| v == READ_ALLOWED_MARK)
+    entry
+        .get(READ_ALLOWED_FIELD)
+        .is_some_and(|v| v == READ_ALLOWED_MARK)
 }
 
 /// Whether the entry sits inside the vault's recycle bin (mirrors the app:
@@ -135,10 +137,7 @@ pub fn list_readable_entries(db: &Database) -> Vec<EntryInfo> {
         .into_iter()
         .filter(|info| {
             db.entry(info.id)
-                .is_some_and(|entry| {
-                    entry_read_allowed(&entry)
-                        && !is_in_recycle_bin(db, &entry)
-                })
+                .is_some_and(|entry| entry_read_allowed(&entry) && !is_in_recycle_bin(db, &entry))
         })
         .collect()
 }

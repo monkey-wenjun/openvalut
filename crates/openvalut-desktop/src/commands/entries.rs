@@ -294,11 +294,7 @@ pub fn group_rename(
 
 /// Move a group and its contents to the recycle bin.
 #[tauri::command]
-pub fn group_trash(
-    app: AppHandle,
-    state: State<'_, AppState>,
-    uuid: String,
-) -> Result<(), String> {
+pub fn group_trash(app: AppHandle, state: State<'_, AppState>, uuid: String) -> Result<(), String> {
     with_vault(&state, |vault| {
         vault
             .trash_group(&uuid)

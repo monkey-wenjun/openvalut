@@ -140,7 +140,9 @@ impl MockHttpServer {
                     "HTTP/1.1 {status} Status\r\nContent-Type: application/json\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{response_body}",
                     response_body.len()
                 );
-                socket.write_all(response.as_bytes()).expect("write response");
+                socket
+                    .write_all(response.as_bytes())
+                    .expect("write response");
                 socket.flush().expect("flush");
             }
         });
@@ -710,9 +712,10 @@ fn auth_login_scan_stores_account_without_echoing_secret() {
     let code = output.status.code();
     let out = stdout(&output);
     let err = stderr(&output);
-    let stored = fs::read_to_string(dir.join("keychain/cloud-secret-key.secret")).unwrap_or_default();
-    let account =
-        fs::read_to_string(dir.join(".config/openvalut/data/cloud-account.json")).unwrap_or_default();
+    let stored =
+        fs::read_to_string(dir.join("keychain/cloud-secret-key.secret")).unwrap_or_default();
+    let account = fs::read_to_string(dir.join(".config/openvalut/data/cloud-account.json"))
+        .unwrap_or_default();
     let _ = fs::remove_dir_all(&dir);
 
     assert_eq!(code, Some(0), "stdout={out}\nstderr={err}");
@@ -727,7 +730,11 @@ fn auth_login_scan_stores_account_without_echoing_secret() {
     assert!(account.contains("scan@example.com"), "account={account}");
     // One create call, then one poll carrying the one-time secret.
     assert_eq!(requests.len(), 2);
-    assert!(requests[0].starts_with("POST /api/login/scan"), "{}", requests[0]);
+    assert!(
+        requests[0].starts_with("POST /api/login/scan"),
+        "{}",
+        requests[0]
+    );
     assert!(
         requests[1].starts_with("GET /api/login/scan/sess-1"),
         "{}",

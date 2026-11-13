@@ -85,7 +85,7 @@ void main() {
       sudo: (code) => code == '654321'
           ? (username: 'octocat', password: 'sudo-secret')
           : null,
-      pamSetup: () async => '/home/test/.openvalut/totp/abc.enc',
+      pamSetup: (_) async => '/home/test/.openvalut/totp/abc.enc',
     );
     await server.start();
   });
@@ -114,7 +114,7 @@ void main() {
       entries: () => [],
       resolveReference: (_) => null,
       sudo: (_) => null,
-      pamSetup: () async => null,
+      pamSetup: (_) async => null,
       authenticate: () async {
         authenticationCount++;
         return false;

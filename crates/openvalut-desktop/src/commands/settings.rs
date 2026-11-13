@@ -66,10 +66,11 @@ mod tests {
     use crate::state::Settings;
 
     fn stored(autostart: bool, days: u32) -> Settings {
-        let mut settings = Settings::default();
-        settings.autostart = autostart;
-        settings.remember_unlock_days = days;
-        settings
+        Settings {
+            autostart,
+            remember_unlock_days: days,
+            ..Default::default()
+        }
     }
 
     #[test]
@@ -90,7 +91,13 @@ mod tests {
 
     #[test]
     fn the_login_item_follows_an_actual_change_with_the_requested_value() {
-        assert_eq!(changes(&stored(false, 0), &stored(true, 0)).autostart, Some(true));
-        assert_eq!(changes(&stored(true, 0), &stored(false, 0)).autostart, Some(false));
+        assert_eq!(
+            changes(&stored(false, 0), &stored(true, 0)).autostart,
+            Some(true)
+        );
+        assert_eq!(
+            changes(&stored(true, 0), &stored(false, 0)).autostart,
+            Some(false)
+        );
     }
 }

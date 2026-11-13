@@ -1,9 +1,10 @@
 //! OpenValut Cloud access, ported from `openvalut-cli/src/cloud.rs` so the
 //! desktop client and the CLI speak byte-identical protocol: login with email
-//! + Secret Key, then row-level entry sync (source of truth) with the legacy
-//! encrypted blob as fallback. The row key is Argon2id (64 MiB / 3 / 4)
-//! derived from the master password and the vault id; payloads are
-//! AES-256-GCM encrypted.
+//! and Secret Key, then row-level entry sync (source of truth) with the legacy
+//! encrypted blob as fallback.
+//!
+//! The row key is Argon2id (64 MiB / 3 / 4) derived from the master password
+//! and the vault id; payloads are AES-256-GCM encrypted.
 use std::time::{SystemTime, UNIX_EPOCH};
 
 use aes_gcm::aead::Aead;
@@ -16,6 +17,10 @@ use rsa::traits::PublicKeyParts;
 use rsa::{Oaep, RsaPrivateKey, RsaPublicKey};
 use serde::Deserialize;
 use serde_json::Value;
+
+/// Upserted `(uuid, updated_at)` pairs plus the uuids the server rejected as
+/// stale by its optimistic lock.
+pub type SyncEntriesResult = (Vec<(String, i64)>, Vec<String>);
 use sha2::Sha256;
 use std::fmt;
 
@@ -446,7 +451,7 @@ impl CloudClient {
         vault_id: &str,
         upserts: &[RowUpsert],
         deletes: &[String],
-    ) -> Result<(Vec<(String, i64)>, Vec<String>), String> {
+    ) -> Result<SyncEntriesResult, String> {
         let upserts_json: Vec<Value> = upserts
             .iter()
             .map(|u| {

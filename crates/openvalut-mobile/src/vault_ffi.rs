@@ -11,7 +11,9 @@ use std::slice;
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Mutex;
 
-use openvalut_core::{Entry, Vault, VaultKey, CreateEntryRequestDto, EntryDto, UpdateEntryRequestDto};
+use openvalut_core::{
+    CreateEntryRequestDto, Entry, EntryDto, UpdateEntryRequestDto, Vault, VaultKey,
+};
 
 use crate::{
     OPENVALUT_ERROR_CORE, OPENVALUT_ERROR_INVALID_ARG, OPENVALUT_ERROR_NULL, OPENVALUT_OK,
