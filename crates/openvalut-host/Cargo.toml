@@ -37,7 +37,7 @@ data-encoding = { workspace = true }
 base32 = "0.5"
 
 # P-256 / ES256 for WebAuthn passkeys
-p256 = { version = "0.13", features = ["ecdsa", "pkcs8", "pem"] }
+p256 = { version = "0.14", features = ["ecdsa", "pkcs8", "pem"] }
 
 # Filesystem
 dirs = "5"
