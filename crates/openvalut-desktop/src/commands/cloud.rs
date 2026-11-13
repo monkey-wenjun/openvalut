@@ -125,15 +125,19 @@ fn resolve_account(config_dir: &Path) -> Result<(String, String, String), String
     })?;
     let secret_key = match read_cloud_secret(SECRET_READ_TIMEOUT) {
         SecretRead::Found(key) => key,
-        SecretRead::Missing => return Err(format!(
-            "账号 {} 已保存，但系统钥匙串里没有它的 Secret Key，请重新登录一次",
-            account.email
-        )),
+        SecretRead::Missing => {
+            return Err(format!(
+                "账号 {} 已保存，但系统钥匙串里没有它的 Secret Key，请重新登录一次",
+                account.email
+            ))
+        }
         SecretRead::Failed(msg) => return Err(msg),
-        SecretRead::Stalled => return Err(format!(
-            "系统钥匙串 {} 秒没有响应，云密码库暂时打不开；本地库不受影响，可以稍后重试",
-            SECRET_READ_TIMEOUT.as_secs()
-        )),
+        SecretRead::Stalled => {
+            return Err(format!(
+                "系统钥匙串 {} 秒没有响应，云密码库暂时打不开；本地库不受影响，可以稍后重试",
+                SECRET_READ_TIMEOUT.as_secs()
+            ))
+        }
     };
     Ok((account.server, account.email, secret_key))
 }
@@ -187,7 +191,10 @@ fn persist_account(
 /// writes — which is what the Windows build did before `windows-native` was
 /// enabled — so it has to fail here rather than let `cloud-account.json` be
 /// written and the next start fall back to the login form.
-fn confirm_round_trip(read_back: Result<String, keyring::Error>, secret_key: &str) -> Result<(), String> {
+fn confirm_round_trip(
+    read_back: Result<String, keyring::Error>,
+    secret_key: &str,
+) -> Result<(), String> {
     match read_back.as_deref() {
         Ok(stored) if stored == secret_key => Ok(()),
         Ok(_) => Err("系统钥匙串读回的 Secret Key 与本次登录不一致，不会被记住".to_string()),
@@ -273,7 +280,7 @@ pub(crate) fn open_cloud_vault(
             vault: std::sync::Mutex::new(vault),
             key: VaultKey::with_password(password),
             source: VaultSource::Cloud {
-                client,
+                client: Box::new(client),
                 vault_id: vault_id.clone(),
                 key,
                 synced: Mutex::new(synced),
@@ -459,7 +466,7 @@ pub fn cloud_register(
             vault: std::sync::Mutex::new(vault),
             key: VaultKey::with_password(&master),
             source: VaultSource::Cloud {
-                client,
+                client: Box::new(client),
                 vault_id,
                 key,
                 synced: Mutex::new(HashMap::new()),
@@ -623,7 +630,10 @@ mod tests {
     /// answers must cost the caller the deadline, not the whole window.
     #[test]
     fn a_stalled_keychain_read_is_cut_off_at_the_deadline() {
-        assert_eq!(bounded(|| "answered", Duration::from_secs(1)), Some("answered"));
+        assert_eq!(
+            bounded(|| "answered", Duration::from_secs(1)),
+            Some("answered")
+        );
         assert_eq!(
             bounded(
                 || {

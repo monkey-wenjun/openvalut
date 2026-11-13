@@ -668,10 +668,7 @@ pub async fn get_group_share(
     let entries = state.db.group_share_entries(&id).await?;
     Ok(Json(GroupShareDetailResponse {
         share: group_share_to_json(share),
-        entries: entries
-            .iter()
-            .map(group_share_entry_to_json)
-            .collect(),
+        entries: entries.iter().map(group_share_entry_to_json).collect(),
     }))
 }
 
@@ -716,17 +713,11 @@ pub async fn upsert_group_share_entries(
             created_at: now,
         });
     }
-    state
-        .db
-        .upsert_group_share_entries(&id, &rows)
-        .await?;
+    state.db.upsert_group_share_entries(&id, &rows).await?;
     let entries = state.db.group_share_entries(&id).await?;
     Ok(Json(GroupShareDetailResponse {
         share: group_share_to_json(share),
-        entries: entries
-            .iter()
-            .map(group_share_entry_to_json)
-            .collect(),
+        entries: entries.iter().map(group_share_entry_to_json).collect(),
     }))
 }
 
@@ -761,8 +752,7 @@ fn group_share_to_json(share: GroupShare) -> CloudGroupShare {
         encrypted_share_key: base64::engine::general_purpose::STANDARD
             .encode(&share.encrypted_share_key),
         name_nonce: base64::engine::general_purpose::STANDARD.encode(&share.name_nonce),
-        name_ciphertext: base64::engine::general_purpose::STANDARD
-            .encode(&share.name_ciphertext),
+        name_ciphertext: base64::engine::general_purpose::STANDARD.encode(&share.name_ciphertext),
         created_at: share.created_at,
     }
 }

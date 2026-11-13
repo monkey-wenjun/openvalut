@@ -42,8 +42,7 @@ pub fn totp_for_entry(state: State<'_, AppState>, uuid: String) -> Result<TotpDt
         });
     };
 
-    let otp = parse_otp_auth(&raw)
-        .map_err(|e| format!("解析验证码配置失败: {e}"))?;
+    let otp = parse_otp_auth(&raw).map_err(|e| format!("解析验证码配置失败: {e}"))?;
     let (code, remaining, period) = generate_totp(&otp, None).map_err(|e| e.to_string())?;
     Ok(TotpDto {
         present: true,

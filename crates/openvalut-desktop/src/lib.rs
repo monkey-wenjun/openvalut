@@ -16,8 +16,7 @@ use tauri::Manager;
 /// sets (`window_prefs.dart`), and an entry it wrote survives this rewrite —
 /// Linux env var names are case-sensitive, so both have to be honoured.
 fn starts_hidden() -> bool {
-    std::env::args()
-        .any(|arg| arg == services::autostart::HIDDEN_ARG)
+    std::env::args().any(|arg| arg == services::autostart::HIDDEN_ARG)
         || std::env::var_os("OPENVALUT_START_HIDDEN").is_some()
         || std::env::var_os("openvalut_START_HIDDEN").is_some()
 }
@@ -158,7 +157,10 @@ pub fn run() {
         // the same recents file. A repeated launch surfaces the window unless
         // that launch was itself an autostart start that lost the race.
         .plugin(tauri_plugin_single_instance::init(|app, args, _cwd| {
-            if !args.iter().any(|arg| arg == services::autostart::HIDDEN_ARG) {
+            if !args
+                .iter()
+                .any(|arg| arg == services::autostart::HIDDEN_ARG)
+            {
                 shell::show(app);
             }
         }))
@@ -283,10 +285,13 @@ mod scale_tests {
 
     #[test]
     fn ui_zoom_maintenance_switch_accepts_both_spellings() {
-        let args =
-            |items: &[&str]| -> std::vec::IntoIter<String> {
-                items.iter().map(|item| item.to_string()).collect::<Vec<_>>().into_iter()
-            };
+        let args = |items: &[&str]| -> std::vec::IntoIter<String> {
+            items
+                .iter()
+                .map(|item| item.to_string())
+                .collect::<Vec<_>>()
+                .into_iter()
+        };
         assert_eq!(requested_ui_zoom(args(&["--set-ui-zoom", "80"])), Some(80));
         assert_eq!(requested_ui_zoom(args(&["--set-ui-zoom=0"])), Some(0));
         assert_eq!(requested_ui_zoom(args(&["--hidden"])), None);
@@ -329,7 +334,10 @@ mod scale_tests {
             Some(1.6)
         );
         // Old Hyprland without the focused flag: the first row is still a scale.
-        assert_eq!(focused_scale(&serde_json::json!([{"scale": 1.6}])), Some(1.6));
+        assert_eq!(
+            focused_scale(&serde_json::json!([{"scale": 1.6}])),
+            Some(1.6)
+        );
         assert_eq!(focused_scale(&serde_json::json!([])), None);
         // Unreadable output answers None, which keeps every caller a no-op
         // rather than a guess.

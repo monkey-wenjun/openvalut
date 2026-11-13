@@ -38,8 +38,8 @@ pub use crypto::{
     envelope_encrypt, generate_id, generate_x25519_keypair, secure_random_bytes, sign_request,
     unwrap_share_key, verify_request_signature, wrap_share_key, x25519_public_from_secret,
 };
-pub use error::{Error, Result};
 pub use dto::{CreateEntryRequestDto, CustomFieldDto, EntryDto, UpdateEntryRequestDto};
+pub use error::{Error, Result};
 pub use kdbx::{
     CreateEntryRequest, Entry, Group, UpdateEntryRequest, Vault, VaultKey, COMPUTER_GROUP_NAME,
     FIELD_MACHINE_ID, FIELD_NOTES, FIELD_OTP, FIELD_PASSWORD, FIELD_SSH_PRIVATE_KEY, FIELD_TITLE,

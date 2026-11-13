@@ -156,7 +156,11 @@ fn live_server_port(data_dir: &Path) -> Option<u16> {
     ok.then_some(port)
 }
 
-fn handle_connection(mut stream: TcpStream, db: &kdbx::Database, token: &str) -> Result<(), String> {
+fn handle_connection(
+    mut stream: TcpStream,
+    db: &kdbx::Database,
+    token: &str,
+) -> Result<(), String> {
     let reader_stream = stream.try_clone().map_err(|e| e.to_string())?;
     let mut reader = BufReader::new(reader_stream);
     let mut line = String::new();
@@ -236,7 +240,10 @@ fn get_metadata(db: &kdbx::Database, params: &Value) -> Result<Value, String> {
         .and_then(Value::as_str)
         .unwrap_or("label")
         .to_lowercase();
-    if !matches!(field.as_str(), "label" | "group" | "file" | "allowed" | "json") {
+    if !matches!(
+        field.as_str(),
+        "label" | "group" | "file" | "allowed" | "json"
+    ) {
         return Err(format!(
             "get only returns non-sensitive metadata; use resolve with a Secret Reference for {field}"
         ));
@@ -305,7 +312,8 @@ fn resolve(db: &kdbx::Database, params: &Value) -> Result<Value, String> {
 }
 
 fn pam_setup_remote(db: &kdbx::Database) -> Result<Value, String> {
-    let machine_id = pam_setup::machine_id().ok_or_else(|| "无法读取 /etc/machine-id".to_string())?;
+    let machine_id =
+        pam_setup::machine_id().ok_or_else(|| "无法读取 /etc/machine-id".to_string())?;
     let entry = kdbx::find_computer_entry(db, &machine_id)
         .ok_or_else(|| "未找到当前计算机的条目".to_string())?;
     let entry_ref = db
@@ -314,8 +322,7 @@ fn pam_setup_remote(db: &kdbx::Database) -> Result<Value, String> {
     let secret = kdbx::entry_value(&entry_ref, kdbx::OTP_FIELD)
         .filter(|v| !v.is_empty())
         .ok_or_else(|| "计算机条目未配置两步验证码（OTP）".to_string())?;
-    let config =
-        totp::parse_otp_auth(&secret).ok_or_else(|| "无效的两步验证码配置".to_string())?;
+    let config = totp::parse_otp_auth(&secret).ok_or_else(|| "无效的两步验证码配置".to_string())?;
     let raw = base32::encode(base32::Alphabet::Rfc4648 { padding: false }, &config.secret);
     let path = pam_setup::write_encrypted_totp(&raw)?;
     Ok(json!({"path": path.display().to_string()}))

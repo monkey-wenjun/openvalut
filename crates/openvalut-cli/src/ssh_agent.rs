@@ -56,14 +56,8 @@ pub fn add_server_keys(db: &kdbx::Database) -> i32 {
         let Some(entry) = db.entry(info.id) else {
             continue;
         };
-        let host = entry
-            .get(kdbx::SSH_HOST_FIELD)
-            .map(str::trim)
-            .unwrap_or("");
-        let port = entry
-            .get(kdbx::SSH_PORT_FIELD)
-            .map(str::trim)
-            .unwrap_or("");
+        let host = entry.get(kdbx::SSH_HOST_FIELD).map(str::trim).unwrap_or("");
+        let port = entry.get(kdbx::SSH_PORT_FIELD).map(str::trim).unwrap_or("");
         if host.is_empty() && port.is_empty() {
             continue;
         }
@@ -74,18 +68,12 @@ pub fn add_server_keys(db: &kdbx::Database) -> i32 {
         let key = match PrivateKey::from_openssh(pem) {
             Ok(k) => k,
             Err(e) => {
-                eprintln!(
-                    "warning: 无法解析条目 {} 的 SSH 私钥：{e}",
-                    info.title
-                );
+                eprintln!("warning: 无法解析条目 {} 的 SSH 私钥：{e}", info.title);
                 continue;
             }
         };
         if let Err(e) = client.add_identity(&key) {
-            eprintln!(
-                "warning: 无法加载条目 {} 到 ssh-agent：{e}",
-                info.title
-            );
+            eprintln!("warning: 无法加载条目 {} 到 ssh-agent：{e}", info.title);
             continue;
         }
         added += 1;

@@ -1018,8 +1018,7 @@ async fn share_crud() {
 async fn group_share_crud() {
     let base_url = spawn_server().await;
     let (owner_id, owner_token) = register_user(&base_url, "g-owner@example.com").await;
-    let (recipient_id, recipient_token) =
-        register_user(&base_url, "g-recipient@example.com").await;
+    let (recipient_id, recipient_token) = register_user(&base_url, "g-recipient@example.com").await;
 
     // Owner creates a vault with two entries.
     let vault_id = generate_id();

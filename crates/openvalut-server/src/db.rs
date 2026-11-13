@@ -114,10 +114,7 @@ pub(super) fn query_for(
 
 impl Db {
     /// sqlx::query but with backend-aware placeholder rewriting.
-    fn query<'q>(
-        &self,
-        sql: &'q str,
-    ) -> sqlx::query::Query<'q, Any, sqlx::any::AnyArguments<'q>> {
+    fn query<'q>(&self, sql: &'q str) -> sqlx::query::Query<'q, Any, sqlx::any::AnyArguments<'q>> {
         if self.kind == DbKind::Postgres {
             sqlx::query(pg_cached(sql))
         } else {
@@ -307,12 +304,8 @@ impl Db {
             "recipient_user_id",
         )
         .await?;
-        self.create_index_if_missing(
-            "idx_group_shares_owner",
-            "group_shares",
-            "owner_user_id",
-        )
-        .await?;
+        self.create_index_if_missing("idx_group_shares_owner", "group_shares", "owner_user_id")
+            .await?;
         self.create_index_if_missing(
             "idx_group_share_entries_share",
             "group_share_entries",
@@ -346,32 +339,35 @@ impl Db {
         alter_ddl: &str,
     ) -> Result<(), ApiError> {
         let exists = if self.kind == DbKind::Mysql {
-            let n: i64 = self.query_scalar(
-                "SELECT COUNT(*) FROM information_schema.columns
+            let n: i64 = self
+                .query_scalar(
+                    "SELECT COUNT(*) FROM information_schema.columns
                  WHERE table_schema = DATABASE() AND table_name = ? AND column_name = ?",
-            )
-            .bind(table)
-            .bind(column)
-            .fetch_one(&self.pool)
-            .await?;
+                )
+                .bind(table)
+                .bind(column)
+                .fetch_one(&self.pool)
+                .await?;
             n > 0
         } else if self.kind == DbKind::Postgres {
-            let n: i64 = self.query_scalar(
-                "SELECT COUNT(*) FROM information_schema.columns
+            let n: i64 = self
+                .query_scalar(
+                    "SELECT COUNT(*) FROM information_schema.columns
                  WHERE table_schema = current_schema() AND table_name = ? AND column_name = ?",
-            )
-            .bind(table)
-            .bind(column)
-            .fetch_one(&self.pool)
-            .await?;
+                )
+                .bind(table)
+                .bind(column)
+                .fetch_one(&self.pool)
+                .await?;
             n > 0
         } else {
-            let n: i64 = self.query_scalar(&format!(
-                "SELECT COUNT(*) FROM pragma_table_info('{table}') WHERE name = ?"
-            ))
-            .bind(column)
-            .fetch_one(&self.pool)
-            .await?;
+            let n: i64 = self
+                .query_scalar(&format!(
+                    "SELECT COUNT(*) FROM pragma_table_info('{table}') WHERE name = ?"
+                ))
+                .bind(column)
+                .fetch_one(&self.pool)
+                .await?;
             n > 0
         };
         if !exists {
@@ -390,14 +386,15 @@ impl Db {
         columns: &str,
     ) -> Result<(), ApiError> {
         if self.kind == DbKind::Mysql {
-            let n: i64 = self.query_scalar(
-                "SELECT COUNT(*) FROM information_schema.statistics
+            let n: i64 = self
+                .query_scalar(
+                    "SELECT COUNT(*) FROM information_schema.statistics
                  WHERE table_schema = DATABASE() AND table_name = ? AND index_name = ?",
-            )
-            .bind(table)
-            .bind(name)
-            .fetch_one(&self.pool)
-            .await?;
+                )
+                .bind(table)
+                .bind(name)
+                .fetch_one(&self.pool)
+                .await?;
             if n > 0 {
                 return Ok(());
             }
@@ -441,24 +438,26 @@ impl Db {
     }
 
     pub async fn user_by_username(&self, username: &str) -> Result<User, ApiError> {
-        let row = self.query(
-            "SELECT id, username, password_hash, public_key, created_at
+        let row = self
+            .query(
+                "SELECT id, username, password_hash, public_key, created_at
              FROM users WHERE username = ?",
-        )
-        .bind(username)
-        .fetch_one(&self.pool)
-        .await?;
+            )
+            .bind(username)
+            .fetch_one(&self.pool)
+            .await?;
         Ok(user_from_row(&row))
     }
 
     pub async fn user_by_id(&self, id: &str) -> Result<User, ApiError> {
-        let row = self.query(
-            "SELECT id, username, password_hash, public_key, created_at
+        let row = self
+            .query(
+                "SELECT id, username, password_hash, public_key, created_at
              FROM users WHERE id = ?",
-        )
-        .bind(id)
-        .fetch_one(&self.pool)
-        .await?;
+            )
+            .bind(id)
+            .fetch_one(&self.pool)
+            .await?;
         Ok(user_from_row(&row))
     }
 
@@ -500,12 +499,13 @@ impl Db {
     }
 
     pub async fn user_id_by_token(&self, token_hash: &str) -> Result<String, ApiError> {
-        let row = self.query_as::<(String, i64)>(
-            "SELECT user_id, expires_at FROM tokens WHERE token_hash = ?",
-        )
-        .bind(token_hash)
-        .fetch_one(&self.pool)
-        .await?;
+        let row = self
+            .query_as::<(String, i64)>(
+                "SELECT user_id, expires_at FROM tokens WHERE token_hash = ?",
+            )
+            .bind(token_hash)
+            .fetch_one(&self.pool)
+            .await?;
         if row.1 > 0 && row.1 < now_secs() {
             return Err(ApiError::Unauthorized);
         }
@@ -534,25 +534,27 @@ impl Db {
     }
 
     pub async fn vaults_by_user(&self, user_id: &str) -> Result<Vec<Vault>, ApiError> {
-        let rows = self.query(
-            "SELECT id, user_id, name, nonce, ciphertext, created_at, updated_at
+        let rows = self
+            .query(
+                "SELECT id, user_id, name, nonce, ciphertext, created_at, updated_at
              FROM vaults WHERE user_id = ? ORDER BY updated_at DESC",
-        )
-        .bind(user_id)
-        .fetch_all(&self.pool)
-        .await?;
+            )
+            .bind(user_id)
+            .fetch_all(&self.pool)
+            .await?;
         Ok(rows.iter().map(vault_from_row).collect())
     }
 
     pub async fn vault_by_id(&self, user_id: &str, id: &str) -> Result<Vault, ApiError> {
-        let row = self.query(
-            "SELECT id, user_id, name, nonce, ciphertext, created_at, updated_at
+        let row = self
+            .query(
+                "SELECT id, user_id, name, nonce, ciphertext, created_at, updated_at
              FROM vaults WHERE user_id = ? AND id = ?",
-        )
-        .bind(user_id)
-        .bind(id)
-        .fetch_one(&self.pool)
-        .await?;
+            )
+            .bind(user_id)
+            .bind(id)
+            .fetch_one(&self.pool)
+            .await?;
         Ok(vault_from_row(&row))
     }
 
@@ -578,18 +580,19 @@ impl Db {
         // Strictly exceed the current version so the optimistic lock holds
         // even for writes that land within the same second.
         let updated_at = now_secs().max(current.updated_at + 1);
-        let result = self.query(
-            "UPDATE vaults SET nonce = ?, ciphertext = ?, updated_at = ?
+        let result = self
+            .query(
+                "UPDATE vaults SET nonce = ?, ciphertext = ?, updated_at = ?
              WHERE user_id = ? AND id = ? AND updated_at = ?",
-        )
-        .bind(nonce)
-        .bind(ciphertext)
-        .bind(updated_at)
-        .bind(user_id)
-        .bind(id)
-        .bind(current.updated_at)
-        .execute(&self.pool)
-        .await?;
+            )
+            .bind(nonce)
+            .bind(ciphertext)
+            .bind(updated_at)
+            .bind(user_id)
+            .bind(id)
+            .bind(current.updated_at)
+            .execute(&self.pool)
+            .await?;
         if result.rows_affected() == 0 {
             return Err(ApiError::Conflict);
         }
@@ -620,7 +623,8 @@ impl Db {
             .bind(id)
             .execute(&mut *tx)
             .await?;
-        let result = self.query("DELETE FROM vaults WHERE user_id = ? AND id = ?")
+        let result = self
+            .query("DELETE FROM vaults WHERE user_id = ? AND id = ?")
             .bind(user_id)
             .bind(id)
             .execute(&mut *tx)
@@ -642,16 +646,17 @@ impl Db {
         vault_id: &str,
         entry_uuid: &str,
     ) -> bool {
-        let Ok(n) = self.query_scalar::<i64>(
-            "SELECT COUNT(*) FROM entries e
+        let Ok(n) = self
+            .query_scalar::<i64>(
+                "SELECT COUNT(*) FROM entries e
              JOIN vaults v ON v.id = e.vault_id
              WHERE e.uuid = ? AND e.vault_id = ? AND v.user_id = ?",
-        )
-        .bind(entry_uuid)
-        .bind(vault_id)
-        .bind(user_id)
-        .fetch_one(&self.pool)
-        .await
+            )
+            .bind(entry_uuid)
+            .bind(vault_id)
+            .bind(user_id)
+            .fetch_one(&self.pool)
+            .await
         else {
             return false;
         };
@@ -666,11 +671,11 @@ impl Db {
         // Row-level optimistic concurrency: a new row is fine, but an
         // existing row that moved on since the client last read it must be
         // rejected so two writers cannot clobber each other's entry.
-        let current: Option<(String, i64)> =
-            self.query_as("SELECT vault_id, updated_at FROM entries WHERE uuid = ?")
-                .bind(&entry.uuid)
-                .fetch_optional(&self.pool)
-                .await?;
+        let current: Option<(String, i64)> = self
+            .query_as("SELECT vault_id, updated_at FROM entries WHERE uuid = ?")
+            .bind(&entry.uuid)
+            .fetch_optional(&self.pool)
+            .await?;
         if current
             .as_ref()
             .is_some_and(|(vault_id, _)| vault_id != &entry.vault_id)
@@ -701,11 +706,11 @@ impl Db {
             .bind(entry.created_at)
             .execute(&self.pool)
             .await?;
-        let stored_vault_id: String =
-            self.query_scalar("SELECT vault_id FROM entries WHERE uuid = ?")
-                .bind(&entry.uuid)
-                .fetch_one(&self.pool)
-                .await?;
+        let stored_vault_id: String = self
+            .query_scalar("SELECT vault_id FROM entries WHERE uuid = ?")
+            .bind(&entry.uuid)
+            .fetch_one(&self.pool)
+            .await?;
         if stored_vault_id != entry.vault_id {
             return Err(ApiError::Forbidden);
         }
@@ -738,17 +743,18 @@ impl Db {
         user_id: &str,
         vault_id: &str,
     ) -> Result<Vec<Entry>, ApiError> {
-        let rows = self.query(
-            "SELECT e.uuid, e.vault_id, e.group_name, e.nonce, e.ciphertext,
+        let rows = self
+            .query(
+                "SELECT e.uuid, e.vault_id, e.group_name, e.nonce, e.ciphertext,
                     e.updated_at, e.created_at
              FROM entries e JOIN vaults v ON v.id = e.vault_id
              WHERE e.vault_id = ? AND v.user_id = ?
              ORDER BY e.updated_at DESC",
-        )
-        .bind(vault_id)
-        .bind(user_id)
-        .fetch_all(&self.pool)
-        .await?;
+            )
+            .bind(vault_id)
+            .bind(user_id)
+            .fetch_all(&self.pool)
+            .await?;
         Ok(rows.iter().map(entry_from_row).collect())
     }
 
@@ -771,15 +777,16 @@ impl Db {
             .bind(entry_uuid)
             .execute(&mut *tx)
             .await?;
-        let result = self.query(
-            "DELETE FROM entries WHERE uuid = ? AND vault_id = ?
+        let result = self
+            .query(
+                "DELETE FROM entries WHERE uuid = ? AND vault_id = ?
              AND EXISTS (SELECT 1 FROM vaults v WHERE v.id = entries.vault_id AND v.user_id = ?)",
-        )
-        .bind(entry_uuid)
-        .bind(vault_id)
-        .bind(user_id)
-        .execute(&mut *tx)
-        .await?;
+            )
+            .bind(entry_uuid)
+            .bind(vault_id)
+            .bind(user_id)
+            .execute(&mut *tx)
+            .await?;
         if result.rows_affected() == 0 {
             return Err(ApiError::NotFound);
         }
@@ -827,8 +834,9 @@ impl Db {
     }
 
     pub async fn shares_for_recipient(&self, recipient_id: &str) -> Result<Vec<Share>, ApiError> {
-        let rows = self.query(
-            "SELECT s.id, s.entry_uuid, s.owner_user_id, s.recipient_user_id,
+        let rows = self
+            .query(
+                "SELECT s.id, s.entry_uuid, s.owner_user_id, s.recipient_user_id,
                     s.encrypted_share_key, s.shared_nonce, s.shared_ciphertext, s.created_at,
                     o.username, r.username
              FROM shares s
@@ -836,16 +844,17 @@ impl Db {
              JOIN users r ON r.id = s.recipient_user_id
              WHERE s.recipient_user_id = ?
              ORDER BY s.created_at DESC",
-        )
-        .bind(recipient_id)
-        .fetch_all(&self.pool)
-        .await?;
+            )
+            .bind(recipient_id)
+            .fetch_all(&self.pool)
+            .await?;
         Ok(rows.iter().map(share_from_row).collect())
     }
 
     pub async fn shares_by_owner(&self, owner_id: &str) -> Result<Vec<Share>, ApiError> {
-        let rows = self.query(
-            "SELECT s.id, s.entry_uuid, s.owner_user_id, s.recipient_user_id,
+        let rows = self
+            .query(
+                "SELECT s.id, s.entry_uuid, s.owner_user_id, s.recipient_user_id,
                     s.encrypted_share_key, s.shared_nonce, s.shared_ciphertext, s.created_at,
                     o.username, r.username
              FROM shares s
@@ -853,10 +862,10 @@ impl Db {
              JOIN users r ON r.id = s.recipient_user_id
              WHERE s.owner_user_id = ?
              ORDER BY s.created_at DESC",
-        )
-        .bind(owner_id)
-        .fetch_all(&self.pool)
-        .await?;
+            )
+            .bind(owner_id)
+            .fetch_all(&self.pool)
+            .await?;
         Ok(rows.iter().map(share_from_row).collect())
     }
 
@@ -866,14 +875,15 @@ impl Db {
         owner_id: &str,
         recipient_id: &str,
     ) -> Result<(), ApiError> {
-        let result = self.query(
-            "DELETE FROM shares WHERE id = ? AND (owner_user_id = ? OR recipient_user_id = ?)",
-        )
-        .bind(id)
-        .bind(owner_id)
-        .bind(recipient_id)
-        .execute(&self.pool)
-        .await?;
+        let result = self
+            .query(
+                "DELETE FROM shares WHERE id = ? AND (owner_user_id = ? OR recipient_user_id = ?)",
+            )
+            .bind(id)
+            .bind(owner_id)
+            .bind(recipient_id)
+            .execute(&self.pool)
+            .await?;
         if result.rows_affected() == 0 {
             return Err(ApiError::NotFound);
         }
@@ -943,9 +953,8 @@ impl Db {
             for uuid in uuid_chunk {
                 seen.insert(uuid.clone());
             }
-            let mut query = sqlx::QueryBuilder::<Any>::new(
-                "SELECT uuid FROM entries WHERE vault_id = ",
-            );
+            let mut query =
+                sqlx::QueryBuilder::<Any>::new("SELECT uuid FROM entries WHERE vault_id = ");
             query.push_bind(vault_id.to_string());
             query.push(" AND uuid IN (");
             let mut separated = query.separated(", ");
@@ -965,8 +974,9 @@ impl Db {
         &self,
         recipient_id: &str,
     ) -> Result<Vec<GroupShare>, ApiError> {
-        let rows = self.query(
-            "SELECT g.id, g.vault_id, g.owner_user_id, g.recipient_user_id,
+        let rows = self
+            .query(
+                "SELECT g.id, g.vault_id, g.owner_user_id, g.recipient_user_id,
                     g.encrypted_share_key, g.name_nonce, g.name_ciphertext, g.created_at,
                     o.username AS owner_username, r.username AS recipient_username
              FROM group_shares g
@@ -974,19 +984,17 @@ impl Db {
              JOIN users r ON r.id = g.recipient_user_id
              WHERE g.recipient_user_id = ?
              ORDER BY g.created_at DESC",
-        )
-        .bind(recipient_id)
-        .fetch_all(&self.pool)
-        .await?;
+            )
+            .bind(recipient_id)
+            .fetch_all(&self.pool)
+            .await?;
         Ok(rows.iter().map(group_share_from_row).collect())
     }
 
-    pub async fn group_shares_by_owner(
-        &self,
-        owner_id: &str,
-    ) -> Result<Vec<GroupShare>, ApiError> {
-        let rows = self.query(
-            "SELECT g.id, g.vault_id, g.owner_user_id, g.recipient_user_id,
+    pub async fn group_shares_by_owner(&self, owner_id: &str) -> Result<Vec<GroupShare>, ApiError> {
+        let rows = self
+            .query(
+                "SELECT g.id, g.vault_id, g.owner_user_id, g.recipient_user_id,
                     g.encrypted_share_key, g.name_nonce, g.name_ciphertext, g.created_at,
                     o.username AS owner_username, r.username AS recipient_username
              FROM group_shares g
@@ -994,10 +1002,10 @@ impl Db {
              JOIN users r ON r.id = g.recipient_user_id
              WHERE g.owner_user_id = ?
              ORDER BY g.created_at DESC",
-        )
-        .bind(owner_id)
-        .fetch_all(&self.pool)
-        .await?;
+            )
+            .bind(owner_id)
+            .fetch_all(&self.pool)
+            .await?;
         Ok(rows.iter().map(group_share_from_row).collect())
     }
 
@@ -1008,20 +1016,21 @@ impl Db {
         id: &str,
         user_id: &str,
     ) -> Result<GroupShare, ApiError> {
-        let row = self.query(
-            "SELECT g.id, g.vault_id, g.owner_user_id, g.recipient_user_id,
+        let row = self
+            .query(
+                "SELECT g.id, g.vault_id, g.owner_user_id, g.recipient_user_id,
                     g.encrypted_share_key, g.name_nonce, g.name_ciphertext, g.created_at,
                     o.username AS owner_username, r.username AS recipient_username
              FROM group_shares g
              JOIN users o ON o.id = g.owner_user_id
              JOIN users r ON r.id = g.recipient_user_id
              WHERE g.id = ? AND (g.owner_user_id = ? OR g.recipient_user_id = ?)",
-        )
-        .bind(id)
-        .bind(user_id)
-        .bind(user_id)
-        .fetch_optional(&self.pool)
-        .await?;
+            )
+            .bind(id)
+            .bind(user_id)
+            .bind(user_id)
+            .fetch_optional(&self.pool)
+            .await?;
         row.map(|row| group_share_from_row(&row))
             .ok_or(ApiError::NotFound)
     }
@@ -1030,15 +1039,16 @@ impl Db {
         &self,
         share_id: &str,
     ) -> Result<Vec<GroupShareEntry>, ApiError> {
-        let rows = self.query(
-            "SELECT share_id, entry_uuid, nonce, ciphertext, updated_at, created_at
+        let rows = self
+            .query(
+                "SELECT share_id, entry_uuid, nonce, ciphertext, updated_at, created_at
              FROM group_share_entries
              WHERE share_id = ?
              ORDER BY updated_at ASC",
-        )
-        .bind(share_id)
-        .fetch_all(&self.pool)
-        .await?;
+            )
+            .bind(share_id)
+            .fetch_all(&self.pool)
+            .await?;
         Ok(rows.iter().map(group_share_entry_from_row).collect())
     }
 
@@ -1090,38 +1100,34 @@ impl Db {
         share_id: &str,
         entry_uuid: &str,
     ) -> Result<(), ApiError> {
-        let result = self.query(
-            "DELETE FROM group_share_entries WHERE share_id = ? AND entry_uuid = ?",
-        )
-        .bind(share_id)
-        .bind(entry_uuid)
-        .execute(&self.pool)
-        .await?;
+        let result = self
+            .query("DELETE FROM group_share_entries WHERE share_id = ? AND entry_uuid = ?")
+            .bind(share_id)
+            .bind(entry_uuid)
+            .execute(&self.pool)
+            .await?;
         if result.rows_affected() == 0 {
             return Err(ApiError::NotFound);
         }
         Ok(())
     }
 
-    pub async fn delete_group_share(
-        &self,
-        id: &str,
-        user_id: &str,
-    ) -> Result<(), ApiError> {
+    pub async fn delete_group_share(&self, id: &str, user_id: &str) -> Result<(), ApiError> {
         let mut tx: Transaction<Any> = self.pool.begin().await?;
         self.query("DELETE FROM group_share_entries WHERE share_id = ?")
             .bind(id)
             .execute(&mut *tx)
             .await?;
-        let result = self.query(
-            "DELETE FROM group_shares WHERE id = ? AND
+        let result = self
+            .query(
+                "DELETE FROM group_shares WHERE id = ? AND
              (owner_user_id = ? OR recipient_user_id = ?)",
-        )
-        .bind(id)
-        .bind(user_id)
-        .bind(user_id)
-        .execute(&mut *tx)
-        .await?;
+            )
+            .bind(id)
+            .bind(user_id)
+            .bind(user_id)
+            .execute(&mut *tx)
+            .await?;
         if result.rows_affected() == 0 {
             return Err(ApiError::NotFound);
         }
@@ -1156,17 +1162,18 @@ impl Db {
     }
 
     pub async fn latest_app_version(&self, platform: &str) -> Result<Option<AppVersion>, ApiError> {
-        let row = self.query(
-            "SELECT id, platform, version_name, version_code, changelog,
+        let row = self
+            .query(
+                "SELECT id, platform, version_name, version_code, changelog,
                     file_key, download_url, sha256, file_size, created_at
              FROM app_versions
              WHERE platform = ?
              ORDER BY version_code DESC
              LIMIT 1",
-        )
-        .bind(platform)
-        .fetch_optional(&self.pool)
-        .await?;
+            )
+            .bind(platform)
+            .fetch_optional(&self.pool)
+            .await?;
         Ok(row.map(|r| app_version_from_row(&r)))
     }
 
@@ -1209,15 +1216,16 @@ impl Db {
         user_id: &str,
         vault_ciphertext: &str,
     ) -> Result<(), ApiError> {
-        let result = self.query(
-            "UPDATE scan_sessions SET status = 'confirmed', user_id = ?, vault_ciphertext = ?
+        let result = self
+            .query(
+                "UPDATE scan_sessions SET status = 'confirmed', user_id = ?, vault_ciphertext = ?
              WHERE id = ? AND status = 'pending'",
-        )
-        .bind(user_id)
-        .bind(vault_ciphertext)
-        .bind(id)
-        .execute(&self.pool)
-        .await?;
+            )
+            .bind(user_id)
+            .bind(vault_ciphertext)
+            .bind(id)
+            .execute(&self.pool)
+            .await?;
         if result.rows_affected() == 0 {
             return Err(ApiError::NotFound);
         }
@@ -1500,7 +1508,10 @@ mod tests {
     #[test]
     fn pg_placeholders_are_numbered() {
         assert_eq!(to_pg_placeholders("SELECT 1"), "SELECT 1");
-        assert_eq!(to_pg_placeholders("SELECT * FROM t WHERE a = ?"), "SELECT * FROM t WHERE a = $1");
+        assert_eq!(
+            to_pg_placeholders("SELECT * FROM t WHERE a = ?"),
+            "SELECT * FROM t WHERE a = $1"
+        );
         assert_eq!(
             to_pg_placeholders("INSERT INTO t (a, b) VALUES (?, ?)"),
             "INSERT INTO t (a, b) VALUES ($1, $2)"

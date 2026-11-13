@@ -24,7 +24,7 @@ pub enum VaultSource {
         path: PathBuf,
     },
     Cloud {
-        client: CloudClient,
+        client: Box<CloudClient>,
         vault_id: String,
         /// Argon2id key derived from the master password + vault id.
         key: [u8; 32],
@@ -352,9 +352,12 @@ mod tests {
             .lines()
             .map(|line| line.trim())
             .filter(|line| !line.starts_with("//"))
-            .filter_map(|line| line.split_once(|c: char| c == ':' || c == '?'))
+            .filter_map(|line| line.split_once([':', '?']))
             .map(|(name, _)| name.trim())
-            .filter(|name| name.chars().all(|c| c.is_lowercase() || c == '_' || c.is_ascii_digit()))
+            .filter(|name| {
+                name.chars()
+                    .all(|c| c.is_lowercase() || c == '_' || c.is_ascii_digit())
+            })
             .collect();
         ts_keys.sort_unstable();
         let mut missing: Vec<&str> = Vec::new();

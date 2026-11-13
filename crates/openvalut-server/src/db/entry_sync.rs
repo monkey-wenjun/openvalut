@@ -30,12 +30,12 @@ impl Db {
         deletes: &[String],
     ) -> Result<EntrySyncResult, ApiError> {
         let mut tx: Transaction<Any> = self.pool.begin().await?;
-        let owns_vault: i64 =
-            self.query_scalar("SELECT COUNT(*) FROM vaults WHERE id = ? AND user_id = ?")
-                .bind(vault_id)
-                .bind(user_id)
-                .fetch_one(&mut *tx)
-                .await?;
+        let owns_vault: i64 = self
+            .query_scalar("SELECT COUNT(*) FROM vaults WHERE id = ? AND user_id = ?")
+            .bind(vault_id)
+            .bind(user_id)
+            .fetch_one(&mut *tx)
+            .await?;
         if owns_vault == 0 {
             return Err(ApiError::NotFound);
         }
@@ -71,7 +71,8 @@ impl Db {
         // move forward too: clients detect "changed on the server" through the
         // vault meta (there is no blob write anymore to bump it).
         let now = super::now_secs();
-        let vault_current: i64 = self.query_scalar("SELECT updated_at FROM vaults WHERE id = ?")
+        let vault_current: i64 = self
+            .query_scalar("SELECT updated_at FROM vaults WHERE id = ?")
             .bind(vault_id)
             .fetch_one(&mut *tx)
             .await?;
@@ -137,7 +138,7 @@ async fn insert_entries(
         return Ok(());
     }
     for entry_chunk in accepted.chunks(MAX_BIND_PARAMS / ENTRY_COLUMN_COUNT) {
-        let row_ph = vec!["?"; ENTRY_COLUMN_COUNT].join(", ");
+        let row_ph = ["?"; ENTRY_COLUMN_COUNT].join(", ");
         let placeholders = vec![row_ph.as_str(); entry_chunk.len()].join("),(");
         let mut sql = format!(
             "INSERT INTO entries \

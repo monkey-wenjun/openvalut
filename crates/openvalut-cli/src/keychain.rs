@@ -289,10 +289,7 @@ mod keyutils {
             )
         };
         if rc < 0 {
-            return Err(format!(
-                "无法写入内核 keyring：{}",
-                Error::last_os_error()
-            ));
+            return Err(format!("无法写入内核 keyring：{}", Error::last_os_error()));
         }
         let serial = rc;
         let rc = unsafe {
@@ -350,10 +347,7 @@ mod keyutils {
             )
         };
         if size < 0 {
-            return Err(format!(
-                "无法读取内核 keyring：{}",
-                Error::last_os_error()
-            ));
+            return Err(format!("无法读取内核 keyring：{}", Error::last_os_error()));
         }
         let mut buffer = vec![0u8; size as usize];
         let rc = unsafe {
@@ -366,10 +360,7 @@ mod keyutils {
             )
         };
         if rc < 0 {
-            return Err(format!(
-                "无法读取内核 keyring：{}",
-                Error::last_os_error()
-            ));
+            return Err(format!("无法读取内核 keyring：{}", Error::last_os_error()));
         }
         buffer.truncate(rc as usize);
         Ok(buffer)
@@ -468,7 +459,10 @@ mod tests {
         assert_eq!(store.get("master-password").unwrap(), None);
 
         // A durable keychain entry is visible while the session ring is empty.
-        store.system.set("master-password", "from-keychain").unwrap();
+        store
+            .system
+            .set("master-password", "from-keychain")
+            .unwrap();
         assert_eq!(
             store.get("master-password").unwrap().as_deref(),
             Some("from-keychain")

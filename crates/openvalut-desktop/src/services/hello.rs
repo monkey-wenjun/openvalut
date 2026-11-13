@@ -70,7 +70,9 @@ fn blocking_verify(prompt: &str) -> Result<(), String> {
     // wait the way WinRT callers do: poll the status, then read the result.
     let deadline = Instant::now() + Duration::from_secs(VERIFY_SECONDS);
     loop {
-        let status = operation.Status().map_err(|e| format!("Windows Hello 验证失败: {e}"))?;
+        let status = operation
+            .Status()
+            .map_err(|e| format!("Windows Hello 验证失败: {e}"))?;
         if status == AsyncStatus::Completed {
             break;
         }
@@ -222,7 +224,10 @@ mod presence_tests {
         let started = Instant::now();
         let error = reap(sh("sleep 30"), started + Duration::from_millis(100))
             .expect_err("a helper that never answers must not grant access");
-        assert!(error.contains("主密码"), "refusal should fall back to a typed password, got: {error}");
+        assert!(
+            error.contains("主密码"),
+            "refusal should fall back to a typed password, got: {error}"
+        );
         assert!(
             started.elapsed() < Duration::from_secs(10),
             "the deadline has to cut the wait off, not the helper exiting on its own"
