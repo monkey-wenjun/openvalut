@@ -3805,7 +3805,7 @@ dependencies = [
  "openvalut-core",
  "portable-pty",
  "qrcode",
- "rand 0.8.8",
+ "rand 0.10.2",
  "rpassword",
  "rsa",
  "serde",
@@ -3836,7 +3836,7 @@ dependencies = [
  "hmac 0.12.1",
  "keepass",
  "percent-encoding",
- "rand 0.8.8",
+ "rand 0.10.2",
  "serde",
  "serde_json",
  "sha1 0.10.7",
@@ -3865,7 +3865,7 @@ dependencies = [
  "keyring",
  "openvalut-core",
  "qrcode",
- "rand 0.8.8",
+ "rand 0.10.2",
  "rsa",
  "serde",
  "serde_json",
@@ -3904,7 +3904,7 @@ dependencies = [
  "openvalut-core",
  "p256 0.14.0",
  "psl",
- "rand 0.8.8",
+ "rand 0.10.2",
  "serde",
  "serde_json",
  "sha1 0.10.7",
@@ -4605,7 +4605,6 @@ version = "0.8.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e058c7de0b26af77780c769414d6257830bb240f3c38477dbc2c16e5f54d6d4c"
 dependencies = [
- "libc",
  "rand_chacha",
  "rand_core 0.6.4",
 ]
