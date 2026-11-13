@@ -9,6 +9,7 @@
 #   ./_tools/check-public.sh              # scan tracked + untracked files
 #   ./_tools/check-public.sh --staged     # scan only what is staged for commit
 #   ./_tools/check-public.sh --tracked    # scan only tracked files (what a push sends)
+#   ./_tools/check-public.sh --history    # also scan every commit in the repo
 #   ./_tools/check-public.sh --deny FILE  # extra rules, one "rule|regex" per line
 #
 # Extra machine-specific rules can live in .public-deny (gitignored), which is
@@ -22,18 +23,20 @@ ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
 cd "$ROOT" || exit 2
 
 MODE=worktree
+HISTORY=0
 DENY_FILES=()
 while [ $# -gt 0 ]; do
   case "$1" in
     --staged) MODE=staged ;;
     --tracked) MODE=tracked ;;
+    --history) HISTORY=1 ;;
     --deny)
-      [ $# -ge 2 ] || { echo "usage: $0 [--staged] [--deny FILE]" >&2; exit 2; }
+      [ $# -ge 2 ] || { echo "usage: $0 [--staged|--tracked] [--history] [--deny FILE]" >&2; exit 2; }
       DENY_FILES+=("$2")
       shift
       ;;
     *)
-      echo "usage: $0 [--staged|--tracked] [--deny FILE]" >&2
+      echo "usage: $0 [--staged|--tracked] [--history] [--deny FILE]" >&2
       exit 2
       ;;
   esac
@@ -102,7 +105,10 @@ scan_file() {
   grep -Iq . "$src" 2>/dev/null || return 0
 
   awk -F'|' -v file="$display" '
-    NR == FNR { rules[++n] = $1; pats[n] = $2; next }
+    NR == FNR {
+      if ($0 ~ /^[[:space:]]*(#|$)/) next
+      rules[++n] = $1; pats[n] = $2; next
+    }
     {
       if ($0 ~ /-----BEGIN [A-Z ]*PRIVATE KEY-----/) {
         in_key = 1
@@ -190,6 +196,29 @@ if [ -s "$TMPDIR_RUN/findings" ]; then
   findings=$(wc -l <"$TMPDIR_RUN/findings")
   echo "check-public: $findings finding(s)" >&2
   exit 1
+fi
+
+# A secret removed from the working tree is still published if it survives in
+# an older commit. Print only <rev>:<path>:<line>:<rule>, never the text.
+if [ "$HISTORY" = 1 ] && git rev-parse --git-dir >/dev/null 2>&1; then
+  mapfile -t revs < <(git rev-list --all)
+  if [ "${#revs[@]}" -gt 0 ]; then
+    while IFS='|' read -r rule pat; do
+      rule=${rule#"${rule%%[![:space:]]*}"}
+      case "$rule" in ''|\#*) continue ;; esac
+      [ -n "$pat" ] || continue
+      git grep -I -n -E -e "$pat" "${revs[@]}" 2>/dev/null |
+        cut -d: -f1-3 |
+        awk -v rule="$rule" '{ printf "%s:%s\n", $0, rule }' \
+          >>"$TMPDIR_RUN/history"
+    done <"$TMPDIR_RUN/rules"
+  fi
+  if [ -s "$TMPDIR_RUN/history" ]; then
+    sort -u "$TMPDIR_RUN/history"
+    findings=$(wc -l <"$TMPDIR_RUN/history")
+    echo "check-public: $findings finding(s) in git history" >&2
+    exit 1
+  fi
 fi
 
 echo "check-public: clean" >&2

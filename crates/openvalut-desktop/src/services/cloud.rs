@@ -13,15 +13,16 @@ use argon2::{Algorithm, Argon2, Params, Version};
 use data_encoding::{BASE64, BASE64URL_NOPAD};
 use openvalut_core::{secure_random_bytes, sign_request};
 use rand::RngCore;
+use rsa::rand_core::UnwrapErr;
 use rsa::traits::PublicKeyParts;
-use rsa::{Oaep, RsaPrivateKey, RsaPublicKey};
+use rsa::{PrivateKey, PublicKey};
 use serde::Deserialize;
 use serde_json::Value;
 
 /// Upserted `(uuid, updated_at)` pairs plus the uuids the server rejected as
 /// stale by its optimistic lock.
 pub type SyncEntriesResult = (Vec<(String, i64)>, Vec<String>);
-use sha2::Sha256;
+use rsa::sha2::Sha256;
 use std::fmt;
 
 const ARGON_MEMORY_KIB: u32 = 64 * 1024;
@@ -758,7 +759,7 @@ pub struct ScanLogin {
     session_id: String,
     qr_content: String,
     session_secret: String,
-    private_key: RsaPrivateKey,
+    private_key: PrivateKey,
     agent: ureq::Agent,
 }
 
@@ -778,10 +779,9 @@ impl ScanLogin {
     pub fn start(server: &str) -> Result<Self, String> {
         let base = server.trim_end_matches('/').to_string();
         let agent = new_agent();
-        let mut rng = rand::thread_rng();
-        let private_key =
-            RsaPrivateKey::new(&mut rng, 2048).map_err(|e| format!("无法生成扫码密钥对：{e}"))?;
-        let public_key = RsaPublicKey::from(&private_key);
+        let private_key = PrivateKey::new(&mut UnwrapErr(getrandom::SysRng), 2048)
+            .map_err(|e| format!("无法生成扫码密钥对：{e}"))?;
+        let public_key = private_key.to_public_key();
         let body = serde_json::json!({ "publicKey": encode_public_key(&public_key) });
 
         let created = post_json(&agent, &format!("{base}/api/login/scan"), &body)?;
@@ -902,10 +902,9 @@ impl ScanLogin {
         let ciphertext = BASE64
             .decode(ciphertext_b64.trim().as_bytes())
             .map_err(|e| format!("扫码密文不是合法 base64：{e}"))?;
-        let padding = Oaep::new::<Sha256>();
         let plaintext = self
             .private_key
-            .decrypt(padding, &ciphertext)
+            .oaep_decrypt::<Sha256>(&ciphertext)
             .map_err(|_| "无法解密手机回传的数据（密钥不匹配）".to_string())?;
         String::from_utf8(plaintext).map_err(|_| "解密结果不是 UTF-8 文本".to_string())
     }
@@ -913,11 +912,11 @@ impl ScanLogin {
 
 /// Encodes the RSA public key exactly like the Flutter app's
 /// `encodeScanPublicKey`: base64url (no padding) of `{"n":"<hex>","e":"<hex>"}`.
-fn encode_public_key(key: &RsaPublicKey) -> String {
+fn encode_public_key(key: &PublicKey) -> String {
     let json = format!(
         "{{\"n\":\"{}\",\"e\":\"{}\"}}",
-        hex::encode(key.n().to_bytes_be()),
-        hex::encode(key.e().to_bytes_be())
+        hex::encode(key.n().as_ref().to_be_bytes_trimmed_vartime()),
+        hex::encode(key.e().to_be_bytes_trimmed_vartime())
     );
     BASE64URL_NOPAD.encode(json.as_bytes())
 }
@@ -1012,9 +1011,8 @@ mod tests {
 
     #[test]
     fn public_key_encoding_matches_dart_format() {
-        let mut rng = rand::thread_rng();
-        let private = RsaPrivateKey::new(&mut rng, 2048).expect("keypair");
-        let public = RsaPublicKey::from(&private);
+        let private = PrivateKey::new(&mut UnwrapErr(getrandom::SysRng), 2048).expect("keypair");
+        let public = private.to_public_key();
         let encoded = encode_public_key(&public);
         assert!(!encoded.contains('='));
         assert!(!encoded.contains('+') && !encoded.contains('/'));
@@ -1024,30 +1022,32 @@ mod tests {
         let parsed: Value = serde_json::from_slice(&json).expect("json");
         assert_eq!(
             parsed["n"].as_str().unwrap(),
-            hex::encode(public.n().to_bytes_be())
+            hex::encode(public.n().as_ref().to_be_bytes_trimmed_vartime())
         );
         assert_eq!(
             parsed["e"].as_str().unwrap(),
-            hex::encode(public.e().to_bytes_be())
+            hex::encode(public.e().to_be_bytes_trimmed_vartime())
         );
     }
 
     #[test]
     fn decrypt_round_trips_a_relayed_password() {
-        let mut rng = rand::thread_rng();
-        let private = RsaPrivateKey::new(&mut rng, 2048).expect("keypair");
-        let public = RsaPublicKey::from(&private);
+        let private = PrivateKey::new(&mut UnwrapErr(getrandom::SysRng), 2048).expect("keypair");
+        let public = private.to_public_key();
         let encoded = encode_public_key(&public);
 
         // Mimic the phone: decode the advertised key and encrypt a password.
         let decoded: Value =
             serde_json::from_slice(&BASE64URL_NOPAD.decode(encoded.as_bytes()).unwrap()).unwrap();
-        let n = rsa::BigUint::parse_bytes(decoded["n"].as_str().unwrap().as_bytes(), 16).unwrap();
-        let e = rsa::BigUint::parse_bytes(decoded["e"].as_str().unwrap().as_bytes(), 16).unwrap();
-        let phone_key = RsaPublicKey::new(n, e).expect("phone key");
-        let padding = Oaep::new::<Sha256>();
+        let n = rsa::BoxedUint::from_be_slice_vartime(
+            &hex::decode(decoded["n"].as_str().unwrap()).unwrap(),
+        );
+        let e = rsa::BoxedUint::from_be_slice_vartime(
+            &hex::decode(decoded["e"].as_str().unwrap()).unwrap(),
+        );
+        let phone_key = PublicKey::new(n, e).expect("phone key");
         let ciphertext = phone_key
-            .encrypt(&mut rng, padding, b"correct horse")
+            .oaep_encrypt::<Sha256>(b"correct horse")
             .expect("encrypt");
         let encoded_ct = BASE64.encode(&ciphertext);
 

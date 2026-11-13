@@ -1,0 +1,26 @@
+OpenValut
+=========
+
+This repository is a derivative work of OpenValut by CodeUX.design
+(https://codeux.design/), distributed under the GNU General Public License
+v3.0 or later.
+
+The Flutter application under `openvalut/`, the bundled KeePass (KDBX)
+implementation and parts of the build tooling originate from that project.
+Substantial changes in this repository add a Rust server and CLI, a Tauri
+desktop client, a browser extension, Android autofill support and Linux
+integration.
+
+Original work:
+  Copyright (C) CodeUX.design and OpenValut contributors
+
+Modifications and new components:
+  Copyright (C) OpenValut contributors
+
+Both are licensed under the GNU General Public License, version 3 or (at your
+option) any later version. See LICENSE for the full text.
+
+Third-party components keep their own licenses; see the crate manifests,
+`openvalut/pubspec.yaml` and `deps/` for details. Fonts under
+`openvalut/assets/fonts/` (Inter, MiSans) are distributed under the SIL Open
+Font License 1.1.

@@ -9,6 +9,9 @@ OpenValut 让你完全掌控自己的密码：主密码只在本机使用，服�
 项目以 [GPL-3.0-or-later](LICENSE) 发布，客户端、服务端、CLI、浏览器扩展与
 native host 全部开源，可自行审计和二次开发。
 
+本项目基于 CodeUX.design 的 OpenValut（<https://codeux.design/>，GPL-3.0）
+继续开发，上游版权与改动范围见 [NOTICE](NOTICE)。
+
 ---
 
 ## 目录
@@ -135,7 +138,7 @@ native host 全部开源，可自行审计和二次开发。
 
 ## 构建与运行
 
-要求：Rust 1.80+、Node.js 20+（桌面端 UI）、Flutter 3.x（移动端）。
+要求：Rust 1.87+、Node.js 20+（桌面端 UI）、Flutter 3.x（移动端）。
 
 ### 服务端
 
@@ -341,6 +344,10 @@ git config core.hooksPath .githooks
 
 hook 只扫描暂存内容（`--staged`），发现命中会直接阻止提交。
 
+如果希望连 `git push` / `cargo publish` 一起拦住，可把
+`_tools/codex-hook/public_repo_guard.py` 注册为 Codex 的 `PreToolUse` hook，
+详见 [docs/public-repo-hook.md](docs/public-repo-hook.md)。
+
 ---
 
 ## 相关文档
@@ -355,7 +362,8 @@ hook 只扫描暂存内容（`--staged`），发现命中会直接阻止提交�
 
 ## 开源协议
 
-[GPL-3.0-or-later](LICENSE)。
+[GPL-3.0-or-later](LICENSE)。上游项目与第三方组件的版权声明见
+[NOTICE](NOTICE)。
 
 ---
 

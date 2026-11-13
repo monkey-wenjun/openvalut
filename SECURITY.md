@@ -8,23 +8,33 @@ reproduction steps, and impact.
 
 ## Dependency Exceptions
 
-### RUSTSEC-2023-0071 (`rsa` 0.9.x)
+`cargo audit` runs in CI and must exit successfully. Exceptions are recorded in
+`.cargo/audit.toml` with an explanation; every other RustSec vulnerability is
+release-blocking.
 
-Status: temporarily accepted until 2027-03-01.
+### RUSTSEC-2026-0459 (`libsqlite3-sys` 0.37, CVE-2026-119375)
 
-No patched stable `rsa` release is currently available. The dependency enters
-OpenValut through:
+Accepted until `sqlx` allows `libsqlite3-sys` >= 0.39.
 
-- `sqlx-mysql`, where RSA is used by MySQL authentication. Production MySQL
-  must be reached over a trusted local connection or TLS with certificate
-  verification; untrusted plaintext MySQL connections are unsupported.
-- `ssh-agent-client-rs`/`ssh-key`, where OpenValut parses and forwards SSH keys
-  to a local agent. OpenValut does not expose an RSA decryption oracle over the
-  network.
+SQLite before 3.54.0 can return uninitialized page-cache memory when it opens a
+database together with a sibling `-wal` file that declares a different page
+size. Only `openvalut-server` links SQLite, and it creates and owns its database
+file. Exploiting this requires a local attacker who can already write files next
+to that database, i.e. the same access that lets them read the database
+directly. The CLI and desktop clients do not use SQLite at all.
 
-CI ignores only this advisory by ID. All other RustSec vulnerabilities remain
-release-blocking. The exception must be removed when a compatible stable fix is
-available, or replaced with a backend that does not use the affected crate.
+The exception disappears as soon as `sqlx` publishes a release that accepts
+`libsqlite3-sys` 0.39; CI will then report the advisory again if it is still
+pinned.
+
+Notes on previously affected crates:
+
+- `rsa` 0.9 (RUSTSEC-2023-0071) was replaced by `rsa` 0.10, which contains the
+  fix. RSA is only used for the QR-code login handshake, where the private half
+  is ephemeral and never leaves the machine.
+- `ssh-agent-client-rs` was removed. The SSH agent wire protocol is now
+  implemented in `crates/openvalut-cli/src/ssh_agent.rs` on top of `ssh-key`,
+  so no third-party agent client sits in the dependency tree.
 
 ### Unmaintained `serial` 0.4
 

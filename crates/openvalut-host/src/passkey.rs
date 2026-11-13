@@ -108,11 +108,7 @@ pub fn generate_key_pair() -> KeyPair {
         .to_pkcs8_pem(LineEnding::LF)
         .expect("pkcs8 encoding of P-256 key")
         .to_string();
-    let public_key_bytes = sk
-        .verifying_key()
-        .to_sec1_point(false)
-        .as_bytes()
-        .to_vec();
+    let public_key_bytes = sk.verifying_key().to_sec1_point(false).as_bytes().to_vec();
     KeyPair {
         private_key_pem: pem,
         public_key_bytes,

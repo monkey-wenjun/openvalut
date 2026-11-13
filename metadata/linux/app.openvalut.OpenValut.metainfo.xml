@@ -5,18 +5,16 @@
         <name>openvalut</name>
         <summary>Password Manager: Keep your passwords safe across all platforms and devices</summary>
         <content_rating type="oars-1.1" />
-        <url type="homepage">https://example.com/</url>
-        <url type="bugtracker">https://github.com/openvalut/openvalut/issues</url>
-        <url type="donation">https://github.com/sponsors/hpoul</url>
-        <url type="translate">https://translate.example.com</url>
+        <url type="homepage">https://github.com/monkey-wenjun/openvalut</url>
+        <url type="bugtracker">https://github.com/monkey-wenjun/openvalut/issues</url>
 
         <metadata_license>MIT</metadata_license>
         <project_license>GPL-3.0-only</project_license>
 
-        <developer_name>Herbert Poul</developer_name>
-        <developer id="codeux.design">
-                <name>Herbert Poul</name>
-                <url>https://codeux.design/</url>
+        <developer_name>OpenValut Contributors</developer_name>
+        <developer id="github.com.monkey-wenjun">
+                <name>OpenValut Contributors</name>
+                <url>https://github.com/monkey-wenjun/openvalut</url>
         </developer>
 
         <supports>
@@ -34,7 +32,7 @@
 <li>Keep track of your accounts across the web.</li>
 <li>App available for Mac, iPhone, iPad, Android Phones and Tablets, Linux and Windows.</li>
 <li>Open multiple password files at the same time (e.g. one for work, one for personal - or even share your password files with coworkers)</li>
-<li>Open Source available on https://github.com/openvalut/openvalut/</li>
+<li>Open Source available on https://github.com/monkey-wenjun/openvalut/</li>
 <li>Dark Theme</li>
 </ul>
 <p><em>=== UNDER YOUR CONTROL ===</em></p>
@@ -48,20 +46,14 @@
 </ul>
 <p><em>=== FULL FEATURED, NO ADS, NO SUBSCRIPTION ===</em></p>
 <p>As an open source project there are no artificial feature restrictions, no ads and no requirement for payments.</p>
-<p><em>Contributions welcome and encouraged</em> ;-) (Always looking for developers, translators, documentation writers, UI designer, etc. :) ), just join our discord channel: https://example.com/go/discord</p>
+<p><em>Contributions welcome and encouraged</em> ;-) (Always looking for developers, translators, documentation writers, UI designer, etc. :)</p>
 <p><em>=== UNDER ACTIVE DEVELOPMENT ===</em></p>
-<p>This is an open source project which is still under heavy development, adding features. We would love your feedback via email or on the issue tracker at https://github.com/openvalut/openvalut/issues/</p>
-<p>Also join the community on our discord channel at https://example.com/go/discord</p>
+<p>This is an open source project which is still under heavy development, adding features. We would love your feedback on the issue tracker at https://github.com/monkey-wenjun/openvalut/issues/</p>
 
         </description>
 
         <launchable type="desktop-id">app.openvalut.openvalut.desktop</launchable>
-        <screenshots>
-                <screenshot type="default">
-                        <image>https://data.example.com/data/screenshot_composition_small.png</image>
-                </screenshot>
-        </screenshots>
         <releases>
-    <release version="1.9.6_1904" date="2022-06-10"/>
+    <release version="0.1.0" date="2026-11-14"/>
   </releases>
 </component>

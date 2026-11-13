@@ -41,7 +41,9 @@ aes-gcm = { workspace = true }
 hex = { workspace = true }
 uuid = { workspace = true }
 data-encoding = { workspace = true }
-rsa = "0.9"
+rsa = "0.10"
+# `rsa` 0.10 takes `rand_core` 0.10 generators.
+getrandom = { version = "0.4", features = ["sys_rng"] }
 qrcode = { version = "0.14", default-features = false, features = ["svg"] }
 tauri-plugin-autostart = "2"
 tauri-plugin-single-instance = "2"

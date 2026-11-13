@@ -22,8 +22,8 @@ version = "0.1.0"
 edition = "2021"
 authors = ["OpenValut Contributors"]
 license = "GPL-3.0-or-later"
-repository = "https://github.com/openvalut/OpenVault"
-rust-version = "1.80"
+repository = "https://github.com/monkey-wenjun/openvalut"
+rust-version = "1.87"
 
 [workspace.dependencies]
 # Core crypto

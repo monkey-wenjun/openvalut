@@ -10,6 +10,9 @@ and can share entries end-to-end encrypted with family members.
 The project is released under [GPL-3.0-or-later](LICENSE). Client, server, CLI, browser
 extension and native host are all open source and auditable.
 
+It continues OpenValut by CodeUX.design (<https://codeux.design/>, GPL-3.0);
+upstream attribution and the scope of changes are in [NOTICE](NOTICE).
+
 ---
 
 ## Table of Contents
@@ -148,7 +151,7 @@ gets ciphertext only.
 
 ## Build & Run
 
-Requirements: Rust 1.80+, Node.js 20+ (desktop UI), Flutter 3.x (mobile).
+Requirements: Rust 1.87+, Node.js 20+ (desktop UI), Flutter 3.x (mobile).
 
 ### Server
 
@@ -369,7 +372,8 @@ The hook scans staged content only (`--staged`) and blocks the commit on any fin
 
 ## License
 
-[GPL-3.0-or-later](LICENSE).
+[GPL-3.0-or-later](LICENSE). Upstream and third-party attributions are in
+[NOTICE](NOTICE).
 
 ---
 
