@@ -104,21 +104,21 @@ pub(super) fn pg_cached(sql: &str) -> &'static str {
 pub(super) fn query_for(
     kind: DbKind,
     sql: &str,
-) -> sqlx::query::Query<'_, Any, sqlx::any::AnyArguments<'_>> {
+) -> sqlx::query::Query<'static, Any, sqlx::any::AnyArguments> {
     if kind == DbKind::Postgres {
         sqlx::query(pg_cached(sql))
     } else {
-        sqlx::query(sql)
+        sqlx::query(sqlx::AssertSqlSafe(sql))
     }
 }
 
 impl Db {
     /// sqlx::query but with backend-aware placeholder rewriting.
-    fn query<'q>(&self, sql: &'q str) -> sqlx::query::Query<'q, Any, sqlx::any::AnyArguments<'q>> {
+    fn query(&self, sql: &str) -> sqlx::query::Query<'static, Any, sqlx::any::AnyArguments> {
         if self.kind == DbKind::Postgres {
             sqlx::query(pg_cached(sql))
         } else {
-            sqlx::query(sql)
+            sqlx::query(sqlx::AssertSqlSafe(sql))
         }
     }
 
@@ -126,14 +126,14 @@ impl Db {
     fn query_scalar<'q, O>(
         &self,
         sql: &'q str,
-    ) -> sqlx::query::QueryScalar<'q, Any, O, sqlx::any::AnyArguments<'q>>
+    ) -> sqlx::query::QueryScalar<'static, Any, O, sqlx::any::AnyArguments>
     where
         O: for<'r> sqlx::Decode<'r, Any> + sqlx::Type<Any>,
     {
         if self.kind == DbKind::Postgres {
             sqlx::query_scalar(pg_cached(sql))
         } else {
-            sqlx::query_scalar(sql)
+            sqlx::query_scalar(sqlx::AssertSqlSafe(sql))
         }
     }
 
@@ -141,14 +141,14 @@ impl Db {
     fn query_as<'q, O>(
         &self,
         sql: &'q str,
-    ) -> sqlx::query::QueryAs<'q, Any, O, sqlx::any::AnyArguments<'q>>
+    ) -> sqlx::query::QueryAs<'static, Any, O, sqlx::any::AnyArguments>
     where
         O: for<'r> sqlx::FromRow<'r, sqlx::any::AnyRow>,
     {
         if self.kind == DbKind::Postgres {
             sqlx::query_as(pg_cached(sql))
         } else {
-            sqlx::query_as(sql)
+            sqlx::query_as(sqlx::AssertSqlSafe(sql))
         }
     }
 
