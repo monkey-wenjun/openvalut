@@ -1,0 +1,68 @@
+[package]
+name = "openvalut-cli"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+description = "Command line access to OpenValut credentials: vaults, items, TOTP, cloud and ssh-agent."
+
+[[bin]]
+name = "openvalut-cli"
+path = "src/main.rs"
+
+[dependencies]
+openvalut-core = { path = "../openvalut-core" }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# HTTP client for the OpenValut Cloud API
+ureq = { version = "3", features = ["json"] }
+
+# Crypto / encoding
+argon2 = { workspace = true }
+aes-gcm = { workspace = true }
+rand = { workspace = true }
+hmac = { workspace = true }
+sha1 = { workspace = true }
+sha2 = { workspace = true }
+base32 = "0.5"
+data-encoding = { workspace = true }
+hex = { workspace = true }
+uuid = { workspace = true }
+
+# KDBX
+keepass = { workspace = true }
+
+# CLI / interaction
+rpassword = { workspace = true }
+dirs = "5"
+keyring = { version = "3", features = ["sync-secret-service", "windows-native"] }
+portable-pty = "0.9"
+
+# SSH agent
+ssh-agent-client-rs = "1.1.3"
+ssh-key = { version = "0.6.7", features = ["ed25519", "rsa"] }
+
+# QR-code login: one-off RSA keypair whose public half is advertised to the
+# phone (via the server); the phone returns the master password / account key
+# RSA-OAEP(SHA-256) encrypted, so the server only relays ciphertext.
+rsa = "0.9"
+# Render the login QR code in the terminal (unicode renderer only; no image
+# backend, and no C dependency like libqrencode).
+qrcode = { version = "0.14", default-features = false }
+
+# Kernel keyring (Linux): keeps the unlocked secret in the per-UID user
+# keyring so any terminal / SSH login sees it until the machine reboots.
+[target.'cfg(target_os = "linux")'.dependencies]
+libc = "0.2"
+
+# Error / utils
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+[dev-dependencies]
+tempfile = "3"

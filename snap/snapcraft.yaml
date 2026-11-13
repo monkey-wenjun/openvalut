@@ -1,0 +1,39 @@
+name: openvalut
+icon: snap/gui/openvalut.png
+summary: Open Source Password Manager with Keepass file support.
+description: |
+  Easily and securely keep track of all your Passwords!
+
+  openvalut is a stand alone password manager with support for the popular 
+  Keepass (kdbx 3.x AND kdbx 4.x 🎉️) format. Store your passwords, share 
+  across all your devices and easily find them whenever you need to login.
+
+
+base: core22
+adopt-info: openvalut
+#grade: devel # must be 'stable' to release into candidate/stable channels
+grade: stable
+confinement: strict
+
+parts:
+  openvalut:
+    plugin: dump
+    source: https://data.example.com/data/artifacts/openvalut-linux-latest.tar.gz
+    override-pull: |
+      snapcraftctl pull
+      snapcraftctl set-version $(cat version.txt)
+    stage-packages:
+      - libegl-mesa0
+      - libkeybinder-3.0-0
+
+apps:
+  openvalut:
+    command: openvalut
+    extensions: [gnome]
+    plugs:
+      - opengl
+      - home
+      - network
+      - password-manager-service
+    environment:
+      __EGL_VENDOR_LIBRARY_DIRS: $SNAP/usr/share/glvnd/egl_vendor.d/

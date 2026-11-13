@@ -1,0 +1,83 @@
+"playstore_full_description","Ľahko a bezpečne sledujte všetky svoje heslá!
+
+openvalut je samostatný správca hesiel s podporou populárneho a osvedčeného formátu <strong> KeePass </strong> (kdbx 3.xa kdbx 4.x 🎉️). Ukladajte svoje heslá, <strong> zdieľajte ich na všetkých svojich zariadeniach </strong> a ľahko ich vyhľadajte, kedykoľvek sa potrebujete prihlásiť.
+
+🗄 Všetky vaše heslá na jednom mieste.
+🧬 Generujte bezpečné náhodné heslá pre každý zo svojich účtov.
+🔐 Rýchle odomknutie zabezpečené biometrickým zámkom.
+🔍 Sledujte svoje účty na webe.
+🖥 Aplikácia dostupná pre Mac, iPhone, iPad, telefóny a tablety Android, Linux a Windows.
+📂 Otvorte viac súborov s heslom súčasne (napr. Jeden do práce, jeden do osobného - alebo dokonca zdieľajte svoje súbory s heslami so spolupracovníkmi)
+🤓 Open Source k dispozícii na https://github.com/openvalut/openvalut/
+✍ Automatické dopĺňanie hesiel (Android 9+, podpora v prehliadači iba od Androidu 10+)
+🔦 Temná téma 😎️
+
+<strong> === POD SVOJOU KONTROLOU === </strong>
+openvalut ukladá všetky vaše heslá v otvorenom formáte KeePass presne tam, kde ich chcete mať. Neodosiela vaše heslá na naše servery. openvalut ale podporuje ukladanie do:
+
+✅️ Ktorýkoľvek miestny poskytovateľ obsahu zo systému Android
+✅️ Natívna integrácia Disku Google
+✅️ Natívna integrácia Dropboxu
+✅️ Natívna podpora WebDAV na ukladanie do vášho vlastného NextCloud alebo OwnCloud (alebo podobného)
+✅️ Natívna integrácia Microsoft OneDrive
+
+<b> === FULL FEATURED, ŽIADNE REKLAMY, ŽIADNE PREDPLATNÉ === </b>
+Ako projekt typu open source neexistujú žiadne obmedzenia umelých funkcií, žiadne reklamy ani požiadavky na platby.
+
+<strong> Príspevky vítané a povzbudené </strong> 😅️ (vždy hľadáme vývojárov, prekladateľov, autorov dokumentácie, návrhárov používateľského rozhrania atď. :)), stačí sa pripojiť na náš <a href=""https://example.com/go/discord""> Discord Server</a>.
+
+<b> === V RÁMCI AKTÍVNEHO ROZVOJA 🛠️ === </b>
+Toto je open source projekt, ktorý je stále vo veľkom vývoji a ktorý pridáva nové funkcie. Boli by sme radi, keby ste dostali spätnú väzbu prostredníctvom e-mailu alebo prostredníctvom <a href=""https://github.com/openvalut/openvalut/issues/""> sledovača problémov </a> na stránke https://github.com/openvalut/openvalut/issues/
+","Google Play Store description","4000",""
+"playstore_title","openvalut - Správca hesiel kompatibilný s KeePass","Google Play Title","50",""
+"playstore_short_description","Chráňte svoje heslá a účty na všetkých platformách a zariadeniach.","Short description in play store.","80",""
+"apple-appstore-title","openvalut - Správca Hesiel","","30",""
+"apple-appstore-subtitle","Všetky heslá, bezpečne uložené","apple-appstore-subtitle -- Used as subtitle in Apple App Store, feel free to be creative ;-) Does not have to match english original, must just be a catchy phrase for the app store.","30",""
+"apple-appstore-description","Ľahko a bezpečne sledujte všetky svoje heslá!
+
+openvalut je samostatný správca hesiel s podporou populárneho a bezpečnosťou overeného formátu KeePass. Ukladajte svoje heslá, zdieľajte ich na všetkých svojich zariadeniach a ľahko ich vyhľadajte, kedykoľvek sa potrebujete prihlásiť.
+
+
+• Všetky vaše heslá na jednom mieste.
+• Generujte bezpečné náhodné heslá pre každý zo svojich účtov.
+• Rýchle odomknutie zabezpečené biometrickým zámkom.
+• Sledujte svoje účty na webe.
+• Aplikácia je k dispozícii na všetkých platformách. Medzi nimi aj Mac, iPhone a iPad.
+• Otvorte viac súborov hesiel súčasne (napr. Jeden do práce, jeden do osobného - alebo dokonca zdieľajte svoje súbory s heslami so spolupracovníkmi)
+• Ušetrite časovo založené jednorazové heslá pre 2fa (dvojfaktorové overenie).
+• K svojim heslám pripojte binárne súbory. (Rovnako ako offline TANy atď.)
+• Open Source k dispozícii na https://github.com/openvalut/openvalut/
+• Temná téma ;-)
+
+=== POD VAŠOU KONTROLOU ===
+
+openvalut ukladá všetky vaše heslá v otvorenom formáte Keepass presne tam, kde ich chcete mať. Neodosiela vaše heslá na naše servery. openvalut ale podporuje ukladanie do:
+
+• Akýkoľvek miestny poskytovateľ dokumentov, napríklad iCloud.
+• Natívna integrácia Disku Google
+• Natívna integrácia Dropboxu
+• Natívna podpora WebDAV na ukladanie do vášho vlastného NextCloud alebo OwnCloud (alebo podobne)
+• Natívna integrácia Microsoft OneDrive
+
+=== V RÁMCI AKTÍVNEHO ROZVOJA ===
+
+Toto je open source projekt, ktorý je stále vo veľkom vývoji a ktorý pridáva nové funkcie. Boli by sme radi, keby ste nám poskytli spätnú väzbu prostredníctvom e-mailu alebo nástroja na sledovanie problémov na adrese: https://github.com/openvalut/openvalut/issues/
+
+Taktiež sa môžte pripojiť do nášho Discord serveru na adrese https://example.com/go/discord
+","apple-appstore-description --- see my comment, this is essentially the same as the playstore_full_description just slight modifications for apple.","4000",""
+"apple-appstore-keywords","Správca hesiel, heslá, správa, Keysafe, KeePass, Kdbx, webdav, icloud, nextcloud, onedrive","apple-appstore-keywords - Keywords used for searching in the apple app store. Does not have to be a 1:1 translation, choose keywords that mak sense.","100",""
+"","","","",""
+"microsoft-store-windows","","Windows Store listing description https://docs.microsoft.com/en-us/windows/uwp/publish/write-a-great-app-description","",""
+"microsoft-store-windows-short-descriptoin","","short description for windows store 
+A shorter, catchy description that may be used in the top of your product’s Store listing
+Recommended length: 270 characters or fewer
+","1000",""
+"microsoft-store-windows-features","","Short summaries of your product's key features
+Displayed as bulleted list
+Up to 20 app features
+(max 200 characters each)","",""
+"microsoft-store-windows-search-terms","","search terms for the microsoft store
+
+Up to 7 search terms
+40 character limit for each search term
+No more than 21 separate words across all search terms","",""

@@ -1,0 +1,320 @@
+/* OpenValut extension design tokens + shared chrome/options primitives.
+   Palette follows the vault-green brand (icon ≈ #2EBA87) with a Swiss,
+   minimal, security-tool treatment. */
+
+:root {
+  color-scheme: light;
+  --ov-bg: #f5f7f6;
+  --ov-surface: #ffffff;
+  --ov-surface-2: #eef3f0;
+  --ov-surface-3: #e2e9e5;
+  --ov-text: #10231b;
+  --ov-text-2: #43584e;
+  --ov-text-3: #5b6d63;
+  --ov-border: #dbe4df;
+  --ov-primary: #047857;
+  --ov-primary-hover: #066349;
+  --ov-primary-active: #054c38;
+  --ov-on-primary: #ffffff;
+  --ov-focus: #0d9f73;
+  --ov-danger: #c12922;
+  --ov-danger-hover: #a7221c;
+  --ov-on-danger: #ffffff;
+  --ov-success-bg: #e3f4ec;
+  --ov-success-text: #0b6b4a;
+  --ov-info-bg: #e5f1fb;
+  --ov-info-text: #1d5d92;
+  --ov-error-bg: #fdecec;
+  --ov-error-text: #b42318;
+  --ov-shadow-sm: 0 1px 2px rgba(16, 35, 27, 0.06);
+  --ov-shadow-md: 0 6px 24px rgba(16, 35, 27, 0.1);
+  --ov-radius-sm: 6px;
+  --ov-radius-md: 10px;
+  --ov-radius-lg: 14px;
+  --ov-font:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --ov-mono: "SFMono-Regular", ui-monospace, Consolas, "Liberation Mono",
+    monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --ov-bg: #0e1512;
+    --ov-surface: #16201b;
+    --ov-surface-2: #1e2b24;
+    --ov-surface-3: #28372f;
+    --ov-text: #e6efe9;
+    --ov-text-2: #b6c7bd;
+    --ov-text-3: #8fa49a;
+    --ov-border: #2a3a32;
+    --ov-primary: #22b583;
+    --ov-primary-hover: #2ec795;
+    --ov-primary-active: #39d4a1;
+    --ov-on-primary: #06241a;
+    --ov-focus: #45dba8;
+    --ov-danger: #c12922;
+    --ov-danger-hover: #a7221c;
+    --ov-on-danger: #ffffff;
+    --ov-success-bg: #123426;
+    --ov-success-text: #53d9a4;
+    --ov-info-bg: #122b3d;
+    --ov-info-text: #8cc6f2;
+    --ov-error-bg: #3a1512;
+    --ov-error-text: #ff9c93;
+    --ov-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --ov-shadow-md: 0 8px 28px rgba(0, 0, 0, 0.45);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--ov-font);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ov-text);
+  background: var(--ov-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.container {
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.header .logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.status {
+  display: none;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  border-radius: var(--ov-radius-sm);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.status.error {
+  display: block;
+  background: var(--ov-error-bg);
+  color: var(--ov-error-text);
+}
+
+.status.info {
+  display: block;
+  background: var(--ov-info-bg);
+  color: var(--ov-info-text);
+}
+
+.status.success {
+  display: block;
+  background: var(--ov-success-bg);
+  color: var(--ov-success-text);
+}
+
+.section {
+  background: var(--ov-surface);
+  border: 1px solid var(--ov-border);
+  border-radius: var(--ov-radius-md);
+  padding: 14px;
+  box-shadow: var(--ov-shadow-sm);
+}
+
+.section + .section {
+  margin-top: 12px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+label {
+  display: block;
+  color: var(--ov-text-2);
+  font-size: 13px;
+  font-weight: 550;
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+  width: 100%;
+  padding: 9px 11px;
+  border: 1px solid var(--ov-border);
+  border-radius: var(--ov-radius-sm);
+  background: var(--ov-surface);
+  color: var(--ov-text);
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--ov-text-3);
+}
+
+textarea {
+  resize: vertical;
+  font-family: inherit;
+}
+
+input[type="range"] {
+  accent-color: var(--ov-primary);
+}
+
+input[type="checkbox"] {
+  accent-color: var(--ov-primary);
+  width: 16px;
+  height: 16px;
+}
+
+button {
+  min-height: 36px;
+  padding: 8px 14px;
+  border: 1px solid transparent;
+  border-radius: var(--ov-radius-sm);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    transform 80ms ease;
+}
+
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+button.primary {
+  background: var(--ov-primary);
+  color: var(--ov-on-primary);
+}
+
+button.primary:hover:not(:disabled) {
+  background: var(--ov-primary-hover);
+}
+
+button.primary:active:not(:disabled) {
+  background: var(--ov-primary-active);
+}
+
+button.secondary {
+  background: var(--ov-surface-2);
+  border-color: var(--ov-border);
+  color: var(--ov-text);
+}
+
+button.secondary:hover:not(:disabled) {
+  background: var(--ov-surface-3);
+}
+
+button.danger {
+  background: var(--ov-danger);
+  color: var(--ov-on-danger);
+}
+
+button.danger:hover:not(:disabled) {
+  background: var(--ov-danger-hover);
+}
+
+button.link {
+  background: transparent;
+  border-color: transparent;
+  color: var(--ov-primary);
+  padding: 6px 8px;
+}
+
+button.link:hover:not(:disabled) {
+  background: var(--ov-surface-2);
+}
+
+/* Keyboard focus must always be visible. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--ov-focus);
+  outline-offset: 2px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--ov-focus);
+  box-shadow: 0 0 0 3px rgba(13, 159, 115, 0.22);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ov-focus) 22%, transparent);
+}
+
+.checkbox-label,
+.radio-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 10px;
+  color: var(--ov-text);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.checkbox-label input,
+.radio-label input {
+  margin-top: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

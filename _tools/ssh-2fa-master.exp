@@ -1,0 +1,55 @@
+#!/usr/bin/expect -f
+# Establish a persistent, daemonized ssh control master for a host that uses
+# 2FA (publickey + password + TOTP). Feed credentials through the environment
+# (via `openvalut-cli run --env`), never argv.
+#
+# Usage:
+#   openvalut-cli run \
+#     --env OV_SSH_PW='ov://我的密码库/<base64-uuid>/password' \
+#     --env OV_SSH_TOTP='ov://我的密码库/<base64-uuid>/totp' \
+#     -- expect _tools/ssh-2fa-master.exp [host] [socket]
+#
+# Then reuse the socket for all ssh/scp:
+#   OPENVALUT_SSH_SOCKET=<socket> ./_tools/deploy-server.sh
+set host [lindex $argv 0]
+if {$host eq ""} { set host "openvalut-server.example.com" }
+set sock [lindex $argv 1]
+if {$sock eq ""} { set sock "/tmp/ov-rs-master" }
+set pw $env(OV_SSH_PW)
+set totp $env(OV_SSH_TOTP)
+set timeout 60
+
+set sent_pw 0
+set sent_totp 0
+
+spawn ssh -MNf -S $sock -o StrictHostKeyChecking=no \
+    -o ConnectTimeout=10 -o ServerAliveInterval=30 -o ServerAliveCountMax=3 \
+    -o ExitOnForwardFailure=yes \
+    -o PreferredAuthentications=publickey,keyboard-interactive \
+    -o NumberOfPasswordPrompts=1 $host
+
+expect {
+    -re {[Pp]assword|请输入密码|Password for} {
+        if {$sent_pw == 0} {
+            send -- "$pw\r"
+            set sent_pw 1
+        }
+        exp_continue
+    }
+    -re {验证码|OTP|verification code|[Vv]erification|one-time|[Cc]ode} {
+        if {$sent_totp == 0} {
+            send -- "$totp\r"
+            set sent_totp 1
+        }
+        exp_continue
+    }
+    timeout {
+        puts stderr "TIMEOUT establishing master at $sock"
+        exit 124
+    }
+    eof
+}
+
+# ssh -f forks and exits after auth; the control master lives on.
+catch wait result
+exit [lindex $result 3]

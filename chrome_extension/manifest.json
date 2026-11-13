@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "OpenValut Autofill",
+  "version": "0.1.0",
+  "description": "Auto-fill passwords and TOTP codes from your OpenValut KDBX vault.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA15Vyc5NvX/lNBMFToVVuqt+yy/dlSuM89iclh1OradWGm4Y8qL/OyOwTVA+jSPdJ18QFvcn9SC7TTXEICkJnXYv3Y3k/nFbb5DtKEunC6esMqgHH7K6iZMDYMtE4qJ//CgceDm5sjJ0NbtHYSDGPS8bf58VKwVaZiNPXFQsZfFKo801zqweKHb+OmzmScUviN+DIc6PhplCaQPWnsPzWFXrBOLsXaJNTBJH77xmwNuja9iZqWoawPVzBdBAyuvgXty8Kn5+V5lC929ymFyToE1iNVB1fvIP5Qez+NRexNc4AgcxVkesLY7Z0lzkJi3y8xXJe9YgV9Adw2wtkLClQewIDAQAB",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "nativeMessaging",
+    "idle",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["rpc-contract.js", "passkey-inject.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": ["<all_urls>"],
+      "css": ["content.css"],
+      "js": ["rpc-contract.js", "dom-scanner.js", "content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "192": "icons/icon-192.png"
+    }
+  },
+  "icons": {
+    "192": "icons/icon-192.png",
+    "512": "icons/icon-512.png"
+  },
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    {
+      "resources": ["inject-passkey.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

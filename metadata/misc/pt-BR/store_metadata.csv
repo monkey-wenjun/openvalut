@@ -1,0 +1,93 @@
+"playstore_full_description","Controle com facilidade e segurança de todas as suas senhas!
+
+O openvalut é um gerenciador de senhas com suporte ao popular formato <strong>KeePass</strong> (kdbx 3. E kdbx 4.x 🎉). Armazene suas senhas, <strong>compartilhe em todos os seus dispositivos</strong> e encontre-as facilmente sempre que você precisar fazer o login.
+
+🗄 Todas as suas senhas em um só lugar.
+🧬 Gere senhas aleatórias seguras para cada uma das suas contas.
+🔐 Desbloqueio Rápido protegido com bloqueio biométrico.
+🔍: Mantenha o controle de suas contas através da web.
+🖥 Aplicativo disponível para Mac, iPhone, iPad, Android e Tablets, Linux e Windows.
+📂 Abra vários arquivos de senha ao mesmo tempo (ex.: um por trabalho, um por pessoal - ou até mesmo compartilhar seus arquivos de senha com colegas de trabalho)
+🤓 Código Aberto disponível em https://github. om/openvalut/openvalut/
+✍ Preenchimento automático de suas senhas (Android 9+, suporte no navegador somente no Android 10+)
+🔦 Tema Escuro 😎
+
+
+<strong>=== SOB SEU CONTROLE ===</strong>
+O openvalut armazena todas as suas senhas no formato aberto Keepass, exatamente onde você quer. Ele não envia suas senhas para nossos servidores. Mas o openvalut suporta salvar em:
+
+✅ Qualquer provedor de conteúdo local do Android
+✅ Integração Nativa com o Google Drive
+✅ Integração Nativa com o Dropbox
+✅ Suporte WebDAV nativo para armazenar em seu próprio NextCloud ou OwnCloud (ou similar)
+✅ integração Nativa com oMicrosoft OneDrive
+
+<b>=== MUITOS RECURSOS, NENHUM ANÚNCIO, SEM ASSINATURA ===</b>
+Como projeto de código aberto não existem restrições artificiais de recursos, sem anúncios e sem necessidade de pagamentos.
+
+<strong>Contribuições são bem vindas e encorajadas</strong> 😅 (Sempre à procura de desenvolvedores, tradutores, escritores de documentação, Designer de User Interface, etc. :) ), é só acessar nosso <a href=""https://example.com/go/discord"">canal no discord</a>.
+
+<b>=== SOB DESENVOLVIMENTO ATIVO 🛠️ ===</b>
+Este é um projeto de código aberto que ainda está em forte desenvolvimento. adicionando recursos. Nós adoraríamos seu feedback por e-mail ou no <a href=""https://github.com/openvalut/openvalut/issues/"">issue tracker</a> em https://github.com/openvalut/openvalut/issues/
+
+Também junte-se à comunidade em nosso <a href=""https://example.com/go/discord"">canal no discord</a> em https://example.com/go/discord
+","Google Play Store description","4000",""
+"playstore_title","openvalut - Gerenciador de Senhas","Google Play Title","50",""
+"playstore_short_description","Mantenha suas senhas e contas seguras em todas as plataformas e dispositivos.","Short description in play store.","80",""
+"apple-appstore-title","openvalut - Gerenciar Senhas","","30",""
+"apple-appstore-subtitle","Uma Senha para Todos.","apple-appstore-subtitle -- Used as subtitle in Apple App Store, feel free to be creative ;-) Does not have to match english original, must just be a catchy phrase for the app store.","30",""
+"apple-appstore-description","Controle com facilidade e segurança de todas as suas senhas!
+
+O openvalut é um gerenciador de senhas com suporte ao popular formato KeePass. Armazene suas senhas, compartilhe em todos os seus dispositivos e encontre-as facilmente sempre que você precisar fazer o login.
+
+• Todas as suas senhas em um só lugar.
+• Gere senhas aleatórias seguras para cada uma das suas contas.
+• Desbloqueio Rápido protegido com bloqueio biométrico.
+• Mantenha o controle de suas contas através da web.
+• Aplicativo disponível todas as plataformas. Incluindo Mac, iPhone e iPad.
+• Abra vários arquivos de senha ao mesmo tempo (ex.: um por trabalho, um por pessoal - ou até mesmo compartilhar seus arquivos de senha com colegas de trabalho)
+• Economize tempo em senhas de uso único baseadas em 2fa (autenticação de dois fatores).
+• Anexe arquivos binários às suas entradas de senha. (Como TANs offline, etc)
+ • Código Aberto disponível em https://github.com/openvalut/openvalut/
+• Tema Escuro
+
+
+=== SOB SEU CONTROLE ===
+O openvalut armazena todas as suas senhas no formato aberto Keepass, exatamente onde você quer. Ele não envia suas senhas para nossos servidores. Mas o openvalut suporta salvar em:
+
+ • Qualquer provedor de conteúdo local, como o iCloud.
+• Integração Nativa com o Google Drive
+• Integração Nativa com o Dropbox
+• Suporte WebDAV nativo para armazenar em seu próprio NextCloud ou OwnCloud (ou similar)
+• integração Nativa com oMicrosoft OneDrive
+
+=== MUITOS RECURSOS, NENHUM ANÚNCIO, SEM ASSINATURA ===
+Como projeto de código aberto não existem restrições artificiais de recursos, sem anúncios e sem necessidade de pagamentos.
+
+Contribuições são bem vindas e encorajadas :-) (Sempre à procura de desenvolvedores, tradutores, escritores de documentação, Designer de User Interface, etc. :) ), é só acessar nosso canal no discord:
+https://example.com/go/discord.
+
+=== SOB DESENVOLVIMENTO ATIVO ===
+Este é um projeto de código aberto que ainda está em forte desenvolvimento. adicionando recursos. Nós adoraríamos seu feedback por e-mail ou em https://github.com/openvalut/openvalut/issues/
+
+Também junte-se à comunidade em nosso canal no discord em https://example.com/go/discord
+","apple-appstore-description --- see my comment, this is essentially the same as the playstore_full_description just slight modifications for apple.","4000",""
+"apple-appstore-keywords","Gerenciador de senhas,senhas,gerenciar,Keystore, Keepass,Kdbx,webdav,icloud,nextcloud,onedrive","apple-appstore-keywords - Keywords used for searching in the apple app store. Does not have to be a 1:1 translation, choose keywords that mak sense.","100",""
+"","","","",""
+"microsoft-store-windows","","Windows Store listing description https://docs.microsoft.com/en-us/windows/uwp/publish/write-a-great-app-description","",""
+"microsoft-store-windows-short-descriptoin","Mantenha suas senhas e contas seguras em todas as plataformas e dispositivos. Gerenciador de senhas gratuito e de código aberto com suporte para arquivos de senha kdbx.","short description for windows store 
+A shorter, catchy description that may be used in the top of your product’s Store listing
+Recommended length: 270 characters or fewer
+","1000",""
+"microsoft-store-windows-features","* Armazene suas senhas com segurança
+* Código aberto
+* Suporte para arquivos padrão KeePass (kdbx)
+* Sincronize seus dispositivos com serviços de armazenamento em nuvem.","Short summaries of your product's key features
+Displayed as bulleted list
+Up to 20 app features
+(max 200 characters each)","",""
+"microsoft-store-windows-search-terms","","search terms for the microsoft store
+
+Up to 7 search terms
+40 character limit for each search term
+No more than 21 separate words across all search terms","",""

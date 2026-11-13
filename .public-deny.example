@@ -1,0 +1,10 @@
+# Extra deny rules for _tools/check-public.sh.
+#
+# Copy to .public-deny (gitignored) and list anything specific to your own
+# deployment: personal domains, usernames, hostnames, internal IPs.
+# Format: rule-name|extended-regexp, one per line.
+#
+# personal-domain|example[.]invalid
+# personal-user|your-username
+# home-path|/home/your-username
+# public-ip|203[.]0[.]113[.][0-9]{1,3}

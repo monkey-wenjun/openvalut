@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# OpenValut sudo askpass helper.
+#
+# Usage:
+#   export SUDO_ASKPASS=/opt/openvalut/openvalut-sudo-askpass
+#   sudo -A <command>
+#
+# This script is invoked by sudo when the -A flag is used. It prompts the
+# user for the current TOTP code, asks the running OpenValut app (via
+# openvalut-cli) for the sudo password, and prints the password to stdout.
+# This way agents/programs never see the real password directly; they can
+# only obtain it after presenting a valid one-time TOTP code.
+
+set -euo pipefail
+
+TOTP=""
+
+# Prefer a graphical prompt when a display is available.
+if [ -n "${DISPLAY:-}" ] && command -v zenity >/dev/null 2>&1; then
+    TOTP=$(zenity --entry --title="OpenValut sudo" --text="请输入两步验证码：" --hide-text || true)
+# Fall back to dialog in a terminal.
+elif command -v dialog >/dev/null 2>&1; then
+    exec 3>&1
+    TOTP=$(dialog --insecure --passwordbox "OpenValut sudo\n请输入两步验证码：" 10 40 2>&1 1>&3 || true)
+    exec 3>&-
+else
+    # Terminal fallback.
+    printf "OpenValut sudo - 请输入两步验证码：" >&2
+    read -rs TOTP || true
+    printf "\n" >&2
+fi
+
+TOTP=$(echo "$TOTP" | tr -d '[:space:]')
+
+if [ -z "$TOTP" ]; then
+    echo "未输入两步验证码" >&2
+    exit 1
+fi
+
+if ! command -v openvalut-cli >/dev/null 2>&1; then
+    echo "未找到 openvalut-cli，请确保 OpenValut 已安装" >&2
+    exit 1
+fi
+
+# Query OpenValut for the sudo password, validating the TOTP code.
+openvalut-cli sudo --totp "$TOTP"

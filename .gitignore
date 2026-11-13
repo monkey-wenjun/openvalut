@@ -1,0 +1,76 @@
+# Build artifacts and generated files
+.dart_tool/
+target/
+build/
+*/build/
+*.deb
+*.apk
+*.ipa
+*.dmg
+*.zip
+*.tar.gz
+
+# IDE and editor files
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*~
+
+# Secrets and CI keys
+secrets/
+.travis_sec/
+*.enc
+.env
+.env.local
+*.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Private deployment overrides stay local only; the committed templates use
+# example.com placeholders.
+crates/openvalut-server/deploy/*.local.conf
+
+# Machine-specific deny rules for _tools/check-public.sh (never publish)
+.public-deny
+
+# Flutter/ephemeral generated files
+**/Flutter/ephemeral/
+**/flutter_export_environment.sh
+**/flutter_native_integration.env
+
+# Debian package build output
+debian/opt/openvalut/
+debian/lib/
+
+# Compiled shared objects (PAM module / native assets) are build artifacts
+*.so
+
+# Node modules (chrome extension)
+node_modules/
+
+# Android signing keystores (never commit)
+**/*.keystore
+**/*.jks
+**/*.p12
+**/*.pfx
+
+# R8/ProGuard build reports (generated, may contain project paths)
+**/_debug-full-r8-config.txt
+**/_proguard_usage.txt
+
+# Go server build artifacts
+server/openvalut-server
+server/openvalut-server-*
+server/*.db
+
+# Local tool HOME / temp dirs used by build scripts (never commit caches)
+.home/
+openvalut/.home/
+openvalut/.tmp/
+
+# Machine-specific native messaging registration (absolute local path)
+design.codeux.openvalut.json

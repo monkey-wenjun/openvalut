@@ -1,0 +1,12 @@
+{
+  "name": "openvalut-chrome-extension-tests",
+  "private": true,
+  "scripts": {
+    "test": "npm run logic",
+    "logic": "node logic_test.js && node security_test.js",
+    "e2e": "node e2e.js"
+  },
+  "devDependencies": {
+    "jsdom": "^26.0.0"
+  }
+}

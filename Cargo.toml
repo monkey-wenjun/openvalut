@@ -1,0 +1,76 @@
+[workspace]
+members = [
+    "crates/openvalut-core",
+    "crates/openvalut-server",
+    "crates/openvalut-cli",
+    "crates/openvalut-host",
+    "crates/openvalut-mobile",
+    "crates/openvalut-desktop",
+]
+exclude = [
+    "linux/pam_openvalut",
+]
+resolver = "2"
+
+# Use our locally-vendored keepass, patched to let a native messaging host reopen
+# a vault with a pre-computed transformed key (no master password needed).
+[patch.crates-io]
+keepass = { path = "vendor/keepass" }
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["OpenValut Contributors"]
+license = "GPL-3.0-or-later"
+repository = "https://github.com/openvalut/OpenVault"
+rust-version = "1.80"
+
+[workspace.dependencies]
+# Core crypto
+argon2 = "0.5"
+aes-gcm = "0.10"
+x25519-dalek = { version = "2", features = ["static_secrets", "getrandom"] }
+hkdf = "0.12"
+hmac = "0.12"
+sha1 = "0.10"
+sha2 = "0.10"
+rand = "0.8"
+getrandom = "0.2"
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+
+# KDBX
+keepass = { version = "0.13.22", features = ["save_kdbx4"] }
+
+# Async / HTTP server (server)
+tokio = { version = "1", features = ["full"] }
+axum = "0.7"
+tower = "0.5"
+tower-http = "0.6"
+sqlx = { version = "0.8", features = ["runtime-tokio", "sqlite", "mysql", "postgres", "migrate"] }
+
+# CLI
+clap = { version = "4", features = ["derive"] }
+rpassword = "7"
+
+# Error handling / utils
+thiserror = "1"
+anyhow = "1"
+hex = "0.4"
+base64 = "0.22"
+url = "2"
+psl = "2"
+chrono = "0.4"
+tracing = "0.1"
+uuid = "1"
+data-encoding = "2"
+percent-encoding = "2"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = true

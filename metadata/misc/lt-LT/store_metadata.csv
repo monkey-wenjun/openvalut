@@ -1,0 +1,83 @@
+"playstore_full_description","Lengvai ir saugiai tvarkykite visus savo slaptažodžius!
+
+„openvalut“ yra atskira slaptažodžių tvarkyklė su palaikymu populiariesiems ir patikrintiems <strong>„KeePass“</strong> (kdbx 3.x or kdbx 4.x 🎉️) formatams. Laikykite savo slaptažodžius, <strong>bendrinkite visuose savo įrenginiuose</strong> ir lengvai raskite juos kada norite prisijungti.
+
+🗄 Visi slaptažodžiai vienoje vietoje.
+🧬 Generuokite saugius atsitiktinius slaptažodžius kiekvienai skirtingai savo paskyrai.
+🔐 Greitai atrakinkite su biometriniu užraktu.
+🔍 Valdykite visas paskyras internete.
+🖥 Programėlė galima „Mac“, „iOS“, „Android“, „Linux“ ir „Windows“ sistemose.
+📂 Atidarykite kelis slaptažodžių failus vienu metu (pvz. vienas darbui, kitas asmeniniams tikslams - taip pat galite dalintis failais su bendradarbiais)
+🤓 Atviras kodas yra https://github.com/openvalut/openvalut/
+✍ Automatiškai užpildykite savo slaptažodžiais („Android“ 9+, palaikymas naršyklėje tik nuo „Android“ 10+)
+🔦 Tamsi išvaizda 😎️
+
+<strong>===PO JŪSŲ KONTROLE === </strong>
+„openvalut“ laiko visus slaptažodžius „KeePass“ formate, tiksliai kur jūs norite. Programėlė nesiunčia jūsų slaptažodžių į mūsų serverius. Bet „openvalut“ palaiko saugojimą:
+
+✅️ Į bet kokį vietinio turinio teikėją „Android“ sistemoje
+✅️ „Google Drive“ integracija vietoje
+✅️ „Dropbox“ integracija vietoje
+✅️ „WebDAV“ integracija vietoje su galimybe laikyti savo „NextCloud“ ar „OwnCloud“ (ar panašiai)
+✅️ „Microsoft OneDrive“ integracija vietoje
+
+<b>=== PILNAI FUNKCIONALI, NĖRA REKLAMŲ, NĖRA NARYSČIŲ ===</b>
+Kaip atviro kodo projekte, čia nėra dirbtinių galimybių apribojimų, nėra reklamų ir nėra būtinumo kažką pirkti.
+
+<strong>Indėlis vertinamas ir skatinamas</strong> 😅️ (Nuolat ieškome programuotojų, vertėjų, dokumentacijos rašytojų, UI dizainerių ir t.t. :) ), tik prisijunkite prie mūsų <a href=""https://example.com/go/discord""> „Discord“ serverio</a>, taip pat esančio https://example.com/go/discord
+
+<b>=== VYKSTA AKTYVUS KŪRIMAS 🛠️ ===</b>
+Šis atviro kodo projektas, dar aktyviai kuriamas ir pridedamos naujos galimybės. Mes džiaugtumėmės gavę jūsų atsiliepimus el. paštu ar <a href=""https://github.com/openvalut/openvalut/issues/"">„GitHub“ problemų stebėjime</a> https://github.com/openvalut/openvalut/issues/
+
+Taip pat prisijunkite prie mūsų <a href=""https://example.com/go/discord"">„Discord“ serverio</a> https://example.com/go/discord
+","Google Play Store description","4000",""
+"playstore_title","","Google Play Title","50",""
+"playstore_short_description","Laikykite savo slaptažodžius saugiai visose platformose ir įrenginiuose.","Short description in play store.","80",""
+"apple-appstore-title","„openvalut“ - slapt. tvarkyklė","","30",""
+"apple-appstore-subtitle","Vienas slapt. visuose įreng.","apple-appstore-subtitle -- Used as subtitle in Apple App Store, feel free to be creative ;-) Does not have to match english original, must just be a catchy phrase for the app store.","30",""
+"apple-appstore-description","Lengvai ir saugiai tvarkykite visus savo slaptažodžius!
+
+„openvalut“ yra atskira slaptažodžių tvarkyklė su palaikymu populiariesiems ir patikrintiems „KeePass“ (kdbx 3.x or kdbx 4.x) formatams. Laikykite savo slaptažodžius, bendrinkite visuose savo įrenginiuose ir lengvai raskite juos kada norite prisijungti.
+
+• Visi slaptažodžiai vienoje vietoje.
+• Generuokite saugius atsitiktinius slaptažodžius kiekvienai skirtingai savo paskyrai.
+• Greitai atrakinkite su biometriniu užraktu.
+• Valdykite visas paskyras internete.
+• Programėlė galima visose platformose, taip pat „Mac“, „iPhone“ ir „iPad“.
+• Atidarykite kelis slaptažodžių failus vienu metu (pvz. vienas darbui, kitas asmeniniams tikslams - taip pat galite dalintis failais su bendradarbiais)
+• Atviras kodas yra https://github.com/openvalut/openvalut/
+• Tamsi išvaizda ;-)
+
+===PO JŪSŲ KONTROLE ===
+„openvalut“ laiko visus slaptažodžius „KeePass“ formate, tiksliai kur jūs norite. Programėlė nesiunčia jūsų slaptažodžių į mūsų serverius. Bet „openvalut“ palaiko saugojimą:
+
+Į bet kokį vietinio turinio teikėją, kaip „iCloud“.
+„Google Drive“ integracija vietoje
+„Dropbox“ integracija vietoje
+ „WebDAV“ integracija vietoje su galimybe laikyti savo „NextCloud“ ar „OwnCloud“ (ar panašiai)
+„Microsoft OneDrive“ integracija vietoje
+
+=== PILNAI FUNKCIONALI, NĖRA REKLAMŲ, NĖRA NARYSČIŲ ===
+Kaip atviro kodo projekte, čia nėra dirbtinių galimybių apribojimų, nėra reklamų ir nėra būtinumo kažką pirkti.
+
+VYKSTA AKTYVUS KŪRIMAS
+Šis atviro kodo projektas, dar aktyviai kuriamas ir pridedamos naujos galimybės. Mes džiaugtumėmės gavę jūsų atsiliepimus el. paštu ar „GitHub“ problemų stebėjime https://github.com/openvalut/openvalut/issues/
+
+Taip pat prisijunkite prie mūsų „Discord“ serverio https://example.com/go/discord
+","apple-appstore-description --- see my comment, this is essentially the same as the playstore_full_description just slight modifications for apple.","4000",""
+"apple-appstore-keywords","","apple-appstore-keywords - Keywords used for searching in the apple app store. Does not have to be a 1:1 translation, choose keywords that mak sense.","100",""
+"","","","",""
+"microsoft-store-windows","","Windows Store listing description https://docs.microsoft.com/en-us/windows/uwp/publish/write-a-great-app-description","",""
+"microsoft-store-windows-short-descriptoin","","short description for windows store 
+A shorter, catchy description that may be used in the top of your product’s Store listing
+Recommended length: 270 characters or fewer
+","1000",""
+"microsoft-store-windows-features","","Short summaries of your product's key features
+Displayed as bulleted list
+Up to 20 app features
+(max 200 characters each)","",""
+"microsoft-store-windows-search-terms","","search terms for the microsoft store
+
+Up to 7 search terms
+40 character limit for each search term
+No more than 21 separate words across all search terms","",""

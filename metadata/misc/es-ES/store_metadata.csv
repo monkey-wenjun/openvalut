@@ -1,0 +1,131 @@
+"playstore_full_description","¡Mantenga un seguimiento fácil y seguro de todas sus contraseñas!
+
+openvalut es un administrador de contraseñas independiente compatible con el popular y probado formato <strong>KeePass</strong> (kdbx 3.x Y kdbx 4.x 🎉️). Almacene sus contraseñas, <strong>compártalas en todos sus dispositivos</strong> y búsquelas fácilmente cuando necesite iniciar sesión.
+
+🗄 Todas tus contraseñas en un solo lugar.
+🧬 Genere contraseñas aleatorias seguras para cada una de sus cuentas.
+🔐 Desbloqueo rápido asegurado con sistema biométrico.
+🔍 Realice un seguimiento de sus cuentas en la web.
+🖥 Aplicación disponible para Mac, iPhone, iPad, teléfonos y tabletas Android, Linux y Windows.
+📂 Abra varios archivos de contraseñas al mismo tiempo (por ejemplo, uno para el trabajo, uno personal, o incluso comparta sus archivos de contraseñas con compañeros de trabajo)
+🤓 Código abierto disponible en https://github.com/openvalut/openvalut/
+✍ Autocomplete sus contraseñas (Android 9+, soporte en el navegador solo desde Android 10+)
+🔦 Tema oscuro 😎️
+
+
+<strong>=== BAJO SU CONTROL ===</strong>
+openvalut almacena todas sus contraseñas en el formato abierto Keepass, exactamente donde lo desea. No envía sus contraseñas a nuestros servidores. Pero openvalut admite guardar en:
+
+✅️ Cualquier proveedor de contenido local de Android
+✅️ Integración nativa de Google Drive
+✅️ Integración nativa de Dropbox
+✅️ Soporte nativo de WebDAV para almacenar en su propio NextCloud u OwnCloud (o similar)
+✅️ Integración nativa de Microsoft OneDrive
+
+<b>=== PRESTACIONES COMPLETAS, SIN ANUNCIOS, SIN SUSCRIPCIÓN ===</b>
+Como proyecto de código abierto, no existen restricciones de funciones artificiales, anuncios ni requisitos de pago.
+
+<strong>Las contribuciones son bienvenidas!</strong> 😅️ (Siempre buscando desarrolladores, traductores, redactores de documentación, diseñadores de interfaz de usuario, etc. :) ), solo únase a nuestro <a href=""https://example.com/go/discord "">canal de discord</a>.
+
+<b>=== EN DESARROLLO ACTIVO 🛠️ ===</b>
+Este es un proyecto de código abierto que aún se encuentra en un gran desarrollo, agregando características. Nos encantaría recibir sus comentarios por correo electrónico o en el <a href=""https://github.com/openvalut/openvalut/issues/""> rastreador de problemas </a> en https://github.com/openvalut/openvalut/issues/
+
+Únase también a la comunidad en nuestro <a href=""https://example.com/go/discord""> canal de discord </a> en https://example.com/go/discord
+","Google Play Store description","4000",""
+"playstore_title","openvalut - Gestor de contraseñas con KeePass","Google Play Title","50",""
+"playstore_short_description","Mantén tus contraseñas y cuentas seguras en toda plataforma y dispositivo.","Short description in play store.","80",""
+"apple-appstore-title","openvalut - Gestor de passwords","","30",""
+"apple-appstore-subtitle","Una contraseña para todo.","apple-appstore-subtitle -- Used as subtitle in Apple App Store, feel free to be creative ;-) Does not have to match english original, must just be a catchy phrase for the app store.","30",""
+"apple-appstore-description","¡Mantenga un seguimiento fácil y seguro de todas sus contraseñas!
+
+openvalut es un administrador de contraseñas independiente compatible con el popular y probado formato KeePass. Almacene sus contraseñas, compártalas en todos sus dispositivos y búsquelas fácilmente cuando necesite iniciar sesión.
+
+• Todas tus contraseñas en un solo lugar.
+• Genere contraseñas aleatorias seguras para cada una de sus cuentas.
+• Desbloqueo rápido asegurado con sistema biométrico.
+• Realice un seguimiento de sus cuentas en la web.
+• Aplicación disponible en todas las plataformas, entre ellas Mac, iPhone e iPad.
+• Abra varios archivos de contraseñas al mismo tiempo (por ejemplo, uno para el trabajo, uno personal, o incluso comparta sus archivos de contraseñas con compañeros de trabajo)
+• Guarde contraseñas de un solo uso basadas en tiempo para A2F (autenticación de dos factores)
+• Adjunte archivos binarios en los campos de contraseñas. (Como TANs offline, etc)
+• Código abierto disponible en https://github.com/openvalut/openvalut/
+• Tema oscuro ;-)
+
+
+=== BAJO SU CONTROL ===
+
+openvalut almacena todas sus contraseñas en el formato abierto Keepass, exactamente donde lo desea. No envía sus contraseñas a nuestros servidores. Pero openvalut admite guardar en:
+
+• Cualquier proveedor de documentos locales, como iCloud
+• Integración nativa de Google Drive
+• Integración nativa de Dropbox
+• Soporte nativo de WebDAV para almacenar en su propio NextCloud u OwnCloud (o similar)
+• Integración nativa de Microsoft OneDrive
+
+
+=== PRESTACIONES COMPLETAS, SIN ANUNCIOS, SIN SUSCRIPCIÓN ===
+
+Como proyecto de código abierto, no existen restricciones de funciones artificiales, anuncios ni requisitos de pago.
+
+Las contribuciones son bienvenidas! :-) (Siempre buscando desarrolladores, traductores, redactores de documentación, diseñadores de interfaz de usuario, etc. :) ), solo únase a nuestro canal de discord: https://example.com/go/discord .
+
+
+=== EN DESARROLLO ACTIVO ===
+
+Este es un proyecto de código abierto que aún se encuentra en un gran desarrollo, agregando características. Nos encantaría recibir sus comentarios por correo electrónico o en el rastreador de problemas: https://github.com/openvalut/openvalut/issues/
+
+Únase también a la comunidad en nuestro canal de discord en https://example.com/go/discord
+","apple-appstore-description --- see my comment, this is essentially the same as the playstore_full_description just slight modifications for apple.","4000",""
+"apple-appstore-keywords","Gestor de contraseñas, password, Keepass, Kdbx, webdav, icloud, nextcloud, onedrive, google drive","apple-appstore-keywords - Keywords used for searching in the apple app store. Does not have to be a 1:1 translation, choose keywords that mak sense.","100",""
+"","","","",""
+"microsoft-store-windows","¡Haga un seguimiento fácil y seguro de todas tus contraseñas!
+
+openvalut es un gestor de contraseñas con soporte para el popular y probado formato KeePass (kdbx 3.x Y kdbx 4.x 🎉). Almacene, comparta y encuentre sus contraseñas fácilmente en todos sus dispositivos cuando necesite iniciar sesión.
+
+🗄Todas sus contraseñas en un solo lugar.
+🧬 Genera contraseñas aleatorias seguras para cada una de sus cuentas.
+🔍 Lleva un registro de sus cuentas a través de la web.
+🖥 Aplicación disponible para Mac, iPhone, iPad, teléfonos Android y Tablets, Linux y Windows.
+📂 Abra múltiples archivos de contraseñas al mismo tiempo (Ej: una para el trabajo, una personal - o incluso para compartir tus archivos de contraseña con colegas)
+🤓 Código abierto disponible en https://github.com/openvalut/openvalut/
+🔦 Tema oscuro 😎
+
+
+=== BAJO TU CONTROL ===
+openvalut almacena todas tus contraseñas en el formato abierto de Keepass, exactamente donde lo desea. No envía sus contraseñas a nuestros servidores. Pero openvalut soporta guardar a:
+
+✅ Integración nativa de Google Drive
+✅ Integración nativa de Dropbox
+✅ Soporte nativo WebDAV para almacenar en su propia NextCloud u OwnCloud (o similar)
+✅ Integración nativa de Microsoft OneDrive
+
+=== TODAS LAS PRESTACIONES, SIN ANUNCIOS, SIN SUBSCRIPCIÓN ===
+Como proyecto de código abierto no hay restricciones de características, no hay anuncios ni requisitos para pagos.
+
+Contribuciones bienvenidas y alentadas 😅 (Siempre buscando desarrolladores, traductores, escritores de documentación, diseñadores de interfaz de usuario, etc.) ), simplemente únase a nuestro canal de discord: https://example.com/go/discord
+
+=== BAJO DESARROLLO ACTIVO 🛠️ ===
+Este es un proyecto de código abierto que todavía está bajo un desarrollo intenso, agregando características. Nos encantaría tu opinión por correo electrónico o sobre el seguimiento de incidencias en https://github.com/openvalut/openvalut/issues/
+
+También únete a la comunidad en nuestro foro: https://forum.example.com/
+","Windows Store listing description https://docs.microsoft.com/en-us/windows/uwp/publish/write-a-great-app-description","",""
+"microsoft-store-windows-short-descriptoin","Mantenga sus contraseñas y cuentas seguras en todas las plataformas y dispositivos. Gestor de contraseñas gratis y de código abierto con soporte para archivos de contraseñas kdbx.","short description for windows store 
+A shorter, catchy description that may be used in the top of your product’s Store listing
+Recommended length: 270 characters or fewer
+","1000",""
+"microsoft-store-windows-features","* Almacene de forma segura sus contraseñas
+* Código abierto
+* Soporte para archivos KeePass (kdbx)
+* Sincronize sus dispositivos con servicios de almacenamiento en la nube.","Short summaries of your product's key features
+Displayed as bulleted list
+Up to 20 app features
+(max 200 characters each)","",""
+"microsoft-store-windows-search-terms","* gestor de contraseñas
+* openvalut
+* kdbx
+* keepass
+* generador de contraseñas","search terms for the microsoft store
+
+Up to 7 search terms
+40 character limit for each search term
+No more than 21 separate words across all search terms","",""

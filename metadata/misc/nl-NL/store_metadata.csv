@@ -1,0 +1,131 @@
+"playstore_full_description","Houd eenvoudig en veilig al je wachtwoorden bij!
+
+openvalut is een lokale wachtwoordbeheerder met ondersteuning voor de populaire en bewezen <strong>KeePass</strong> (kdbx 3. en kdbx 4.x 🎉) formaat. Sla uw wachtwoorden op, <strong>deel ze op al uw apparaten</strong> en vind ze gemakkelijk wanneer u wilt inloggen.
+
+🗄 Al je wachtwoorden op één plek.
+🧬 Genereer veilige willekeurige wachtwoorden voor al je accounts.
+🔐 Snelle ontgrendeling beveiligd met biometrische vergrendeling.
+🔍 Bijhouden van je gebruikersnamen op het internet.
+🖥 App beschikbaar voor Mac, iPhone, iPad, Android telefoons en tablets, Linux en Windows.
+📂 Open meerdere wachtwoordbestanden tegelijkertijd (bijvoorbeeld een voor werk, een voor privé - of zelfs uw wachtwoord bestanden delen met collega's)
+🤓 Open Source beschikbaar op https://github. om/openvalut/openvalut/
+✍ Autofill your passwords (Android 9+, Ondersteuning in browsers vanaf Android 10)
+🔦 Donker Thema 😎
+
+
+<strong>=== ONDER YOUR CONTROL ===</strong>
+openvalut slaat al uw wachtwoorden op in het open Keepass formaat, precies waar je het wilt. Het stuurt geen wachtwoorden naar onze servers. Maar openvalut ondersteunt opslaan naar:
+
+✅ Elke lokale content provider in Android
+✅ Ingebouwde Google Drive Integratie
+✅ Ingebouwde Dropbox integratie
+✅ Ingebouwde WebDAV ondersteuning om op te slaan in uw eigen NextCloud of OwnCloud (of iets dergelijks)
+✅ Ingebouwde Microsoft OneDrive integratie
+
+<b>=== ALLE MOGELIJKHEDEN, GEEN ADS, GEEN SUBSCRIPTIE ===</b>
+Als open source project zijn er geen kunstmatige kenmerken beperkingen, geen advertenties en geen betalingsverplichting.
+
+<strong>bijdrages welkom en moedigen we aan</strong> 😅 (Altijd zoeken we naar ontwikkelaars, vertalers, documentatieschrijvers, UI ontwerpers, etc. :) ) , doe gewoon mee met ons <a href=""https://example.com/go/discord"">discord channel</a>.
+
+<b>=== ONDER ACTIEVE ONTIKKELING 🛠️ ===</b>
+Dit is een open source project dat nog steeds in volle ontwikkeling is, door functies toe te voegen. We horen graag je feedback via e-mail of op de <a href=""https://github.com/openvalut/openvalut/issues/"">issue tracker</a> op https://github. om/openvalut/openvalut/issues/
+
+Neem ook deel aan de community op ons <a href=""https://example.com/go/discord"">discord kanaal</a> op https://example.com/go/discord
+","Google Play Store description","4000",""
+"playstore_title","openvalut - KeePass compatibele Wachtwoordmanager","Google Play Title","50",""
+"playstore_short_description","Houd je wachtwoorden veilig op alle platforms en apparaten.","Short description in play store.","80",""
+"apple-appstore-title","openvalut – Wachtwoordbeheerder","","30",""
+"apple-appstore-subtitle","Één wachtwoord, alle apparaten","apple-appstore-subtitle -- Used as subtitle in Apple App Store, feel free to be creative ;-) Does not have to match english original, must just be a catchy phrase for the app store.","30",""
+"apple-appstore-description","Houd eenvoudig en veilig al je wachtwoorden bij!
+
+openvalut is een lokale wachtwoordmanager met ondersteuning voor het populaire en goedgekeurde KeePass formaat. Sla je wachtwoorden op, deel ze op al je apparaten en vind ze gemakkelijk wanneer je wilt inloggen.
+
+• Al uw wachtwoorden op één plek.
+• Genereer veilige, willekeurige wachtwoorden voor al je accounts.
+• Snelle ontgrendeling beveiligd met biometrische vergrendeling.
+• Bijhouden van je gebruikersnamen op het internet.
+• App beschikbaar op alle platformen. Onder andere Mac, iPhone en iPad.
+• Open tegelijkertijd meerdere wachtwoordbestanden (bijv. een voor werk, een voor persoonlijk - of zelfs uw wachtwoord delen met collega's)
+• Bewaar tijd gebaseerde wachtwoorden voor 2fa (Twee factor authenticatie).
+• Koppel binaire bestanden aan je wachtwoord invoer. (Zoals offline TANs, etc)
+• Open Source beschikbaar op https://github. om/openvalut/openvalut/
+• Donker thema ;-)
+
+
+=== ONDER JOUW BEHEER ===
+
+openvalut slaat al je wachtwoorden in de open Keepass bestandsindeling op, precies waar jij het wilt. Het verstuurt je wachtwoorden niet naar onze servers. Maar openvalut ondersteunt opslaan op:
+
+• Elke lokale opslagmethode, zoals iCloud.
+• Heeft ingebouwde Google Drive Integratie
+• Heeft ingebouwde Dropbox Integratie
+• Heeft ingebouwde ondersteuning om op te slaan in uw eigen NextCloud of OwnCloud (of iets dergelijks)
+• Heeft ingebouwde Microsoft OneDrive integratie
+
+
+=== ALLE MOGELIJKHEDEN, GEEN ADS, GEEN ABONNEMENT ===
+
+Als open source project zijn er geen kunstmatige beperkingen, geen advertenties en is er geen betalingsverplichting.
+
+Bijdrages zijn welkom en moedigen we aan :-) (Altijd zoeken we naar ontwikkelaars, vertalers, documentatieschrijvers, UI ontwerpers, etc. :) ) kom in ons discord kanaal: https://openvalut. pp/go/discord.
+
+
+=== ACTIEVE ONTWIKKELING ===
+
+Dit is een opensourceproject dat nog steeds in volle ontwikkeling is, zoals functies toevoegen. We horen graag je opmerkingen via e-mail of in de probleemtracker op https://github. om/openvalut/openvalut/issues/
+
+Doe ook mee met onze community in ons discord kanaal https://example.com/go/discord
+","apple-appstore-description --- see my comment, this is essentially the same as the playstore_full_description just slight modifications for apple.","4000",""
+"apple-appstore-keywords","Wachtwoordenbeheerder, wachtwoorden, Keystore, Keysafe,Keepass,Kdbx,webdav,icloud,nextcloud,onedrive","apple-appstore-keywords - Keywords used for searching in the apple app store. Does not have to be a 1:1 translation, choose keywords that mak sense.","100",""
+"","","","",""
+"microsoft-store-windows","Houd eenvoudig en veilig al je wachtwoorden bij!
+
+openvalut is een lokale wachtwoordbeheerder met ondersteuning voor de populaire en bewezen KeePass (kdbx 3. en kdbx 4.x 🎉) formaat. Sla uw wachtwoorden op, deel ze op al uw apparaten en vind ze gemakkelijk wanneer u wilt inloggen.
+
+🗄 al je wachtwoorden op één plaats.
+🧬 Genereer veilige willekeurige wachtwoorden voor elk van uw accounts.
+🔍 Bijhouden van je gebruikersnamen op het internet.
+🖥 App beschikbaar voor Mac, iPhone, iPad, Android telefoons en tablets, Linux en Windows.
+📂 Open meerdere wachtwoord bestanden tegelijkertijd (bijvoorbeeld een voor werk, een voor privé - of zelfs uw wachtwoord bestanden delen met collega's)
+🤓 Open Source beschikbaar op https://github. om/openvalut/openvalut/
+🔦 Donker Thema 😎
+
+
+=== ONDER JOUW CONTROLE ===
+openvalut slaat al uw wachtwoorden op in het open Keepass formaat, precies waar je het wilt. Het stuurt geen wachtwoorden naar onze servers. openvalut ondersteunt opslaan naar:
+
+✅ Ingebouwde Google Drive integratie
+✅ Ingebouwde Dropbox integratie
+✅ Ingebouwde WebDAV ondersteuning om op te slaan in je eigen NextCloud of OwnCloud (of iets dergelijks)
+✅ Ingebouwde Microsoft OneDrive integratie
+
+=== ALLE MOGELIJKHEDEN, GEEN ADS, GEEN ABONNEMENTEN ===
+Als open source project zijn er geen kunstmatige beperkingen, geen advertenties en geen betalingsverplichting.
+
+Bijdrages zijn welkom en nodigden we uit 😅 (Altijd zoeken we naar ontwikkelaars, vertalers, documentatie schrijvers, UI ontwerpers, etc. :) ), meld je gewoon aan in ons discord kanaal: https://openvalut. pp/go/discord
+
+=== ONDER ACTIeVE DEVELOPMENT 🛠️ ===
+Dit is een opensourceproject dat nog steeds in volle ontwikkeling is, functies worden steeds toegevoegd. We willen graag je feedback per e-mail of in de issue tracker op https://github.com/openvalut/openvalut/issues/
+
+Doe ook mee met de community in ons forum: https://forum.example.com/
+","Windows Store listing description https://docs.microsoft.com/en-us/windows/uwp/publish/write-a-great-app-description","",""
+"microsoft-store-windows-short-descriptoin","Houd uw wachtwoorden en accounts veilig op alle platforms en apparaten. Gratis en Open Source wachtwoordbeheer met ondersteuning voor kdbx wachtwoordbestanden.","short description for windows store 
+A shorter, catchy description that may be used in the top of your product’s Store listing
+Recommended length: 270 characters or fewer
+","1000",""
+"microsoft-store-windows-features","* Veilig je wachtwoorden opslaan
+* Open Source
+* Ondersteuning voor standaard KeePass-bestanden (kdbx)
+* Synchroniseren met cloud-opslagdiensten.","Short summaries of your product's key features
+Displayed as bulleted list
+Up to 20 app features
+(max 200 characters each)","",""
+"microsoft-store-windows-search-terms","* wachtwoordmanager
+* openvalut
+* kdbx
+* keepass
+* wachtwoord generator","search terms for the microsoft store
+
+Up to 7 search terms
+40 character limit for each search term
+No more than 21 separate words across all search terms","",""

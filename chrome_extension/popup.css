@@ -1,0 +1,334 @@
+/* Popup layout & components; tokens/base live in ui.css. */
+
+body {
+  width: 400px;
+  min-height: 220px;
+}
+
+/* Matches list */
+.matches {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.match-empty {
+  padding: 14px 4px;
+  color: var(--ov-text-3);
+  font-size: 13px;
+  text-align: center;
+}
+
+.match-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 2px;
+  border-bottom: 1px solid var(--ov-border);
+}
+
+.match-item:last-child {
+  border-bottom: 0;
+}
+
+.match-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.match-title,
+.match-subtitle {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.match-title {
+  font-weight: 600;
+  color: var(--ov-text);
+}
+
+.match-subtitle {
+  margin-top: 1px;
+  font-size: 12px;
+  color: var(--ov-text-3);
+}
+
+.match-actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.match-actions button.primary {
+  min-height: 32px;
+  padding: 6px 12px;
+}
+
+.menu-btn {
+  min-height: 32px;
+  min-width: 32px;
+  padding: 0;
+  border-radius: var(--ov-radius-sm);
+  background: transparent;
+  color: var(--ov-text-2);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.menu-btn:hover {
+  background: var(--ov-surface-2);
+  color: var(--ov-text);
+}
+
+/* Row dropdown */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 10;
+  min-width: 148px;
+  padding: 4px;
+  overflow: hidden;
+  background: var(--ov-surface);
+  border: 1px solid var(--ov-border);
+  border-radius: var(--ov-radius-md);
+  box-shadow: var(--ov-shadow-md);
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  min-height: 34px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: var(--ov-radius-sm);
+  background: transparent;
+  color: var(--ov-text);
+  text-align: left;
+}
+
+.dropdown-item:hover {
+  background: var(--ov-surface-2);
+}
+
+.dropdown-item.danger {
+  background: transparent;
+  color: var(--ov-danger);
+}
+
+.dropdown-item.danger:hover {
+  background: var(--ov-error-bg);
+}
+
+/* Password generator */
+.gen-field {
+  margin-bottom: 12px;
+}
+
+.gen-field input[type="range"] {
+  width: 100%;
+  margin-top: 6px;
+}
+
+.gen-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin-bottom: 14px;
+}
+
+.gen-checks label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  color: var(--ov-text);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.gen-checks input {
+  margin: 0;
+}
+
+.gen-output-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.gen-output-row input {
+  flex: 1;
+  margin: 0;
+  font-family: var(--ov-mono);
+  font-size: 13px;
+}
+
+.gen-output-row button {
+  flex-shrink: 0;
+  min-height: 38px;
+}
+
+.gen-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.gen-actions button {
+  flex: 1;
+}
+
+.gen-actions button.primary {
+  flex: 1.25;
+}
+
+/* Strength meter */
+.gen-strength {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.strength-bar {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--ov-surface-3);
+  overflow: hidden;
+  transition: background-color 200ms ease;
+}
+
+.strength-bar.weak {
+  background: var(--ov-danger);
+}
+
+.strength-bar.fair {
+  background: #d97706;
+}
+
+.strength-bar.good {
+  background: #65a30d;
+}
+
+.strength-bar.strong {
+  background: var(--ov-primary);
+}
+
+.strength-label {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--ov-text-2);
+}
+
+/* Inline edit form */
+.match-item.edit-form {
+  display: block;
+}
+
+.edit-field {
+  margin-bottom: 10px;
+}
+
+.edit-field label {
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: var(--ov-text-2);
+}
+
+.edit-field input,
+.edit-field textarea {
+  margin: 0;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+.edit-field textarea {
+  min-height: 64px;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.edit-actions button {
+  flex: 1;
+  min-height: 34px;
+  padding: 7px 10px;
+  font-size: 13px;
+}
+
+/* Confirm dialog */
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(10, 20, 16, 0.5);
+  animation: ov-fade-in 140ms ease;
+}
+
+.confirm-box {
+  width: 100%;
+  max-width: 320px;
+  padding: 18px;
+  background: var(--ov-surface);
+  border: 1px solid var(--ov-border);
+  border-radius: var(--ov-radius-lg);
+  box-shadow: var(--ov-shadow-md);
+  animation: ov-rise-in 160ms ease;
+}
+
+.confirm-title {
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.confirm-message {
+  margin: 0 0 18px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ov-text-2);
+}
+
+.confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+@keyframes ov-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes ov-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+}
+
+/* Unlock prompt */
+#unlock-section .hint {
+  margin: 0 0 12px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ov-text-2);
+}
+
+#unlock-btn {
+  width: 100%;
+}

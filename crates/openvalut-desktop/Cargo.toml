@@ -1,0 +1,73 @@
+[package]
+name = "openvalut-desktop"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+description = "OpenValut desktop client built with Tauri 2."
+
+[lib]
+name = "openvalut_desktop_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-clipboard-manager = "2"
+tauri-plugin-dialog = "2"
+openvalut-core = { path = "../openvalut-core" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tokio = { workspace = true }
+base64 = { workspace = true }
+chrono = { workspace = true }
+zxcvbn = "3"
+axum = { workspace = true }
+sha2 = { workspace = true }
+rand = { workspace = true }
+dirs = "6"
+zeroize = "1"
+
+# OpenValut Cloud client (ported from openvalut-cli)
+ureq = { version = "3", features = ["json"] }
+keyring = { version = "3", features = ["sync-secret-service", "windows-native"] }
+keepass = { workspace = true }
+argon2 = { workspace = true }
+aes-gcm = { workspace = true }
+hex = { workspace = true }
+uuid = { workspace = true }
+data-encoding = { workspace = true }
+rsa = "0.9"
+qrcode = { version = "0.14", default-features = false, features = ["svg"] }
+tauri-plugin-autostart = "2"
+tauri-plugin-single-instance = "2"
+
+# Windows Hello (UserConsentVerifier) for the remembered-unlock gate. Already in
+# the lock tree via tao/wry, so this only turns on metadata features.
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.62", features = [
+    "Security_Credentials_UI",
+    "Win32_Foundation",
+    "Win32_Security",
+    "Win32_System_Com",
+    "Win32_System_SystemInformation",
+    "Win32_System_Threading",
+] }
+windows-future = "0.3.2"
+windows-registry = "0.6"
+windows-result = "0.4"
+
+# Already in the tree through tauri-plugin-single-instance, with the same
+# features; used to ask the StatusNotifier watcher whether a tray host exists.
+[target.'cfg(target_os = "linux")'.dependencies]
+zbus = "5"
+
+[dev-dependencies]
+tauri = { version = "2", features = ["test"] }
+tower = { workspace = true }
+tempfile = "3"
+openvalut-core = { path = "../openvalut-core" }

@@ -1,0 +1,122 @@
+"playstore_full_description","Einfache und <b>sichere</b> Verwaltung all Deiner Passwörter und Konten!
+
+openvalut ist ein nativer Passwort Manager der das populäre und auf Sicherheit erprobte Format von <strong>KeePass</strong> verwendet. Dies stellt sicher, dass all Deine Passwörter verschlüsselt und sicher gespeichert sind. Außerdem erlaubt es all deine Passwörter zwischen <b>all deinen Geräten</b> zu synchronisieren und deine Zugangsdaten zu finden, wo auch immer du sie brauchst.
+
+🗄 All deine Passwörter an einem Ort, einfaches suchen und finden.
+🧬 Generiere sichere Zufallspasswörter für jeden einzelnen deiner Benutzeraccounts, für alle Services.
+🔐 ""Quick Unlock"" (Speicherung des Master Passworts) im sicheren Gerätespeicher mit Biometrischer Verschlüsselung (Fingerabdruck oder Gesichtserkennung, je nach Gerät).
+🔍 Behalte den Überblick über all deine Benutzerkonten und Zugangsdaten.
+🖥 App ist verfügbar auf Mac, iPhone, iPad, Android Smartphones & Tablets, Linux und Windows.
+📂 Öffne mehrere unterschiedliche Passwort Dateien/Datenbanken. (z.B.: Eine für berufliche und eine für private Passwörter. Oder teile eine Datenbank mit Kollegen oder Freunden).
+🤓 Open Source Projekt unter https://github.com/openvalut/openvalut/
+✍ Autofill für alle deine Passwörter (Android 9+, Support in Browser erst ab Android 10+)
+🔦 Dark Theme 😎️
+
+
+<strong>=== Du hast volle Kontrolle ===</strong>
+openvalut speichert all deine Passwörter im KeePass format, in einer Datei wo auch immer du diese ablegen möchtest. Entweder lokal am Gerät, oder auf Cloud Storage Diensten wie Dropbox, Google Drive, One Drive oder eigenen WebDav server:
+
+✅️ Jeder lokale Content Provider von Android.
+✅️ Native Google Drive Integration
+✅️ Native Dropbox Integration
+✅️ Native WebDAV support zum speichern in deiner eigenen NextCloud or OwnCloud (oder ähnlichem)
+✅️ Native Microsoft OneDrive Integration
+
+<b>=== FULL FEATURED, KEINE WERBUNG, KEINE ABOS ===</b>
+Als ein Open Source Projekt gibt es keine künstlichen Funktionsbeschränkungen, keine Werbung und keine Notwendigkeit für Zahlungen oder Abos.
+
+<strong>Mitwirken am Open Source Projekt gewünscht</strong> 😅️ (Wir suchen immer nach Entwicklern, Übersetzern, Dokumentations-Autoren, Grafiker, etc. :) ), komm einfach in unseren <a href=""https://example.com/go/discord"">discord channel</a>.
+
+<b>=== AKTIV WEITER ENTWICKELT 🛠️ ===</b>
+Dieses Open Source Projekt wird ständig weiter entwickelt und es gibt regelmäßig updates und neue features. Wir bauen auf dein Feedback! Per E-Mail oder in unserem <a href=""https://github.com/openvalut/openvalut/issues/"">issue tracker</a> at https://github.com/openvalut/openvalut/issues/
+
+Werde Teil der Community und besuche unseren <a href=""https://example.com/go/discord"">discord channel</a> at https://example.com/go/discord
+","Google Play Store description","4000",""
+"playstore_title","openvalut - KeePass kompatibler Passwort Manager","Google Play Title","50",""
+"playstore_short_description","Sichere Aufbewahrung aller Passwörter und Benutzerkonten über alle Geräten.","Short description in play store.","80",""
+"apple-appstore-title","openvalut – Passwort Manager","","30",""
+"apple-appstore-subtitle","Sicher, Effizient, Privat.","apple-appstore-subtitle -- Used as subtitle in Apple App Store, feel free to be creative ;-) Does not have to match english original, must just be a catchy phrase for the app store.","30",""
+"apple-appstore-description","Einfache und sichere Verwaltung all Deiner Passwörter und Konten!
+
+openvalut ist ein nativer Passwort Manager der das populäre und auf Sicherheit erprobte Format von KeePass verwendet. Dies stellt sicher, dass all Deine Passwörter verschlüsselt und sicher gespeichert sind. Außerdem erlaubt es all deine Passwörter zwischen all deinen Geräten zu synchronisieren und deine Zugangsdaten zu finden, wo auch immer du sie brauchst.
+
+• All deine Passwörter an einem Ort, einfaches suchen und finden.
+• Generiere sichere Zufallspasswörter für jeden einzelnen deiner Benutzeraccounts, für alle Services.
+• ""Quick Unlock"" (Speicherung des Master Passworts) im sicheren Gerätespeicher mit Biometrischer Verschlüsselung (Fingerabdruck oder Gesichtserkennung, je nach Gerät).
+• Behalte den Überblick über all deine Benutzerkonten und Zugangsdaten.
+• App ist verfügbar auf allen Platformen, unter anderem auf Mac, iPhone, iPad.
+• Öffne mehrere unterschiedliche Passwort Dateien/Datenbanken. (z.B.: Eine für berufliche und eine für private Passwörter. Oder teile eine Datenbank mit Kollegen oder Freunden).
+• Open Source Projekt unter https://github.com/openvalut/openvalut/
+• Dark Theme ;-)
+
+
+=== Du hast volle Kontrolle ===
+openvalut speichert all deine Passwörter im KeePass format, in einer Datei wo auch immer du diese ablegen möchtest. Entweder lokal am Gerät, oder auf Cloud Storage Diensten wie Dropbox, Google Drive, One Drive oder eigenen WebDav server:
+
+• Jeder lokale Content Provider von Android.
+• Native Google Drive Integration
+• Native Dropbox Integration
+• Native WebDAV support zum speichern in deiner eigenen NextCloud or OwnCloud (oder ähnlichem)
+• Native Microsoft OneDrive Integration
+
+=== FULL FEATURED, KEINE WERBUNG, KEINE ABOS ===
+Als ein Open Source Projekt gibt es keine künstlichen Funktionsbeschränkungen, keine Werbung und keine Notwendigkeit für Zahlungen oder Abos.
+
+Mitwirken am Open Source Projekt gewünscht ;`) (Wir suchen immer nach Entwicklern, Übersetzern, Dokumentations-Autoren, Grafiker, etc. ;) ), komm einfach in unseren discord channel: https://example.com/go/discord
+
+=== AKTIV WEITER ENTWICKELT ===
+Dieses Open Source Projekt wird ständig weiter entwickelt und es gibt regelmäßig updates und neue features. Wir bauen auf dein Feedback! Per E-Mail oder in unserem issue tracker unter https://github.com/openvalut/openvalut/issues/
+
+Werde Teil der Community und besuche unseren discord channel unter https://example.com/go/discord
+","apple-appstore-description --- see my comment, this is essentially the same as the playstore_full_description just slight modifications for apple.","4000",""
+"apple-appstore-keywords","Kennwortmanager,Kennwörter,Verwalten,Keystore,Keysafe,Keepass,Kdbx,webdav,icloud,nextcloud,onedrive","apple-appstore-keywords - Keywords used for searching in the apple app store. Does not have to be a 1:1 translation, choose keywords that mak sense.","100",""
+"","","","",""
+"microsoft-store-windows","Verschlüsselte, sichere Speicherung all deiner Passwörter und Benutzerkonten!
+
+openvalut ist ein Passwortmanager mit Unterstützung für das bewährte KeePass (kdbx 3. AND kdbx 4.x 🎉) Format. Speichern Sie Ihre Passwörter, synchronisiere sie auf all deine Geräten und finde sie einfach, wann immer Sie sich bei einem Dienst anmelden müssen.
+
+🗄 Alle deine Passwörter und geheimen Daten an einem Ort.
+🧬 Generiere sichere zufällige Passwörter für jedes deiner Konten.
+🔍 Behalte den Überblick über deine Konten im Internet.
+🖥 App für Mac, iPhone, iPad, Android Handys und Tablets, Linux und Windows.
+📂 Mehrere Passwortdateien gleichzeitig öffnen (Z.B.: Eines für Arbeit, eines für persönliche - oder sogar deine Passwortdateien mit Kollegen zu teilen)
+🤓 Open Source verfügbar auf https://github. om/openvalut/openvalut/
+🔦 Dark Theme 😎
+
+
+=== UNTERDEINER KONTROLLE ===
+openvalut speichert alle Passwörter im offenen Keepass Format, genau dort wo du möchtest. Deine Passwörter werden nicht an unsere Server gesendet. Aber openvalut unterstützt die Speicherung nach:
+
+✅ Native Google Drive Integration
+✅ Native Dropbox Integration
+✅ Native WebDAV Unterstützung die in Ihrer eigenen NextCloud oder OwnCloud (oder ähnlich) gespeichert werden kann
+✅ Native Microsoft OneDrive Integration
+
+=== FULL FEATURED, KEINE WERBUNG, KEINE SUBSCRIPTION, IMMER GRATIS ===
+Als Open Source Projekt gibt es keine künstlichen Feature-Einschränkungen, keine Werbung und keine Zahlungsaufforderungen.
+
+Unterstützung ist allerdings willkommen 😅 (Immer auf der Suche nach Entwicklern, Übersetzern, Dokumentationsschreibern, UI Designer, etc. :) ), Besuche unseren Discord Channel: https://openvalut. pp/go/discord oder das forum https://forum.example.com/
+
+=== AKTIVE WEITERENTWICKLUNG 🛠️ ===
+openvalut ist ein OpenSource-Projekt, das weiterhin aktiv Weiterentwickelt wird. Wir freuen uns über jedes Feedback in unserem forum https://forum.example.com oder im Issue-Tracker unter https://github.com/openvalut/openvalut/issues/
+","Windows Store listing description https://docs.microsoft.com/en-us/windows/uwp/publish/write-a-great-app-description","",""
+"microsoft-store-windows-short-descriptoin","Sicheres verwahren Sie Ihre Passwörter und Konten auf allen Plattformen und Geräten. Kostenloser und Open Source Passwort-Manager mit Unterstützung für kdbx Passwort-Dateien.","short description for windows store 
+A shorter, catchy description that may be used in the top of your product’s Store listing
+Recommended length: 270 characters or fewer
+","1000",""
+"microsoft-store-windows-features","* Sicheres speichern all deiner Passwörter
+* Open Source
+* Unterstützung für Standard-KeePass Dateien (kdbx)
+* Synchronisieren Sie Ihre Geräte mit Cloud-Speicherdiensten.","Short summaries of your product's key features
+Displayed as bulleted list
+Up to 20 app features
+(max 200 characters each)","",""
+"microsoft-store-windows-search-terms","* Passwortmanager
+* openvalut
+* kdbx
+* keepass
+* Passwortgenerator","search terms for the microsoft store
+
+Up to 7 search terms
+40 character limit for each search term
+No more than 21 separate words across all search terms","",""

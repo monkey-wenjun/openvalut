@@ -1,0 +1,131 @@
+"playstore_full_description","Memorizza facilmente e in sicurezza le tue password!
+
+openvalut è un Password Manager che supporta l'ormai popolare e sicuro formato <strong>KeePass</strong> (kdbx 3.x E kdbx 4.x 🎉️). Salva le tue password, <strong>accessibili da ogni tuo dispositivo</strong> e facili da trovare ogni volta che devi fare il login.
+
+🗄 Tutte le tue password in un posto sicuro.
+🧬Genera password casuali sicure per ogni tuo account.
+🔐 Usa il riconoscimento facciale e impronte digitali per sbloccare rapidamente e in sicurezza.
+🔍 Tieni traccia di tutti i tuoi account sul web.
+🖥 App disponibile per tutte le piattaforme: Mac, iOS, Android, Linux e Windows.
+📂Apri più database contemporaneamente (es. uno per il lavoro, uno per gli account personali - puoi anche condividerli con i tuoi colleghi!).
+🤓 Software libero, codice sorgente su: https://github.com/openvalut/openvalut/
+✍ Auto-completamento delle password (da Android 9+, supporto nei browser solo da Android 10+).
+🔦 Tema scuro.😎️
+
+
+<strong>=== MANTIENI IL CONTROLLO ===</strong>
+openvalut salva le tue password nel formato KeePass (kdbx), famoso nell'ambiente del software libero per la sua sicurezza, esattamente dove vuoi tu. Le tue password non vengono inviate ai nostri server. Ma con openvalut puoi salvarle su:
+
+✅️ Qualsiasi provider di servizi Android
+✅️ Google Drive
+✅️ Dropbox
+✅️ WebDAV per salvare nei TUOI server NextCloud o OwnCloud (o simili)
+✅️ Microsoft One Drive
+
+<b>=== FUNZIONALITÀ COMPLETE, NO PUBBLICITA', NO CARTA DI CREDITO ===</b>
+Siccome è un progetto Open Source (Software Libero, aperto a tutti), openvalut non ha alcuna restrizione, nessuna pubblicità e mai ti chiederà i dati della tua Poste Pay 😎️ (è gratuita).
+
+<strong>Volontari sono sempre ben accetti!</strong> 😅️ Abbiamo sempre bisogno di sviluppatori, traduttori, persone che scrivono la documentazione, designer per l'UI, etc. 😃 Entra nel nostro <a href=""https://example.com/go/discord"">server Discord!</a>.
+
+<b>=== SVILUPPO ATTIVO E COSTANTE 🛠️ ===</b>
+Quest'app è Open Source, sempre in costante evoluzione, al passo coi tempi e con ancora più funzioni in futuro. Manca qualcosa nell'app? scrivici una Email oppure richiedi nel <a href=""https://github.com/openvalut/openvalut/issues/"">issue tracker</a> su https://github.com/openvalut/openvalut/issues/
+
+Cosa aspetti? unisciti alla community nel <a href=""https://example.com/go/discord"">Server Discord!</a> tramite: https://example.com/go/discord
+","Google Play Store description","4000",""
+"playstore_title","openvalut - Password Manager compatibile KeePass","Google Play Title","50",""
+"playstore_short_description","Tieni le tue Password al sicuro su tutte le piattaforme e dispositivi.","Short description in play store.","80",""
+"apple-appstore-title","openvalut - Password Manager","","30",""
+"apple-appstore-subtitle","Le tue Password, Ovunque.","apple-appstore-subtitle -- Used as subtitle in Apple App Store, feel free to be creative ;-) Does not have to match english original, must just be a catchy phrase for the app store.","30",""
+"apple-appstore-description","Tieni traccia di tutte le tue password in modo semplice e sicuro!
+
+openvalut è un gestore di password standalone con supporto per il popolare e collaudato formato KeePass. Memorizza le tue password, condividile su tutti i tuoi dispositivi così puoi trovarle facilmente ogni volta che hai bisogno di effettuare il login.
+
+• Tutte le tue password in un unico posto.
+• Genera password casuali sicure per ciascuno dei tuoi account.
+• Sblocco rapido protetto con blocco biometrico.
+• Tieni traccia dei tuoi account sul web.
+• App disponibile su tutte le piattaforme. Tra cui Mac, iPhone e iPad.
+• Aprire contemporaneamente più database di password contemporaneamente (ad es. uno per lavoro, uno personale - o anche condividere i database di password con i tuoi colleghi di lavoro)
+• Salva una password basata sul tempo per 2fa (Autenticazione a due fattori).
+• Allega i file binari alle voci della password. (Come TAN offline, ecc)
+• Codice sorgente disponibile su https://github. om/openvalut/openvalut/
+• Tema scuro ; )
+
+
+=== SOTTO IL TUO CONTRLLO ===
+
+openvalut memorizza tutte le tue password nel formato aperto Keepass, esattamente dove vuoi. Non invia le password ai nostri server. Ma openvalut supporta il salvataggio:
+
+• Qualsiasi fornitore di documenti locale, come iCloud.
+• Integrazione Nativa con Google Drive
+• Integrazione Nativa Dropbox
+• Supporto Nativo WebDAV da memorizzare nel tuo NextCloud o OwnCloud (o simile)
+• Integrazione Nativa di Microsoft OneDrive
+
+
+=== FUNZIONALITÀ COMPLETE, NO PUBBLICITÀ, NO ABBONAMENTI===
+
+Siccome è un progetto open source (codice libero sviluppato eticamente da volontari) non ci sono restrizioni, nessuna pubblicità e nessun obbligo di pagamento (è gratuita).
+
+I volontari sono i benvenuti :-) (Siamo sempre alla ricerca di sviluppatori, traduttori, scrittori per la documentazione, UI designer, ecc :) ), basta unirsi al nostro canale discord: https://example.com/go/discord.
+
+
+=== SOTTO CONTINUO SVILUPPO ===
+
+Questo è un progetto open source che è ancora in fase di intenso sviluppo per aggiungere funzionalità. Ci piacerebbe il tuo feedback via email o sul tracker dei problemi all'indirizzo: https://github.com/openvalut/openvalut/issues/
+
+Unisciti anche alla community nel nostro canale discord su https://example.com/go/discord
+","apple-appstore-description --- see my comment, this is essentially the same as the playstore_full_description just slight modifications for apple.","4000",""
+"apple-appstore-keywords","Password Manager, Password, Manage, Keystore, Keysafe,Keepass,Kdbx,webdav,icloud,nextcloud,onedrive","apple-appstore-keywords - Keywords used for searching in the apple app store. Does not have to be a 1:1 translation, choose keywords that mak sense.","100",""
+"","","","",""
+"microsoft-store-windows","Tieni traccia di tutte le tue password in modo semplice e sicuro!
+
+openvalut è un gestore di password standalone con supporto per il famoso e collaudato formato KeePass (kdbx 3. E kdbx 4.x 🎉). 
+Memorizza le tue password, condividi su tutti i tuoi dispositivi e trovale facilmente ogni qualvolta hai bisogno di accedere.
+
+🗄 Tutte le tue password in un unico posto.
+🧬 Genera sicure password casuali per ciascuno dei tuoi account.
+🔍 Tieni traccia dei tuoi account attraverso il web.
+🖥 App disponibile per Mac, iPhone, iPad, telefoni e tablet Android, Linux e Windows.
+📂 Apri contemporaneamente più file di password (per esempio uno per lavoro, uno personale - oppure condividi i file di password con i collaboratori)
+🤓 Open Source è disponibile su https://github. om/openvalut/openvalut/
+🔦 Dark Theme 😎
+
+
+=== SOTTO IL TUO CONTROLLO ===
+openvalut memorizza tutte le password in formato Keepass aperto, esattamente dove vuoi. Non invia le password ai nostri server. Ma openvalut supporta il salvataggio in:
+
+✅ Integrazione Nativa con Google Drive
+✅ Integrazione Nativa con Dropbox
+✅ Supporto Nativo WebDAV per memorizzare nel tuo NextCloud o OwnCloud (o simile)
+✅ Integrazione Nativa con Microsoft OneDrive
+
+=== FUNZIONALITÀ COMPLETA, NESSUNA PUBBLICITÀ, NESSUN ABBONAMENTO===
+In quanto progetto open source non ha restrizioni artificiali, nessun annuncio e nessun obbligo di pagamento.
+I contributi sono benvenuti e incoraggiati 😅 (Siamo sempre alla ricerca di sviluppatori, traduttori, scrittori di documentazione, UI designer, etc. :) ), basta unirsi al nostro canale discord: https://openvalut. pp/go/discord
+
+=== IN SVILUPPO ATTIVO 🛠️ ===
+Questo è un progetto open source ancora in fase di forte sviluppo, in via di ampliamento delle funzioni. Ci piacerebbe il tuo feedback via email o sul tracker dei problemi su https://github.com/openvalut/openvalut/issues/
+
+Unisciti anche alla community sul nostro forum: https://forum.example.com/
+","Windows Store listing description https://docs.microsoft.com/en-us/windows/uwp/publish/write-a-great-app-description","",""
+"microsoft-store-windows-short-descriptoin","Mantieni le password e gli account al sicuro su tutte le piattaforme e i dispositivi. Gestore di password gratuito e Open Source con supporto per i file di password kdbx.","short description for windows store 
+A shorter, catchy description that may be used in the top of your product’s Store listing
+Recommended length: 270 characters or fewer
+","1000",""
+"microsoft-store-windows-features","* Salva in modo sicuro le tue password
+* Open Source
+* Supporto per i file KeePass standard (kdbx)
+* Mantieni sincronizzati i tuoi dispositivi con servizi di cloud storage.","Short summaries of your product's key features
+Displayed as bulleted list
+Up to 20 app features
+(max 200 characters each)","",""
+"microsoft-store-windows-search-terms","* gestore di password
+* openvalut
+* kdbx
+* keepass
+* generatore di password","search terms for the microsoft store
+
+Up to 7 search terms
+40 character limit for each search term
+No more than 21 separate words across all search terms","",""

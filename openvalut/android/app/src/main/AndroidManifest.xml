@@ -1,0 +1,166 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:installLocation="auto">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission
+        android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.CAMERA"
+       />
+
+  <queries>
+    <intent>
+      <action android:name="android.intent.action.MAIN" />
+      <category android:name="android.intent.category.LAUNCHER" />
+    </intent>
+    <intent>
+      <action android:name="android.intent.action.SENDTO" />
+      <data android:scheme="mailto" />
+    </intent>
+    <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="https" />
+    </intent>
+    <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="http" />
+    </intent>
+    <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="mailto" />
+    </intent>
+  </queries>
+
+    <!-- 自动更新需要安装 APK 的权限。 -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <!-- Companion apps that declare this uses-permission may discover the
+         credential-server endpoint and its bearer token. The random per-session
+         token remains the real gate; the loopback server is only reachable
+         on-device. (Set to signature and sign companions with the same key to
+         tighten further.) -->
+    <permission
+        android:name="app.openvalut.permission.READ_CREDENTIAL_SERVER"
+        android:protectionLevel="normal" />
+
+    <!-- enableOnBackInvokedCallback not working with FlutterFragmentActivity
+    https://github.com/flutter/engine/pull/44865
+    https://github.com/flutter/flutter/issues/109558
+    -->
+    <application
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:enableOnBackInvokedCallback="false"
+        android:fullBackupContent="@xml/backup_descriptor"
+        tools:targetApi="tiramisu">
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTask"
+            android:theme="@style/LaunchTheme"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true">
+            <!-- This keeps the window background of the activity showing
+                 until Flutter renders its first frame. It can be removed if
+                 there is no splash screen (such as the default splash screen
+                 defined in @style/LaunchTheme). -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- Theme to apply as soon as Flutter begins rendering frames -->
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/OpenValutAppTheme" />
+
+            <intent-filter android:label="@string/app_name">
+                <action android:name="android.intent.action.VIEW"  />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="file" />
+                <data android:scheme="content" />
+                <data android:host="*"  />
+                <data android:mimeType="*/*" />
+                <!-- https://stackoverflow.com/a/52384331/109219 ?? -->
+                <data android:pathPattern=".*\\.kdbx" />
+                <data android:pathPattern=".*\\..*\\.kdbx" />
+                <data android:pathPattern=".*\\..*\\..*\\.kdbx" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.kdbx" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.kdbx" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.*\\..*\\.kdbx" />
+            </intent-filter>
+            <intent-filter android:label="@string/app_name">
+                <action android:name="android.intent.action.VIEW"  />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="file" />
+                <data android:scheme="content" />
+                <data android:host="*"  />
+                <data android:mimeType="application/octet-stream" />
+            </intent-filter>
+            <intent-filter android:label="@string/app_name">
+                <action android:name="android.intent.action.SEND"  />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:mimeType="application/octet-stream" />
+            </intent-filter>
+            <intent-filter android:label="@string/app_name">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="openvalut"
+                    android:host="*" />
+            </intent-filter>
+            <intent-filter android:label="@string/app_name" android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                        android:host="links.openvalut.app"
+                        android:scheme="https"/>
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="design.codeux.autofill_service.FlutterMyAutofillService"
+            android:label="@string/autofill_service_label"
+            tools:replace="label">
+
+            <meta-data
+                android:name="design.codeux.autofill_service.unlock_label"
+                android:value="使用 OpenValut 自动填充" />
+        </service>
+
+        <service
+            android:name=".KeepAliveService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Keep the app process alive while the vault is unlocked so Android autofill can fill without re-authentication." />
+        </service>
+
+        <provider
+            android:name=".CredentialServerProvider"
+            android:authorities="app.openvalut.credentials"
+            android:exported="true"
+            android:permission="app.openvalut.permission.READ_CREDENTIAL_SERVER" />
+
+        <meta-data
+            android:name="design.codeux.autofill_service.ACTIVITY_NAME"
+            android:value="app.openvalut.MainActivity" />
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+    </application>
+</manifest>

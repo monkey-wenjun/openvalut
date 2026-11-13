@@ -1,0 +1,19 @@
+[Unit]
+Description=openvalut-server (OpenValut sync + share backend)
+After=network.target mysql.service mariadb.service
+Wants=network.target
+
+[Service]
+Type=simple
+User=openvalut
+Group=openvalut
+WorkingDirectory=/opt/openvalut-server
+ExecStart=/opt/openvalut-server/openvalut-server -addr 127.0.0.1:18080 -db mysql -dsn "${OPENVALUT_DSN}"
+EnvironmentFile=/etc/default/openvalut-server
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

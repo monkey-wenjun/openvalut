@@ -1,0 +1,259 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:flutter/services.dart';
+import 'package:logging/logging.dart';
+
+final _logger = Logger('autofill_service');
+
+enum AutofillServiceStatus {
+  unsupported,
+  disabled,
+  enabled,
+}
+
+class AutofillPreferences {
+  const AutofillPreferences({
+    this.enableDebug = false,
+    this.ignoredPackages = const <String>{},
+  });
+
+  /// Lenient on purpose: an older plugin build does not answer `ignoredPackages`,
+  /// a newer one may add keys this build does not know. `setPreferences` overwrites
+  /// the whole object, so a lost key here silently reverts a setting the user made.
+  factory AutofillPreferences.fromJson(Map<dynamic, dynamic> json) =>
+      AutofillPreferences(
+        enableDebug: json['enableDebug'] as bool? ?? false,
+        ignoredPackages: (json['ignoredPackages'] as Iterable?)
+                ?.map((e) => (e as String).toLowerCase())
+                .toSet() ??
+            const <String>{},
+      );
+
+  final bool enableDebug;
+
+  /// Apps the user told OpenValut to never offer autofill in, lowercased.
+  final Set<String> ignoredPackages;
+
+  AutofillPreferences copyWith({
+    bool? enableDebug,
+    Set<String>? ignoredPackages,
+  }) =>
+      AutofillPreferences(
+        enableDebug: enableDebug ?? this.enableDebug,
+        ignoredPackages: ignoredPackages ?? this.ignoredPackages,
+      );
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'enableDebug': enableDebug,
+        'ignoredPackages': ignoredPackages.toList(),
+      };
+
+  @override
+  bool operator ==(Object other) =>
+      other is AutofillPreferences &&
+      other.enableDebug == enableDebug &&
+      other.ignoredPackages.length == ignoredPackages.length &&
+      other.ignoredPackages.containsAll(ignoredPackages);
+
+  @override
+  int get hashCode => Object.hash(enableDebug, ignoredPackages);
+}
+
+class AutofillService {
+  factory AutofillService() => _instance;
+
+  AutofillService._();
+
+  static const MethodChannel _channel =
+      MethodChannel('codeux.design/autofill_service');
+
+  static final _instance = AutofillService._();
+
+  Future<bool> get hasAutofillServicesSupport async {
+    if (!Platform.isAndroid) {
+      return false;
+    }
+    return (await _channel.invokeMethod<bool>('hasAutofillServicesSupport'))
+        as bool;
+  }
+
+  Future<bool> get hasEnabledAutofillServices async {
+    return (await _channel.invokeMethod<bool>('hasEnabledAutofillServices')) ==
+        true;
+  }
+
+  /// Chromium based browsers only forward form data to the autofill framework
+  /// after the user enabled "Autofill using another service" in the browser
+  /// settings. Returns the state of that setting for all installed browsers
+  /// which expose it (empty on other platforms and for older browsers).
+  Future<List<BrowserAutofillStatus>> getBrowserAutofillStatus() async {
+    if (!Platform.isAndroid) {
+      return [];
+    }
+    final result =
+        await _channel.invokeListMethod<dynamic>('getBrowserAutofillStatus');
+    _logger.fine('Got browser autofill status $result');
+    return result
+            ?.map((dynamic e) =>
+                BrowserAutofillStatus.fromJson(e as Map<dynamic, dynamic>))
+            .toList() ??
+        [];
+  }
+
+  /// Opens the settings of the given browser, where the user can enable
+  /// "Autofill using another service".
+  Future<bool> openBrowserAutofillSettings(String packageName) async {
+    return (await _channel.invokeMethod<bool>(
+          'openBrowserAutofillSettings',
+          <String, dynamic>{'packageName': packageName},
+        )) ==
+        true;
+  }
+
+  Future<AutofillMetadata?> getAutofillMetadata() async {
+    final result = await _channel
+        .invokeMethod<Map<dynamic, dynamic>>('getAutofillMetadata');
+    _logger.fine(
+        'Got result for getAutofillMetadata $result (${result.runtimeType})');
+    if (result == null) {
+      return null;
+    }
+    return AutofillMetadata.fromJson(result);
+  }
+
+  Future<AutofillServiceStatus> status() async {
+    if (!Platform.isAndroid) {
+      return AutofillServiceStatus.unsupported;
+    }
+    final enabled =
+        await _channel.invokeMethod<bool>('hasEnabledAutofillServices');
+    if (enabled == null) {
+      return AutofillServiceStatus.unsupported;
+    } else if (enabled) {
+      return AutofillServiceStatus.enabled;
+    } else {
+      return AutofillServiceStatus.disabled;
+    }
+  }
+
+  Future<bool> requestSetAutofillService() async {
+    return (await _channel.invokeMethod<bool>('requestSetAutofillService'))
+        as bool;
+  }
+
+  Future<bool> resultWithDataset({
+    String? label,
+    String? username,
+    String? password,
+    String? otp,
+  }) async {
+    return (await _channel.invokeMethod<bool>(
+        'resultWithDataset', <String, dynamic>{
+      'label': label,
+      'username': username,
+      'password': password,
+      'otp': otp
+    })) as bool;
+  }
+
+  Future<void> disableAutofillServices() async {
+    return await _channel.invokeMethod('disableAutofillServices');
+  }
+
+  Future<AutofillPreferences> getPreferences() async {
+    final json =
+        await _channel.invokeMapMethod<String, dynamic>('getPreferences');
+    if (json == null) {
+      throw StateError('Got null response from `getPreferences`.');
+    }
+    _logger.fine('Got preferences $json');
+    return AutofillPreferences.fromJson(json);
+  }
+
+  Future<void> setPreferences(AutofillPreferences preferences) async {
+    _logger.fine('set prefs to ${preferences.toJson()}');
+    await _channel.invokeMethod<void>(
+        'setPreferences', {'preferences': preferences.toJson()});
+  }
+}
+
+class AutofillMetadata {
+  AutofillMetadata({required this.packageNames, required this.webDomains});
+  factory AutofillMetadata.fromJson(Map<dynamic, dynamic> json) =>
+      AutofillMetadata(
+        packageNames: (json['packageNames'] as Iterable)
+            .map((dynamic e) => e as String)
+            .toSet(),
+        webDomains: (json['webDomains'] as Iterable)
+            .map((dynamic e) =>
+                AutofillWebDomain.fromJson(e as Map<dynamic, dynamic>))
+            .toSet(),
+      );
+
+  final Set<String> packageNames;
+  final Set<AutofillWebDomain> webDomains;
+
+  @override
+  String toString() => toJson().toString();
+
+  Map<String, Object> toJson() => {
+        'packageNames': packageNames,
+        'webDomains': webDomains.map((e) => e.toJson()),
+      };
+}
+
+/// State of the "Autofill using another service" setting of a chromium based
+/// browser. While [thirdPartyModeEnabled] is false, the browser will not
+/// forward any form data to the autofill framework.
+class BrowserAutofillStatus {
+  BrowserAutofillStatus({
+    required this.packageName,
+    required this.label,
+    required this.thirdPartyModeEnabled,
+  });
+
+  factory BrowserAutofillStatus.fromJson(Map<dynamic, dynamic> json) =>
+      BrowserAutofillStatus(
+        packageName: json['packageName'] as String,
+        label: json['label'] as String,
+        thirdPartyModeEnabled: json['thirdPartyModeEnabled'] as bool,
+      );
+
+  final String packageName;
+
+  /// Name of the browser as displayed to the user, e.g. `Chrome`.
+  final String label;
+
+  final bool thirdPartyModeEnabled;
+
+  @override
+  String toString() => toJson().toString();
+
+  Map<String, Object> toJson() => {
+        'packageName': packageName,
+        'label': label,
+        'thirdPartyModeEnabled': thirdPartyModeEnabled,
+      };
+}
+
+class AutofillWebDomain {
+  AutofillWebDomain({this.scheme, required this.domain});
+
+  factory AutofillWebDomain.fromJson(Map<dynamic, dynamic> json) =>
+      AutofillWebDomain(
+        scheme: json['scheme'] as String?,
+        domain: json['domain'] as String,
+      );
+
+  final String? scheme;
+  final String domain;
+
+  @override
+  String toString() => toJson().toString();
+
+  Map<String, Object?> toJson() => {
+        'scheme': scheme,
+        'domain': domain,
+      };
+}
