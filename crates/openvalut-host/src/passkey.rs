@@ -10,6 +10,7 @@ use p256::ecdsa::{
     signature::{Signer, Verifier},
     Signature as EcdsaSig, SigningKey, VerifyingKey,
 };
+use p256::elliptic_curve::Generate;
 use p256::pkcs8::{DecodePrivateKey, EncodePrivateKey, LineEnding};
 use sha2::{Digest, Sha256};
 
@@ -102,14 +103,14 @@ pub struct KeyPair {
 }
 
 pub fn generate_key_pair() -> KeyPair {
-    let sk = SigningKey::random(&mut rand::rngs::OsRng);
+    let sk = SigningKey::generate();
     let pem = sk
         .to_pkcs8_pem(LineEnding::LF)
         .expect("pkcs8 encoding of P-256 key")
         .to_string();
     let public_key_bytes = sk
         .verifying_key()
-        .to_encoded_point(false)
+        .to_sec1_point(false)
         .as_bytes()
         .to_vec();
     KeyPair {
@@ -127,9 +128,9 @@ pub fn sign_sha256(private_key_pem: &str, data: &[u8]) -> Vec<u8> {
 /// Verifies an ES256 signature over `data` with an uncompressed point.
 #[allow(dead_code)]
 pub fn verify_sha256(public_key_bytes: &[u8], data: &[u8], sig: &[u8]) -> bool {
-    let point = p256::PublicKey::from_sec1_bytes(public_key_bytes).ok();
-    let Some(point) = point else { return false };
-    let vk = VerifyingKey::from(point);
+    let Ok(vk) = VerifyingKey::from_sec1_bytes(public_key_bytes) else {
+        return false;
+    };
     let sig = EcdsaSig::from_slice(sig).ok();
     let Some(sig) = sig else { return false };
     vk.verify(data, &sig).is_ok()
