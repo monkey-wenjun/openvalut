@@ -29,7 +29,7 @@ rust-version = "1.87"
 # Core crypto
 argon2 = "0.5"
 aes-gcm = "0.10"
-x25519-dalek = { version = "2", features = ["static_secrets", "getrandom"] }
+x25519-dalek = { version = "3", features = ["static_secrets", "getrandom"] }
 hkdf = "0.12"
 hmac = "0.12"
 sha1 = "0.10"
